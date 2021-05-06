@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:solr="metafad.modules.solr.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    controllerName="metafad.modules.solr.controllers.*"
+    templateType="php"
+    templateFileName="search.php"
+    defaultEditableRegion="content">
+    <pnx:Import src="Common.xml" />
+
+ 		<pnx:JSscript folder="metafad/modules/solr/js"/>
+
+    <mvc:State name="index,sbn">
+
+      <solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html"/>
+
+      <solr:AdvancedSearch id="advancedSearch" skin="advancedSearch.html"/>
+    </mvc:State>
+
+    <mvc:State name="archive">
+      <solr:SearchType id="searchType" editableRegion="filters" skin="searchType_archive.html" section="archivi"/>
+
+      <solr:AdvancedSearch id="advancedSearch" skin="advancedSearch.html" searchUrl="solr_search_archive" section="archivi" solrFieldUrl="metafad.archive-ca.field.url" autocompleteUrl="metafad.archive-ca.autocomplete.url"/>
+
+      <pnx:EmptyComponent id="showArchives" editableRegion="showArchives" skin="showArchives.html" />
+    </mvc:State>
+
+    <mvc:State name="iccd">
+      <solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="patrimonio"/>
+
+      <solr:AdvancedSearch id="advancedSearch" skin="advancedSearch.html" searchUrl="solr_search_iccd" section="patrimonio" solrFieldUrl="metafad.iccd.field.url" autocompleteUrl="metafad.iccd.autocomplete.url"/>
+    </mvc:State>
+
+    <mvc:State name="metaindice">
+      <solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="metaindice"/>
+
+      <solr:AdvancedSearch id="advancedSearch" skin="advancedSearch.html" searchUrl="solr_search_metaindice" section="metaindice" solrFieldUrl="metafad.metaindice.field.url" autocompleteUrl="metafad.metaindice.autocomplete.url"/>
+    </mvc:State>
+
+    <mvc:State name="metaindiceau">
+      <solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="metaindiceau"/>
+
+      <solr:AdvancedSearch id="advancedSearch" skin="advancedSearch.html" searchUrl="solr_search_metaindice_au" section="metaindiceau" solrFieldUrl="metafad.metaindice-au.field.url" autocompleteUrl="metafad.metaindice-au.autocomplete.url"/>
+    </mvc:State>
+</mvc:Page>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:EmptyComponent>
+    <pnx:Resources>
+		<pnx:js src="{path:APPLICATION_TEMPLATE}ita-web-toolkit/build/vendor/modernizr.js" editableRegion="headMetafad" />
+        <pnx:css src="{path:APPLICATION_TEMPLATE}ita-web-toolkit/build/build.css" editableRegion="headMetafad" />
+        <pnx:js src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" editableRegion="headMetafad" />
+		<pnx:js src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js" editableRegion="headMetafad" />
+
+        <pnx:js src="{path:APPLICATION_TEMPLATE}ita-web-toolkit/build/IWT.min.js" editableRegion="tail" />
+		<pnx:js src="{path:APPLICATION_TEMPLATE}ita-web-toolkit/build/0.chunk.js" editableRegion="tail" />
+        <pnx:js src="{path:APPLICATION_TEMPLATE}js/_main.js" editableRegion="tail" />
+		<pnx:js src="{path:APPLICATION_TEMPLATE}js/ecommerce.js" editableRegion="tail" />
+		<pnx:css src="{path:APPLICATION_TEMPLATE}css/customStyles.css" editableRegion="headMetafad" />
+		<pnx:css src="{path:APPLICATION_TEMPLATE}css/stylesViewer.css" editableRegion="headMetafad" />
+	</pnx:Resources>
+
+</pnx:EmptyComponent>

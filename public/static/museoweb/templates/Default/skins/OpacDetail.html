@@ -1,0 +1,165 @@
+<div tal:omit-tag="" tal:condition="php: Component['visibility_d']">
+    <div class="bcp-block-item-post-tool padding-top content-align-right" tal:condition="php: Component['linkedIccd']">
+        <ul><li><a tal:attributes="href Component/linkedIccd"><span class="icon-view2331"></span> <span tal:omit-tag="" tal:content="Component/linkLabel"/></a></li></ul>
+    </div>
+
+    <div class="module-preview-section padding-bottom mcp-module-introducing-content padding-bottom margin-bottom">
+
+        <h1 class="block-title" tal:condition="php: Component['title'] AND strlen(Component['title']) LT 130" tal:content="structure Component/title"/>
+        <h1 class="block-title-smaller" tal:condition="php: Component['title'] AND strlen(Component['title']) GT 131" tal:content="structure Component/title"/>
+
+        <!-- module-accordion -->
+        <div class="module-accordion">
+
+            <span tal:repeat="item Component/values" tal:omit-tag="">
+
+                <div tal:condition="Component/firstImage" tal:omit-tag="">
+                    <div tal:condition="repeat/item/start" class="row margin-bottom">
+                        <div tal:condition="repeat/item/start" class="col-md-9 col-lg-9 col-sm-12">
+                            <!-- block-accordion -->
+                            <div class="block-accordion">
+                                <div class="block-accordion-heading js-show-element-reverse">
+                                    <h2 class="block-title" tal:content="repeat/item/key"></h2></div>
+                                    <div id="FirstWithImage" class="block-accordion-content js-collapse-box-reverse hidden">
+
+                                        <dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse">
+
+                                            <span tal:omit-tag="" tal:repeat="item2 item">
+                                                <div tal:content="php: Component['parents'][repeat.item2.key]" tal:condition="php: Component['parents'][repeat.item2.key]" class="parent-archive"/>
+                                                <div tal:content="php: ''" tal:condition="php: Component['parents'][repeat.item2.key] === false" class="margin-bottom-parent"/>
+                                                <span tal:omit-tag="" tal:condition="php: strip_tags(item2) != ''">
+                                                    <dt tal:condition="php: (repeat.item2.key !== repeat.item.key) " class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="structure php: __T(ucfirst(strtolower(repeat.item2.key)))"></dt>
+                                                    <dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="structure php: item2"></dd>
+                                                </span>
+                                            </span>
+                                        </dl>
+
+                                    </div>
+                                </div>
+                                <!-- block-accordion -->
+                            </div>
+
+                            <div tal:condition="repeat/item/start" class="col-md-3 col-lg-3 col-sm-12">
+                                <figure>
+                                    <a id="imageLink" tal:attributes="href Component/imageUrl; title php: __T('Vedi')"><img tal:attributes="src Component/firstImage"/></a>
+                                    <div tal:condition="php: Component['visibility_v']" class="bcp-block-item-post-tool padding-top content-align-right">
+                                        <ul><li><a id="imageLink" tal:attributes="href php: (Component['visibility_v']) ? Component['imageUrl'] : '#'; title php: __T('Vedi')"><span class="icon-view2331"></span> Vedi</a></li></ul>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- block-accordion -->
+                    <div tal:condition="php: Component['firstImage'] == null" tal:omit-tag="">
+
+                        <div tal:condition="repeat/item/start" class="block-accordion">
+                            <div class="block-accordion-heading js-show-element-reverse"><h2 class="block-title" tal:content="repeat/item/key"></h2></div>
+                            <div tal:attributes="id repeat/item/key" class="block-accordion-content js-collapse-box-reverse hidden">
+                                <dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse">
+
+                                    <span tal:omit-tag="" tal:repeat="item2 item">
+                                        <div tal:content="php: Component['parents'][repeat.item2.key]" tal:condition="php: Component['parents'][repeat.item2.key]" class="parent-archive"/>
+                                        <div tal:content="php: ''" tal:condition="php: Component['parents'][repeat.item2.key] === false" class="margin-bottom-parent"/>
+                                        <span tal:omit-tag="" tal:condition="php: strip_tags(item2) != ''">
+                                            <dt tal:condition="php: (repeat.item2.key !== repeat.item.key) " class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="structure php: __T(ucfirst(strtolower(repeat.item2.key)))"></dt>
+                                            <dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="structure php: item2"></dd>
+                                        </span>
+                                    </span>
+                                </dl>
+
+                                <!-- block-my-pop-up -->
+                                <div tal:attributes="id php: 'p' . md5(repeat.item2.key)" style="width:1000px;height:300px;" class="block-my-pop-up hide bcp-block-pop-up-iframe--fixed bcp-block-pop-up-iframe--center-xy-position bcp-block-pop-up-iframe js-my-pop-up hidden">
+                                    <!-- block-my-pop-up-content -->
+                                    <div class="popup-richieste block-my-pop-up-content clearfix">
+                                        <a tal:attributes="data-popup-target-close php: '#p' . md5(repeat.item2.key)" class="gcp-btn-close-pop-up js-close-my-pop-up"><i class="icon-remove2231 g-right g-top margin-top margin-right"></i></a>
+                                        <iframe class="request-iframe" frameborder="0" tal:attributes="id php: 'p' . md5(repeat.item2.key) . '-iframe'" src="" />
+                                    </div>
+                                    <!-- block-my-pop-up-content -->
+                                </div>
+                                <!-- block-my-pop-up -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- block-accordion -->
+
+                    <div tal:condition="php: repeat.item.index GT 0" class="block-accordion">
+                        <div class="block-accordion-heading js-show-element-reverse"><h2 class="block-title" tal:content="repeat/item/key"></h2></div>
+                        <div tal:attributes="id repeat/item/key" class="block-accordion-content js-collapse-box-reverse hidden">
+
+                            <dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse">
+
+                                <span tal:omit-tag="" tal:repeat="item2 item">
+                                    <div tal:content="php: Component['parents'][repeat.item2.key]" tal:condition="php: Component['parents'][repeat.item2.key]" class="parent-archive"/>
+                                    <div tal:content="php: ''" tal:condition="php: Component['parents'][repeat.item2.key] === false" class="margin-bottom-parent"/>
+                                    <span tal:omit-tag="" tal:condition="php: strip_tags(item2) != ''">
+                                        <tal:block tal:content="structure php: '<div class=\'child-archive\'>'" tal:condition="php: metafad_utils_SkinHelper::checkForIndentationDiv(repeat.item2.key)" />
+										<dt tal:condition="php: (repeat.item2.key !== repeat.item.key AND !Component['hideLabel'][repeat.item2.key]) " class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="structure php: __T(ucfirst(strtolower(repeat.item2.key)))"></dt>
+                                        <dd class="Rtable-cell gcp-no-border Rtable-cell--3of4" tal:content="structure php: item2"></dd>
+                                        <tal:block tal:content="structure php: '</div>'" tal:condition="php: metafad_utils_SkinHelper::checkForIndentationDiv(repeat.item2.key)" />
+                                    </span>
+
+                                </span>
+                            </dl>
+
+                            <!-- block-my-pop-up -->
+                            <div tal:attributes="id php: 'p' . md5(repeat.item2.key)" style="width:1000px;height:300px;" class="block-my-pop-up hide bcp-block-pop-up-iframe--fixed bcp-block-pop-up-iframe--center-xy-position bcp-block-pop-up-iframe js-my-pop-up hidden">
+                                <!-- block-my-pop-up-content -->
+                                <div class="popup-richieste block-my-pop-up-content clearfix">
+                                    <a tal:attributes="data-popup-target-close php: '#p' . md5(repeat.item2.key)" class="gcp-btn-close-pop-up js-close-my-pop-up"><i class="icon-remove2231 g-right g-top margin-top margin-right"></i></a>
+                                    <iframe class="request-iframe" frameborder="0" tal:attributes="id php: 'p' . md5(repeat.item2.key) . '-iframe'" src="" />
+                                </div>
+                                <!-- block-my-pop-up-content -->
+                            </div>
+                            <!-- block-my-pop-up -->
+                        </div>
+                    </div>
+
+                </span>
+            </div>
+            <!-- module-accordion -->
+
+        </div>
+        <!-- module-preview-section -->
+        <script>
+        $(document).ready(function(){
+            $('dd').find('a').on('click',function(event){
+                if($(this).attr('data-modal') !== undefined) {
+                    $(this).closest('dl').siblings('.block-my-pop-up').toggleClass('js-called').find('iframe').attr('src',$(this).attr('data-modal'));
+                	$(this).closest('dl').siblings('.block-my-pop-up').show();
+					$(this).closest('dl').siblings('.block-my-pop-up').removeClass('hide');
+                }
+            });
+
+            $('.value').each(function(){
+                if($(this).html() == '' || $(this).html() == ' ')
+                {
+                    $(this).addClass('hide');
+                    $(this).prev().addClass('hide');
+                }
+            });
+
+            $('div[title="950.fe"]').each(function(){
+                $(this).children().last().children('.value').css('margin-bottom','20px');
+            })
+
+            $('div[title="950.fe"]').first().children().first().children('.label').css('margin-top','20px');
+            $('div[title="950.fe"]').first().children().first().children('.value').css('margin-top','20px');
+
+            $('.label').each(function(){
+                var arrayLabels = ["Kardex"];
+                if(arrayLabels.indexOf($(this).html()) != -1)
+                {
+                    $(this).addClass('hide');
+                    $(this).next().addClass('hide');
+                }
+            });
+        });
+        </script>
+    </div>
+
+
+    <div tal:condition="php: !Component['visibility_d']" class="module-preview-section padding-bottom mcp-module-introducing-content padding-bottom margin-bottom">
+        <div class="block-title">Non è possibile visualizzare il contenuto della scheda né accedere on-line al documento digitale. Effettua una richiesta di consultazione in sede della documentazione in oggetto.</div>
+        <!-- TODO avviare anche da qui richiesta di consultazione? -->
+    </div>

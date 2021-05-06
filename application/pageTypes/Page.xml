@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Page id="Page"
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content" >
+	<pnx:Import src="Common.xml" />
+
+    <pnx:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" skin="longText.html" />
+
+    <pnx:Repeater id="images" label="{i18n:MW_IMAGELIST}" adm:collapsable="false" >
+        <pnx:Image id="image" label="{i18n:MW_IMAGE}" width="{config:THUMB_WIDTH}" height="{config:THUMB_HEIGHT}" zoom="true" group="slideshow" superZoom="true" />
+    </pnx:Repeater>
+</pnx:Page>

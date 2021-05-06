@@ -1,0 +1,9 @@
+<Files ~ ".+">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</Files>
+<FilesMatch ".(css|js|png|gif|jpe?g|eot|ttf|woff|woff2|otf|svg)$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>

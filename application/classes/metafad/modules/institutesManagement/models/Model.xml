@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:model="pinax.models.*/"
+    model:tableName="metafad.modules.institutesManagement" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <model:Field name="name" type="string" length="255" index="true" />
+        <model:Field name="institute" type="object" readFormat="false"/>
+        <model:Field name="institute_index" type="string" index="true"/>
+        <model:Field name="image" type="string" length="255" />
+        <model:Field name="headerImage" type="string" length="255" />
+        <model:Field name="text" type="string" length="255" />
+        <model:Field name="longtext" type="string" />
+        <model:Field name="link" type="string" length="255"/>
+		<model:Field name="baseindex_key" type="string" length="255" />
+		<model:Field name="metaindex_key" type="string" length="255" />
+        <model:Field name="consultation" type="string" length="5" />
+        <model:Field name="digitalization" type="string" length="5" />
+        <model:Field name="copies" type="string" length="5" />
+		<model:Field name="metaindice" type="string" length="5" />
+		<model:Field name="metaindiceau" type="string" length="5" />
+		<model:Field name="archive" type="string" length="5" />
+		<model:Field name="iccd" type="string" length="5" />
+		<model:Field name="sbn" type="string" length="5" />
+        <model:Field name="homeGallery" type="object" readFormat="false" />
+    </model:Define>
+
+    <model:Script parent="model">
+    <![CDATA[
+    public function save($values=NULL, $forceNew=false, $status='DRAFT', $comment = '') {
+      $this->createAddictionalIndex();
+      return parent::save($values, $forceNew, $status);
+    }
+
+    private function createAddictionalIndex()
+    {
+        $this->institute_index = $this->institute->id;
+    }
+    ]]>
+    </model:Script>
+
+	<model:Query name="getById" type="function" arguments="institute_id">
+	<![CDATA[
+		$iterator->where('institute_index',$institute_id);
+	]]>
+	</model:Query>
+
+</model:Model>

@@ -1,0 +1,65 @@
+<!-- bcp-block-item-gate -->
+<div tal:condition="Component/consultation" class="bcp-block-item-gate">
+
+  <span class="icon-moon icon-view2331"></span>
+  <p><span class="icon-angledoubleright"></span> Richieste di consultazione</p>
+  <a tal:attributes="class php: (__Session::get('instituteKey')) ? 'g-wrapper-area-link g-top g-left' : 'g-wrapper-area-link g-top g-left js-expand'">Accedi</a>
+
+  <div class="module-list-archive mcp-module-list-archive--in-parallax-mode clearfix hide">
+    <div tal:repeat="item Component/consultation" style="padding-bottom: 0 !important" class="block-item-post w-1-5 bw-f bcp-block-institute list block-item-post-card-list clearfix service">
+      <figure>
+        <a tal:attributes="href php: __Link::addParams(array('instituteKey'=>item['instituteKey'],'service'=>'true','type'=>item['type']))"><img tal:attributes="src php: json_decode(item['image']).src" alt="" /></a>
+      </figure>
+      <h2 class="titleService" tal:content="item/name"></h2>
+    </div>
+  </div>
+
+</div>
+<!-- bcp-block-item-gate -->
+
+<!-- bcp-block-item-gate -->
+<div tal:condition="Component/digitalization" class="bcp-block-item-gate ">
+
+  <span class="icon-moon icon-inboxtext231"></span>
+  <p><span class="icon-angledoubleright"></span> Richieste di digitalizzazione</p>
+  <a tal:attributes="class php: (__Session::get('instituteKey')) ? 'g-wrapper-area-link g-top g-left' : 'g-wrapper-area-link g-top g-left js-expand'">Accedi</a>
+
+
+  <div class="module-list-archive mcp-module-list-archive--in-parallax-mode clearfix hide">
+    <div tal:repeat="item Component/digitalization" style="padding-bottom: 0 !important" class="block-item-post w-1-5 bw-f bcp-block-institute list block-item-post-card-list clearfix service">
+      <figure>
+        <a tal:attributes="href php: __Link::addParams(array('instituteKey'=>item['instituteKey'],'service'=>'true','type'=>item['type']))"><img tal:attributes="src php: json_decode(item['image']).src" alt="" /></a>
+      </figure>
+      <h2 class="titleService" tal:content="item/name"></h2>
+    </div>
+  </div>
+
+</div>
+<!-- bcp-block-item-gate -->
+
+<!-- bcp-block-item-gate -->
+<div tal:condition="Component/copies" class="bcp-block-item-gate">
+
+  <span class="icon-moon icon-shoppingcart1231"></span>
+  <p><span class="icon-angledoubleright"></span> Acquisto di copie digitali</p>
+  <a tal:attributes="class php: (__Session::get('instituteKey')) ? 'g-wrapper-area-link g-top g-left' : 'g-wrapper-area-link g-top g-left js-expand'">Accedi</a>
+
+  <div class="module-list-archive mcp-module-list-archive--in-parallax-mode clearfix hide">
+    <div tal:repeat="item Component/copies" style="padding-bottom: 0 !important" class="block-item-post w-1-5 bw-f bcp-block-institute list block-item-post-card-list clearfix service">
+      <figure>
+        <a tal:attributes="href php: __Link::addParams(array('instituteKey'=>item['instituteKey'],'service'=>'true','type'=>item['type']))"><img tal:attributes="src php: json_decode(item['image']).src" alt="" /></a>
+      </figure>
+      <h2 class="titleService" tal:content="item/name"></h2>
+    </div>
+  </div>
+</div>
+<!-- bcp-block-item-gate -->
+<script>
+$(document).ready(function(){
+  $('.js-expand').on('click',function(){
+    $(this).siblings('.module-list-archive').toggleClass('hide');
+    $(this).siblings('p').children('span').toggleClass('icon-angledoubleright');
+    $(this).siblings('p').children('span').toggleClass('icon-angle-down');
+  })
+})
+</script>

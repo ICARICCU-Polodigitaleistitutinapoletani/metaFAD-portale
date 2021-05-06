@@ -1,0 +1,87 @@
+<div class="mcp-module-results-tool clearfix padding-h-0">
+
+    <!-- module-row -->
+    <div class="module-row clearfix">
+
+        <!-- module-column -->
+        <div class="module-column w-1-3 no-gutter bw-f">
+
+            <div class="bcp-count-results">
+              <span>
+                <span tal:content="php: (Component['recordsCount'] == false) ? Component['start'] : Component['start'] + 1"/> -
+                <span tal:condition="php: Component['recordsCount'] GT 15" tal:content="php: Component['stop'] + 1"/>
+                <span tal:condition="php: Component['recordsCount'] LT 15" tal:content="php: Component['recordsCount']"/> di
+                <span tal:condition="php: Component['recordsCount'] == false"> 0 </span>
+                <span tal:condition="php: Component['recordsCount'] != false" tal:content="Component/recordsCount"/>
+                risultati
+              </span>
+            </div>
+
+        </div>
+        <!-- module-column -->
+
+        <!-- module-column -->
+        <div tal:condition="Component/showSortingFilters" class="module-column w-2-3 padding-left no-gutter bw-f last">
+
+            <div class="bcp-count-results pull-right">
+
+                <ul class="bcp-result-filter-list">
+                    <li>Ordine per:</li>
+                    <li class="js-filter-order"><a href="&az=true" tal:attributes="class php: (__Request::get('az')) ? 'active' : ''">Titolo [A-Z]</a></li>
+                    <li class="js-filter-order"><a href="&za=true" tal:attributes="class php: (__Request::get('za')) ? 'active' : ''">Titolo [Z-A]</a></li>
+                    <li class="js-filter-order"><a href="&azaut=true" tal:attributes="class php: (__Request::get('azaut')) ? 'active' : ''">Autore [A-Z]</a></li>
+                    <li class="js-filter-order"><a href="&zaaut=true" tal:attributes="class php: (__Request::get('zaaut')) ? 'active' : ''">Autore [Z-A]</a></li>
+                    <!-- <li><a href="#" >Rilevanza</a></li>
+                    <li><a href="#">Il pi&ugrave; recente</a></li>
+                    <li><a href="#">Il meno recente</a></li> -->
+                </ul>
+
+            </div>
+
+        </div>
+        <!-- module-column -->
+
+    </div>
+    <!-- module-row -->
+
+    <!-- module-row -->
+    <div class="module-row gcp-have-border-top margin-bottom clearfix">
+        <h3 tal:condition="php: Component['recordsCount'] == false AND __Request::get('search') !== ''" class="block-title-no-result">La ricerca non ha prodotto risultati.</h3>
+        <h3 tal:condition="php: Component['recordsCount'] == false AND __Request::get('search') === ''" class="block-title-no-result">Inserisci almeno un parametro di ricerca.</h3>
+        <!-- module-column -->
+        <div class="module-column w-4-4 padding-left no-gutter bw-f last">
+
+            <!-- bcp-count-results -->
+            <div class="bcp-count-results hide-in-wm-xxl pull-right">
+                <div tal:condition="php: !empty(Component['pagesLinks'])" class="pagination">
+                    <ul>
+                      <span tal:repeat="item Component/pagesLinks">
+                        <li tal:attributes="class item/__cssClass__"><a tal:attributes="href item/__url__"><span tal:omit-tag="" tal:content="structure item/value"/></a></li>
+                      </span>
+                    </ul>
+                </div>
+            </div>
+            <!-- bcp-count-results -->
+
+            <script>
+              $('.current').addClass('active');
+
+              $(document).ready(function(){
+                var href = window.location.href;
+                href = href.replace('&az=true','');
+                href = href.replace('&za=true','');
+                href = href.replace('&zaaut=true','');
+                href = href.replace('&azaut=true','');
+                $('.js-filter-order').each(function(){
+                  $(this).children('a').attr('href',href + $(this).children('a').attr('href'));
+                });
+              });
+
+            </script>
+        </div>
+        <!-- module-column -->
+
+    </div>
+    <!-- module-row -->
+
+</div>

@@ -1,0 +1,44 @@
+  <div class="bcp-block-widget-result">
+    <div class="btn-expand js-expand">
+      <i class="fa fa-expand" aria-hidden="true"></i>
+    </div>
+    <div class="btn-expand js-compress hide">
+      <i class="fa fa-compress" aria-hidden="true"></i>
+    </div>
+  </div>
+  <!-- bcp-block-widget-result -->
+  <!-- <div class="bcp-block-widget-result ">
+
+    <h3 class="block-title u-background-95 u-color-white u-padding-left-s u-padding-top-s u-padding-bottom-s u-padding-right-s">Ricerche</h3>
+
+    <div class="block-content">
+
+      <div class="bcp-block-group-item-list bcp-block-group-item-list- -search">
+        <ul>
+          <li><a tal:content="php: Component['labelRicerca avanzata CA']" tal:attributes="href php: Component['urlRicercaAvanzataCA']; class php: (__Request::get('mask') == 'Ricerca avanzata CA') ? 'active' : ''" ></a></li>
+          <li><a tal:content="php: Component['labelRicerca avanzata UN']" tal:attributes="href php: Component['urlRicercaAvanzataUN']; class php: (__Request::get('mask') == 'Ricerca avanzata UN') ? 'active' : ''" ></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div> -->
+  <!-- bcp-block-widget-result -->
+
+<script>
+  $(document).ready(function(){
+    $('.js-expand').on('click',function(){
+      $(this).addClass('hide');
+      $('.js-compress').removeClass('hide');
+      $('.module-list-archive').addClass('archive-expanded');
+      $('.block-my-pop-up').addClass('archive-expanded-popup');
+    });
+
+    $('.js-compress').on('click',function(){
+      $(this).addClass('hide');
+      $('.js-expand').removeClass('hide');
+      $('.module-list-archive').removeClass('archive-expanded');
+      $('.block-my-pop-up').removeClass('archive-expanded-popup');
+    });
+  });
+</script>

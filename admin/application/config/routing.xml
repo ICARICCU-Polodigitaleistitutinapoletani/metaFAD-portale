@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Routing>
+    <pnx:Route name="actionsMVCDelete" value="{pageId}/{action=delete}/{value=model}/{value=id}" />
+    <pnx:Route name="actionsMVCToggleVisibility" value="{pageId}/{action=togglevisibility}/{value=model}/{value=id}" />
+
+    <pnx:Route name="actionsMVC" value="{pageId}/{value=action}/{value=id}" />
+    <pnx:Route name="actionsMVCAdd" value="{pageId}/{action=edit}/0" parseUrl="false" />
+
+    <pnx:Route name="pinaxcmsMediaArchiveAdd" value="{pageId}/{action=add}" parseUrl="false" />
+    <pnx:Route name="pinaxcmsModuleManagerDuplicate" value="{pageId}/{action=duplicate}/{value=id}" parseUrl="false" />
+
+    <pnx:Route name="moduleAction" value="{pageId}/{value=action}" />
+
+    <pnx:Route name="linkAddEntity" value="{pageId}/{action=edit}" />
+    <pnx:Route name="linkCurrentPage" value="{pageId}" parseUrl="false" />
+    <pnx:Route name="linkChangeAction" value="{pageId}/{value=action}" />
+	<pnx:Route name="login" value="{pageId=Login}" />
+    <pnx:Route name="logout" value="{pageId=_logout}" />
+    <pnx:Route name="link" value="{pageId}" />
+
+	<pnx:Route name="link-portale-be" value="{config=metafad.url}/dashboard/" parseUrl="false" />
+
+</pnx:Routing>

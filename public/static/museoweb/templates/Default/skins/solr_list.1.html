@@ -1,0 +1,52 @@
+<div class="solrResult right-column search-section" tal:condition="php: !is_null(Component.records)">
+    <div class="pull-right">
+        <span tal:content="php: __T('Ordina per:')"></span>
+
+        <b tal:condition="php: Component.order == 'relevance'" tal:content="php: __T('Rilevanza')"></b>
+        <a  tal:condition="php: Component.order != 'relevance'" tal:attributes="href Component/urlRelevance; title 'Rilevanza'" tal:content="php: __T('Rilevanza')"/>
+        <span> | </span>
+
+        <b tal:condition="php: Component.order == 'mostRecent'" tal:content="structure php: __T('Il più recente')"></b>
+        <a tal:condition="php: Component.order != 'mostRecent'" tal:attributes="href Component/urlMostRecent; title php: __T('Il più recente')" tal:content="structure php: __T('Il più recente')"/>
+        <span> | </span>
+
+        <b tal:condition="php: Component.order == 'leastRecent'" tal:content="php: __T('Il meno recente')"></b>
+        <a tal:condition="php: Component.order != 'leastRecent'" tal:attributes="href Component/urlLeastRecent; title php: __T('Il meno recente')" tal:content="php: __T('Il meno recente')"/>
+    </div>
+
+    <span tal:omit-tag="" tal:condition="php: count(Component.records)">
+        <p class="solrTotal"><span tal:omit-tag="" tal:content="php: __T('Document founds:')" /> <span tal:content="Component/total" /></p>
+        <div class="col-xs-12 right-column-list clearfix" tal:repeat="item Component/records">
+            <div tal:attributes="class item/cssClass">
+              <div class="article-header">
+                <div class="col-xs-12 title">
+                  <h4 class="date-news" tal:condition="php: property_exists(item, 'type_s')">
+                      <span tal:omit-tag="" tal:content="item/type_s" />
+                      <span tal:condition="php: isset(item.pubTitle_s)">
+                        - <span tal:omit-tag="" tal:content="item/pubTitle_s" />
+                      </span>
+                  </h4>
+                  <span tal:condition="php: isset(item.author_txt) && item.author_txt">
+                    <h4 class="authors-news" tal:content="item/author_txt"></h4>
+                  </span>
+                  <h1 class="title-blog-event"><a tal:attributes="href item/url_s; title item/title_t" tal:content="structure item/title_t"/></h1>
+                  <span tal:condition="php: isset(item.subtitle_t)">
+                    <h4 class="subtitle-blog-event" tal:condition="item/subtitle_t" tal:content="item/subtitle_t"></h4>
+                  </span>
+                  <hr />
+                </div>
+              </div>
+              <div class="col-xs-12 content-news-list" >
+                 <span tal:omit-tag="" tal:content="structure php: pinax_strtrim(item.text_t, 400)"></span>
+              </div>
+            </div>
+            <div class="conver-in-result" tal:condition="php: property_exists(item, 'image_s') && item.image_s">
+                <img tal:attributes="src item/image_s" />
+                <span class="pull-right" tal:content="item/publicationdate_dt"></span>
+            </div>
+      </div>
+	</span>
+    <span tal:omit-tag="" tal:condition="php: !count(Component.records)">
+        <p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+    </span>
+</div>

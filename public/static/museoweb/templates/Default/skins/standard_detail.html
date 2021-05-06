@@ -1,0 +1,174 @@
+<h1 class="block-title" tal:condition="php: Component['title'] AND strlen(Component['title']) LT 130" tal:content="structure Component/title"/>
+<h1 class="block-title-smaller" tal:condition="php: Component['title'] AND strlen(Component['title']) GT 131" tal:content="structure Component/title"/>
+
+<div class="module-preview-section padding-bottom mcp-module-introducing-content padding-bottom margin-bottom">
+	<tal:block tal:repeat="item Component/data">
+		<tal:block tal:condition="php: repeat.item.start" >
+			<!-- module-accordion -->
+	        <div tal:attributes="class php: 'module-accordion row' . ((Component['firstImage']) ? ' first-row' : '')">
+	            <!-- block-accordion -->
+		            <div tal:attributes="class php: 'block-accordion' . ((Component['firstImage']) ? ' col-md-9' : '')">
+		                <div class="block-accordion-heading js-show-element-reverse">
+		                    <h2 class="block-title" tal:content="item/label"></h2>
+		                </div>
+		                <div tal:attributes="id repeat/item/key" class="block-accordion-content js-collapse-box-reverse hidden">
+		                    <dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse">
+		                        <tal:block tal:repeat="children php: item.children">
+		                            <tal:block tal:repeat="child children">
+		                                <tal:block condition="php: !child.children">
+											<tal:block tal:condition="php: is_string(child.value)">
+												<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="child/label"></dt>
+												<dd tal:condition="php: child.value" class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="child/value"></dd>
+											</tal:block>
+											<tal:block tal:condition="php: ! is_string(child.value)">
+												<tal:block tal:repeat="c php: child.value" >
+													<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="php: (repeat.c.key == 0) ? child.label : ''"></dt>
+													<tal:block tal:condition="php: !is_string(c)">
+														<!--Specializzazione per campo ROZ -->
+														<tal:block tal:condition="php: child.name == 'ROZ'">
+															<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 ">
+																<a tal:attributes="href php: metafad_utils_SkinHelper::rozSearchLink(end(get_object_vars(c)).text)" target="_blank" tal:content="php: end(get_object_vars(c)).text" />
+															</dd>
+														</tal:block>
+														<tal:block tal:condition="php: child.name !== 'ROZ'">
+															<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="php: is_string(end(get_object_vars(c))) ? end(get_object_vars(c)) : end(get_object_vars(c)).text"></dd>
+														</tal:block>
+													</tal:block>
+													<tal:block tal:condition="php: is_string(c)">
+														<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="c"></dd>
+													</tal:block>
+												</tal:block>
+											</tal:block>
+		                                </tal:block>
+		                                <tal:block condition="php: child.children">
+		                                    <tal:block metal:use-macro="repeatBlock" tal:define="item child"/>
+		                                </tal:block>
+		                            </tal:block>
+		                        </tal:block>
+		                    </dl>
+		                </div>
+				</div>
+				<div tal:condition="php: Component['firstImage'] AND repeat.item.start" class="col-md-3 col-lg-3 col-sm-12">
+					<figure>
+						<a id="imageLink" tal:attributes="href Component/imageUrl; title php: __T('Vedi')">
+							<img tal:attributes="src Component/firstImage" class="detail-image"/>
+						</a>
+						<div class="bcp-block-item-post-tool padding-top content-align-right">
+							<ul><li><a id="imageLink" tal:attributes="href Component/imageUrl"><span class="icon-view2331"></span> Vedi</a></li></ul>
+						</div>
+					</figure>
+				</div>
+	            <!-- block-accordion -->
+	        </div>
+		</tal:block>
+		<tal:block tal:condition="php: NOT repeat.item.start" >
+			<!-- module-accordion -->
+	        <div class="module-accordion row">
+	            <!-- block-accordion -->
+		            <div class="block-accordion">
+		                <div class="block-accordion-heading js-show-element-reverse">
+		                    <h2 class="block-title" tal:content="item/label"></h2>
+		                </div>
+		                <div tal:attributes="id repeat/item/key" class="block-accordion-content js-collapse-box-reverse hidden">
+		                    <dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse">
+		                        <tal:block tal:repeat="children php: item.children">
+		                            <tal:block tal:repeat="child children">
+		                                <tal:block condition="php: !child.children">
+											<tal:block tal:condition="php: is_string(child.value)">
+												<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="child/label"></dt>
+												<dd tal:condition="php: child.value" class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="child/value"></dd>
+											</tal:block>
+											<tal:block tal:condition="php: ! is_string(child.value)">
+												<tal:block tal:repeat="c php: child.value" >
+													<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="php: (repeat.c.key == 0) ? child.label : ''"></dt>
+													<tal:block tal:condition="php: !is_string(c)">
+														<!--Specializzazione per campo ROZ -->
+														<tal:block tal:condition="php: child.name == 'ROZ'">
+															<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 link-detail">
+																<i class="fa fa-external-link" aria-hidden="true"></i>
+																<a tal:attributes="href php: metafad_utils_SkinHelper::rozSearchLink(end(get_object_vars(c)).text)" target="_blank" tal:content="php: end(get_object_vars(c)).text" />
+															</dd>
+														</tal:block>
+														<tal:block tal:condition="php: child.name == 'soggettoProduttore' OR child.name == 'soggettoConservatore'">
+															<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 link-detail">
+																<i class="fa fa-external-link" aria-hidden="true"></i>
+																<tal:block tal:content="structure php: metafad_utils_SkinHelper::archiveAutLink(c)" />
+															</dd>
+														</tal:block>
+														<tal:block tal:condition="php: child.name !== 'ROZ' AND child.name !== 'soggettoProduttore' AND child.name !== 'soggettoConservatore'">
+															<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="php: is_string(end(get_object_vars(c))) == 1 ? end(get_object_vars(c)) : end(get_object_vars(c)).text"></dd>
+														</tal:block>
+													</tal:block>
+													<tal:block tal:condition="php: is_string(c)">
+														<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="c"></dd>
+													</tal:block>
+												</tal:block>
+											</tal:block>
+		                                </tal:block>
+		                                <tal:block condition="php: child.children">
+		                                    <tal:block metal:use-macro="repeatBlock" tal:define="item child"/>
+		                                </tal:block>
+		                            </tal:block>
+		                        </tal:block>
+								<tal:block condition="php: !item.children">
+									<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="php: item.label"></dt>
+									<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="php: item.value"></dd>
+								</tal:block>
+		                    </dl>
+		                </div>
+				</div>
+	            <!-- block-accordion -->
+	        </div>
+		</tal:block>
+        <!-- module-accordion -->
+    </tal:block>
+
+</div>
+
+<tal:block metal:define-macro="repeatBlock">
+	<div class="parent-archive" tal:content="item/label"></div>
+	<dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse children-elements">
+		<tal:block tal:repeat="children php: item.children">
+			<tal:block tal:repeat="child children">
+				<tal:block condition="php: !child.children">
+					<tal:block tal:condition="php: is_string(child.value)">
+						<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="child/label"></dt>
+						<!-- Caso particolare link RVEL -->
+						<tal:block tal:condition="php: child.name !== 'RVEL'">
+							<dd tal:condition="php: child.value" class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="child/value"></dd>
+						</tal:block>
+						<tal:block tal:condition="php: child.name == 'RVEL'">
+							<dd tal:condition="php: child.value" class="Rtable-cell gcp-no-border Rtable-cell--3of4 link-detail">
+								<tal:block tal:content="structure php: metafad_utils_SkinHelper::rvelSearchLink(child.value)" />
+							</dd>
+						</tal:block>
+					</tal:block>
+					<tal:block tal:condition="php: ! is_string(child.value)">
+						<tal:block tal:repeat="c php: child.value" >
+							<tal:block tal:condition="php: child.name !== '__AUT' && child.name !== '__BIB'">
+								<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="php: (repeat.c.key == 0) ? child.label : ''"></dt>
+								<tal:block tal:condition="php: !is_string(c)">
+										<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="php: is_string(end(get_object_vars(c))) ? end(get_object_vars(c)) : end(get_object_vars(c)).text"></dd>
+								</tal:block>
+								<tal:block tal:condition="php: is_string(c)">
+									<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="c"></dd>
+								</tal:block>
+							</tal:block>
+						</tal:block>
+						<tal:block tal:condition="php: child.name == '__AUT' || child.name == '__BIB'">
+							<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="child/label"></dt>
+							<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 link-detail">
+								<i class="fa fa-external-link" aria-hidden="true"></i>
+								<tal:block tal:content="structure php: metafad_utils_SkinHelper::autDetailLink(child.value)" />
+							</dd>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				<tal:block condition="php: child.children">
+					<tal:block metal:use-macro="repeatBlock" tal:define="item child"/>
+				</tal:block>
+			</tal:block>
+			<div tal:condition="php: NOT repeat.children.end" class="fields-children-separator"></div>
+		</tal:block>
+	</dl>
+</tal:block>

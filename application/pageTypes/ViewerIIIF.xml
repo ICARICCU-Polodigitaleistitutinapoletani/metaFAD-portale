@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mwf="metafad.viewer.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    controllerName="metafad.modules.solr.controllers.*"
+    templateType="php"
+    templateFileName="vieweriiif.php"
+    defaultEditableRegion="content">
+    <pnx:Import src="Common.xml" />
+
+    <mvc:State name="index">
+        <pnx:Resources id="resources">
+            <pnx:js src="static/vieweriiif/js/mirador.min.js" editableRegion="head" />
+            <pnx:css src="static/vieweriiif/css/mirador-combined.css" editableRegion="head" />
+            <pnx:css src="static/vieweriiif/imageCropper/imageCropper.min.css" editableRegion="head" />
+            <pnx:js src="static/vieweriiif/imageCropper/imageCropper.min.js" editableRegion="head" />
+            <pnx:css src="static/vieweriiif/DownloadMenu/downloadMenu.min.css" editableRegion="head" />
+            <pnx:js src="static/vieweriiif/DownloadMenu/downloadMenu.min.js" editableRegion="head" />
+        </pnx:Resources>
+        <pnx:EmptyComponent editableRegion="backButton" skin="backButton_detail.html" />
+        <mwf:ViewerIIIF id="viewer" skin="vieweriiif.html"/>
+    </mvc:State>
+
+</mvc:Page>

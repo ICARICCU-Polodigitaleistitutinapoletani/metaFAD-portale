@@ -1,0 +1,12 @@
+<tal:block metal:define-macro="requestPopup">
+	<!-- block-my-pop-up -->
+	<div id="popupRequest" style="width:1000px;height:300px;" class="block-my-pop-up hide bcp-block-pop-up-iframe--fixed bcp-block-pop-up-iframe--center-xy-position bcp-block-pop-up-iframe js-my-pop-up hidden">
+	  <!-- block-my-pop-up-content -->
+	  <div class="popup-richieste block-my-pop-up-content clearfix" style="overflow: scroll">
+		<a data-popup-target-close="#popupRequest" class="gcp-btn-close-pop-up js-close-my-pop-up"><i class="icon-remove2231 g-right g-top margin-top margin-right"></i></a>
+		<iframe style="height: 800px !important;" class="request-iframe" frameborder="0" id="popupRequest-iframe" src="" />
+	  </div>
+	  <!-- block-my-pop-up-content -->
+	</div>
+	<!-- block-my-pop-up -->
+</tal:block>

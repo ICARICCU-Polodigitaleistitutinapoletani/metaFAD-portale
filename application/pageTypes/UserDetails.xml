@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:cms="pinaxcms.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="page.php"
+    adm:editComponents="text,confirm"
+    controllerName="museoweb.controllers.user.*"
+    defaultAction="modify">
+
+	<pnx:Import src="Common.xml" />
+	<pnx:LoginCheck text="{i18n:MW_LOGIN_REQUIRED}" cssClass="error" />
+	<mvc:State name="modify">
+		<pnx:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+		<pnx:MessageBox type="ERROR" cssClass="message error" message="{i18n:Controllare i seguenti errori:}" />
+		<pnx:Form id="registration" cssClass="module-main-search--opac minHeigthFix">
+      <pnx:Input id="name" cssClassLabel="" label="{i18n:MW_USER_NAME}" size="50" required="true" validationType="not_empty" />
+			<pnx:Input id="surname" cssClassLabel="" label="{i18n:MW_USER_SURNAME}" size="50" required="true" validationType="not_empty" />
+      <pnx:List id="sex" cssClassLabel="" label="{i18n:Sesso}" required="true" emptyValue="">
+        <pnx:ListItem value="M" key="M"/>
+        <pnx:ListItem value="S" key="S"/>
+      </pnx:List>
+      <pnx:Input id="birthDate" type="date" cssClassLabel="" label="{i18n:Data di nascita}" size="50" required="true" />
+      <pnx:Input id="country" cssClassLabel="" label="{i18n:MW_USER_COUNTRY}" size="50" required="true" validationType="not_empty"/>
+      <pnx:Input id="taxCode" cssClassLabel="" label="{i18n:Codice fiscale}" size="50" required="true" validationType="not_empty"/>
+      <pnx:Input id="username" cssClassLabel="" label="{i18n:Nome utente}" size="50" required="true" readOnly="true" validationType="not_empty"/>
+      <pnx:Input id="email" cssClassLabel="" label="{i18n:MW_USER_EMAIL}" size="50" required="true" validationType="email" />
+			<pnx:Input id="psw" cssClassLabel="" label="{i18n:MW_USER_PSW}" size="50" type="password" validationType="not_empty" />
+      <pnx:Input id="psw_confirm" cssClassLabel="" label="{i18n:Conferma password}" size="50" type="password" validationType="not_empty" />
+      <pnx:Checkbox id="sbnUser" cssClassLabel="" label="{i18n:Utente SBN}"  />
+			<pnx:Panel cssClass="formButtons" >
+				<pnx:HtmlButton label="{i18n:Invia modifiche}" value="submit" name="submit" cssClass="submitButton" />
+			</pnx:Panel>
+		</pnx:Form>
+		<pnx:Text text="{i18n:MW_REGISTRATION_REQUIRED}" wrapTag="p" />
+	</mvc:State>
+	<mvc:State name="modifyConfirm">
+		<pnx:LongText id="confirm" label="{i18n:MW_REGISTRATION_CONFIRM}" forceP="true" adm:rows="10" adm:cols="75" adm:htmlEditor="true" />
+	</mvc:State>
+</mvc:Page>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:solr="metafad.modules.solr.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:arc="metafad.archive.views.components.*"
+    xmlns:mwf="metafad.views.components.*"
+    controllerName="metafad.modules.solr.controllers.*"
+    templateType="php"
+    templateFileName="popup.php"
+    defaultEditableRegion="content">
+    <pnx:Import src="Common.xml" />
+
+    <mvc:State name="detail">
+      <pnx:JSscript editableRegion="content" src="application/classes/metafad/modules/solr/js/advancedSearch.js"/>
+
+      <solr:Detail id="detail" skin="OpacDetail_popup.html" mediaType="sbn"/>
+    </mvc:State>
+
+    <mvc:State name="detailiccdaut">
+      <pnx:JSscript editableRegion="content" src="application/classes/metafad/modules/solr/js/advancedSearch.js"/>
+
+      <solr:Detail id="detail" skin="OpacDetail.html" solrUrl="metafad.iccd-au.detail.url"/>
+    </mvc:State>
+
+    <mvc:State name="detailaut">
+      <pnx:JSscript editableRegion="content" src="application/classes/metafad/modules/solr/js/advancedSearch.js"/>
+
+      <solr:Detail id="detail" skin="OpacDetail_popup.html" solrUrl="metafad.opac-au.detail.url"/>
+    </mvc:State>
+
+    <mvc:State name="detailarchiveaut">
+      <pnx:JSscript editableRegion="content" src="application/classes/metafad/modules/solr/js/advancedSearch.js"/>
+
+      <solr:Detail id="detail" skin="OpacDetail.html" solrUrl="metafad.archivio-au.detail.url" detailType="archive"/>
+      <pnx:JSscript editableRegion="content" src="application/classes/metafad/archive/js/detailArchiveEntity.js"/>
+    </mvc:State>
+
+</mvc:Page>

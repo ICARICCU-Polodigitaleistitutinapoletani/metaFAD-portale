@@ -1,0 +1,9 @@
+parameters:
+	level: 0
+	paths:
+		- admin
+		- application/classes
+		- public
+	scanDirectories:
+		- vendor/icariccu/pinax/src
+		- application/libs

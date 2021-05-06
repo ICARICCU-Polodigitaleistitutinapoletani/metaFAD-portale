@@ -1,0 +1,3 @@
+<ul class="bcp-result-filter-list bcp-result-filter-list--nav">
+	<li tal:repeat="search Component/searchs"><a tal:attributes="href php: __Link::makeUrl('solr_advancedSearch',array('action'=>search)) .'?mask=Ricerca semplice'; class php: (__Request::get('action')) == search ? 'active' : ''" tal:content="php: __T(search)"></a></li>
+</ul>

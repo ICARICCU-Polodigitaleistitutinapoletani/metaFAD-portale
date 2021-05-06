@@ -1,0 +1,134 @@
+<!-- module-preview-section -->
+<div class="module-preview-section padding-bottom mcp-module-introducing-content padding-bottom margin-bottom">
+
+  <h1 class="block-title" tal:content="php: ( Component['label'] ) ?  Component['label']  : 'Ricerca avanzata' "></h1>
+
+  <!-- module-main-search -->
+  <div class="module-main-search module-main-search--opac col-md-6 col-lg-12 col-sm-12">
+
+    <!-- block-form -->
+    <div class="block-form">
+
+      <form id="advancedSearchForm" tal:attributes="action Component/solrSearch; data-url Component/autocompleteUrl">
+        <input name="search" type="hidden" value="*" />
+        <!-- row -->
+        <div class="module-accordion">
+
+        <div class="block-accordion" tal:repeat="accordion Component/accordionList">
+          <div class="block-accordion-heading js-show-element-reverse" tal:condition="php: accordion != ''"><h2 class="block-title" tal:content="accordion"></h2></div>
+          <div tal:attributes="class php: (accordion == '') ? 'block-accordion-content js-collapse-box-reverse hidden' : 'block-accordion-content js-collapse-box-reverse'">
+
+          <div class="row" tal:repeat="item Component/fields">
+            <span tal:condition="php: item.accordion == accordion" tal:omit-tag="">
+              <span tal:condition="php: item.range == false" tal:omit-tag="">
+                <div class="col-md-2 col-lg-2 content-align-right">
+                  <label tal:content="php: item.label . ':'"/>
+                </div>
+                <div class="col-md-7 col-lg-8">
+                  <div class="block-field bselect-show-input-search">
+                    <p>
+                      <select tal:condition="php: item.type != 'text' AND item.type != 'checkbox'" tal:attributes="id php: 'bselect-' . item.id; data-fieldid item/id; name php: 'filter_' . item.id; data-type php: item.type" data-placeholder="Seleziona" >
+                        <option value="">Seleziona</option>
+                      </select>
+                      <input type="text" tal:condition="php: item.type == 'text'" tal:attributes="id php: item.id; name php: 'filter_' . item.id; data-type php: item.type;"/>
+                      <input class="checkbox-adv" type="checkbox" tal:condition="php: item.type == 'checkbox'" tal:attributes="id php: item.id; name php: 'filter_' . item.id; data-type php: item.type;checked php: (__Request::get('digitale')) ? 'checked' : ''" value="true"/>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-lg-2">
+
+                  <div tal:condition="php: item.type != 'checkbox' AND item.type != 'list'" class="block-field gcp-bselect-and-theme">
+                    <p>
+                      <select name="" tal:attributes="id php: 'bselect-' . item.id . '-words'; data-fieldid item/id; name php: 'filter_' . item.id . '-words'" data-placeholder="Parole in AND" >
+                        <option value="AND">Parole in AND</option>
+                        <option value="OR">Parole in OR</option>
+                        <option value="NOTALL">NOT (tutto)</option>
+                        <option value="NOT">NOT (singole parole)</option>
+                        <option value="=">Frase esatta</option>
+                      </select>
+                    </p>
+                  </div>
+
+                </div>
+              </span>
+
+              <span tal:condition="php: item.range == true" tal:omit-tag="">
+                <div class="col-md-2 content-align-right">
+                  <label tal:content="php: item.label . ':'"/>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-1 content-align-right">
+                            <label class="label-w30">da:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="block-field bselect-show-input-search">
+                                <p>
+                                  <select tal:condition="php: item.type != 'text' AND item.type != 'checkbox'" tal:attributes="id php: 'bselect-from' . item.id; data-fieldid item/id; name php: 'filter_' . item.id; data-type php: item.type" data-placeholder="Seleziona" >
+                                    <option value="">Seleziona</option>
+                                  </select>
+                                  <input type="text" tal:condition="php: item.type == 'text'" tal:attributes="id php: item.id; name php: 'filterFrom_' . item.id; data-type php: item.type;"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-1 content-align-right">
+                            <label class="label-w30">a:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="block-field bselect-show-input-search">
+                              <p>
+                                <select tal:condition="php: item.type != 'text' AND item.type != 'checkbox'" tal:attributes="id php: 'bselect-to' . item.id; data-fieldid item/id; name php: 'filter_' . item.id; data-type php: item.type" data-placeholder="Seleziona" >
+                                  <option value="">Seleziona</option>
+                                </select>
+                                <input type="text" tal:condition="php: item.type == 'text'" tal:attributes="id php: item.id; name php: 'filterTo_' . item.id; data-type php: item.type;"/>
+                              </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </span>
+            </span>
+
+          </div>
+          </div>
+        </div>
+      </div>
+        <!-- row -->
+
+        <div class="module-row-button gutter-top-large content-align-center">
+		  <!--Ricerca mista su due particolari istituti, task POLODEBUG-538 -->
+		  <!-- <input tal:condition="Component/mergesearch" type="submit" name="ssbc" class="btn-ct8" value="Avvia ricerca su IISS e FBBC" /> -->
+
+          <input type="submit" name="" class="btn-ct8" value="Avvia la ricerca" />
+
+          <input type="reset" class="btn-reset" name="" value="Annulla" />
+
+        </div>
+
+        <script>
+          $('.row').each(function(){
+            if($(this).html().indexOf('div') == -1)
+            {
+              $(this).addClass('hide');
+            }
+          });
+
+          $('.btn-reset').on('click',function(){
+            $('.block-field.bselect-show-input-search').find('.bselect-label').each(function(){
+              $(this).html('Seleziona');
+            });
+            $('.block-field.gcp-bselect-and-theme').find('.bselect-label').each(function(){
+              $(this).html('Parole in AND');
+            });
+          })
+        </script>
+      </form>
+
+    </div>
+    <!-- block-form -->
+
+  </div>
+  <!-- module-main-search -->
+
+</div>
+<!-- module-preview-section -->

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:mwf="metafad.requests.views.components.*"
+    controllerName="metafad.requests.controllers.*"
+    templateType="php"
+    templateFileName="page.php"
+    defaultEditableRegion="content">
+    <pnx:Import src="Common.xml" />
+
+    <mvc:State name="login">
+    	<pnx:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+      	<pnx:EmptyComponent skin="serviceMessage.html" />
+    </mvc:State>
+</mvc:Page>

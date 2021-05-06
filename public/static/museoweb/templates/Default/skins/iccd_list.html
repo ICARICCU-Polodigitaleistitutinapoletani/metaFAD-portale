@@ -1,0 +1,68 @@
+<article tal:attributes="class php: 'block-item-post not-have-image bcp-block-item-post--result list clearfix ' . ((repeat.item.index % 2 == 0) ? 'img-border-left-red' : 'img-border-left-brown')" tal:repeat="item Component/records">
+
+	<div class="gcp-wrapper-figure pull-left" tal:condition="php: item.digitale_idpreview_s">
+		<figure class="gcp-wrapper-img gcp-bg-CCCCCC">
+			<a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=iccd'"><img tal:attributes="src php: item.digitale_idpreview_s" alt="" /></a>
+		</figure>
+	</div>
+
+	<h1 class="block-title">
+		<a tal:condition="php: item.{'SGTI_ss'}" tal:attributes="href php: __Link::makeUrl('iccd_detail', array('id'=> item.id ))" tal:content="php: item.{'SGTI_ss'}"></a>
+	</h1>
+
+	<p tal:condition="php: item.{'AUTN_ss'}"><span class='bcp-block-item-pot-field'>Autore: </span><tal:block tal:content="php: item.{'AUTN_ss'}"/></p>
+
+	<p tal:condition="php: item.{'TSK_ss'}"><span class='bcp-block-item-pot-field'>Tipo scheda: </span><tal:block tal:content="php: item.{'TSK_ss'}"/></p>
+	<p tal:condition="php: item.{'OGTD_ss'}"><span class='bcp-block-item-pot-field'>Definizione: </span><tal:block tal:content="php: item.{'OGTD_ss'}"/></p>
+	<p>
+		<span class="bcp-block-item-pot-field">N. Cat.: </span>
+		<span tal:omit-tag="" tal:condition="php: item.{'NCTN_ss'}" tal:content="php: metafad_utils_SkinHelper::getNCT(item)"/>
+	</p>
+
+	<!-- bcp-block-item-post-tool -->
+	<div class="bcp-block-item-post-tool padding-top content-align-right">
+		<ul>
+			<li tal:condition="php: item.visibility_d"><a tal:attributes="href php: __Link::makeUrl('iccd_detail', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li>
+			<li tal:condition="php: item.visibility_v AND item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=iccd'"><span class="icon-view2331"></span> Vedi</a></li>
+			<tal:block tal:condition="Component/hasRequests">
+			<!-- <li tal:condition="php: NOT item.visibility_d"><a class="js-get-request-iframe" href="#popupRequest" data-popup-target="#popupRequest" tal:attributes="data-iframe php: __Link::makeUrl('request', array('action' => 'request','type' => 'd','id' => item.id ))"><span class="icon-filetexto"></span>Richiedi scheda</a></li>
+			<li tal:condition="php: item.size >= 1 AND NOT item.visibility_v"><a class="js-get-request-iframe" href="#popupRequest" data-popup-target="#popupRequest" tal:attributes="data-iframe php: __Link::makeUrl('request', array('action' => 'request','type' => 'v','id' => item.id ))"><span class="icon-view2331"></span>Richiedi consultazione</a></li>
+			<li tal:condition="php: item.size == 0"><a class="js-get-request-iframe" href="#popupRequest" data-popup-target="#popupRequest" tal:attributes="data-iframe php: __Link::makeUrl('request', array('action' => 'request','type' => 'dig','id' => item.id ))"><span class="icon-inboxtext231"></span>Richiedi digitalizzazione</a></li> -->
+		</tal:block>
+		<li tal:condition="Component/hasSocial">
+			<a tal:attributes="href php: '#social'.item.id; data-popup-target php: '#social'.item.id"><span class="icon-share231"></span> Condividi</a>
+			<!-- block-my-pop-up -->
+			<div tal:attributes="id php: 'social'.item.id" style="width:230px;top:100%;" class="block-my-pop-up hide bcp-block-pop-up-share js-my-pop-up g-right">
+				<div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+				<!-- block-my-pop-up-content -->
+				<div class="block-my-pop-up-content clearfix">
+
+					<!-- block-form -->
+					<article class="block-form">
+
+						<!-- block-social-network -->
+						<div class="block-social-network">
+							<ul>
+								<li><a tal:attributes="href php: 'mailto:?subject=Visita questo sito&amp;body=Visita questo sito'.__Link::makeUrl('iccd_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-at"></i></span></a></li>
+								<li><a tal:attributes="href php: 'https://www.facebook.com/sharer/sharer.php?u='.__Link::makeUrl('iccd_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-facebookf"></i></span></a></li>
+								<li><a tal:attributes="href php: 'https://twitter.com/home?status='.__Link::makeUrl('iccd_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-twitter"></i></span></a></li>
+								<li><a tal:attributes="href php: 'https://plus.google.com/share?url='.__Link::makeUrl('iccd_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-googleplus"></i></span></a></li>
+							</ul>
+						</div>
+						<!-- block-social-network -->
+
+					</article>
+					<!-- block-form -->
+
+				</div>
+				<!-- block-my-pop-up-content -->
+
+			</div>
+			<!-- block-my-pop-up -->
+		</li>
+
+	</ul>
+</div>
+<!-- bcp-block-item-post-tool -->
+</article>

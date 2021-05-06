@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:include
+  xmlns:cms="pinaxcms.views.components.*"
+  src="pinaxcms.views.TemplateModuleAdmin">
+  <pnx:template name="model" value="metafad.modules.institutesManagement.models.Model" />
+  <pnx:template name="show_external_id" value="false" />
+  <pnx:template name="show_permissions" value="false" />
+
+  <pnx:template name="grid_fields">
+    <pnx:DataGridColumn columnName="name" headerText="{i18n:Titolo}" renderCell="pinaxcms.contents.views.renderer.DocumentTitle" width="70" />
+    <pnx:DataGridColumn columnName="document_creationDate" headerText="{i18n:Data Creazione}" width="15" />
+    <pnx:DataGridColumn columnName="document_detail_modificationDate" headerText="{i18n:Data Ultima Modifica}" width="15"/>
+  </pnx:template>
+
+  <pnx:template name="form_fields">
+    <pnx:JSscript src="../application/classes/metafad/modules/institutesManagement/js/institutesManagement.js"/>
+
+    <pnx:Input id="name" label="{i18n:Nome}" size="90" required="true" />
+    <pnx:Input id="institute" label="{i18n:Istituto}" required="true" data="type=selectfrom;return_object=true;multiple=false;add_new_values=false;proxy=metafad.institutes.models.proxy.InstituteProxy;"/>
+    <pnx:Input id="image" label="{i18n:Immagine}" size="90" required="true" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+    <pnx:Input id="headerImage" label="{i18n:Immagine istituto selezionato}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+    
+    <pnx:Fieldset id="homeGallery" label="{i18n:Lista immagini galleria Home (dimensione consigliata: 1300x800)}" data="type=repeat;collapsable=false;repeatMin=0">
+      <pnx:Input id="image" label="{i18n:Immagine}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+    </pnx:Fieldset>
+
+    <pnx:Input id="text" label="{i18n:Descrizione breve}" required="true" type="multiline" wrap="false" rows="10"/>
+    <pnx:Input id="longtext" label="{i18n:Descrizione completa}" type="multiline" rows="10" cols="70" htmlEditor="true"  data="type=tinymce"/>
+    <pnx:Input id="link" label="{i18n:Link istituto in home}" size="255" required="false" />
+    <pnx:List id="consultation" label="{i18n:Consultazione}">
+      <pnx:ListItem key="false" value="No" selected="true"/>
+      <pnx:ListItem key="true" value="Si"/>
+    </pnx:List>
+    <pnx:List id="digitalization" label="{i18n:Digitalizzazione}">
+      <pnx:ListItem key="false" value="No" selected="true"/>
+      <pnx:ListItem key="true" value="Si"/>
+    </pnx:List>
+    <pnx:List id="copies" label="{i18n:Acquisto copie digitali}">
+      <pnx:ListItem key="false" value="No" selected="true"/>
+      <pnx:ListItem key="true" value="Si"/>
+    </pnx:List>
+	<pnx:Fieldset label="{i18n:Valore localizzazioni in record SBN}">
+		<pnx:Input id="baseindex_key" label="{i18n:Nome istituto su indice SBN}" size="90" />
+		<pnx:Input id="metaindex_key" label="{i18n:Nome istituto su metaindice}" size="90" />
+	</pnx:Fieldset>
+	<pnx:Fieldset label="{i18n:Indici di ricerca disponibili}">
+		<pnx:List id="metaindice" label="{i18n:Metaindice}">
+	      <pnx:ListItem key="false" value="No" selected="true"/>
+	      <pnx:ListItem key="true" value="Si"/>
+	    </pnx:List>
+		<pnx:List id="metaindiceau" label="{i18n:Metaindice authorities}">
+	      <pnx:ListItem key="false" value="No" selected="true"/>
+	      <pnx:ListItem key="true" value="Si"/>
+	    </pnx:List>
+		<pnx:List id="archive" label="{i18n:Archivistico}">
+	      <pnx:ListItem key="false" value="No" selected="true"/>
+	      <pnx:ListItem key="true" value="Si"/>
+	    </pnx:List>
+		<pnx:List id="iccd" label="{i18n:ICCD}">
+	      <pnx:ListItem key="false" value="No" selected="true"/>
+	      <pnx:ListItem key="true" value="Si"/>
+	    </pnx:List>
+		<pnx:List id="sbn" label="{i18n:SBN}">
+	      <pnx:ListItem key="false" value="No" selected="true"/>
+	      <pnx:ListItem key="true" value="Si"/>
+	    </pnx:List>
+	</pnx:Fieldset>
+  </pnx:template>
+</pnx:include>

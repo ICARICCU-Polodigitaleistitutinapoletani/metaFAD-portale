@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<mvc:Page id="Page"
+  xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+  xmlns:mvc="pinax.mvc.components.*"
+  xmlns:col="metafad.modules.collections.views.components.*"
+  xmlns:solr="metafad.modules.solr.views.components.*"
+  templateType="php"
+  templateFileName="page.php"
+  defaultEditableRegion="content"
+  controllerName="metafad.modules.collections.controllers.*"
+  adm:editComponents="text,ModuleDP">
+  <pnx:Import src="Common.xml" />
+  <pnx:Modifier target="searchSections" attribute="visible" value="false"/>
+
+  <mvc:State name="index">
+
+  </mvc:State>
+
+  <mvc:State name="show">
+    <pnx:EmptyComponent id="back" skin="backButton.html" editableRegion="buttons"/>
+    <col:CollectionList id="collectionList" editableRegion="filters" skin="collectionListDetail.html"/>
+    <col:CollectionPreview id="collectionPreview" editableRegion="content" skin="collectionPreviewDetail.html"/>
+    <solr:Solr paginate="{paginate}" id="collectionResult" immediateSearch="true" resultPerPage="10" solrUrl="metafad.iccd.url" solrFieldUrl="metafad.iccd.field.url"/>
+
+    <pnx:PaginateResult editableRegion="content" id="paginate" pageLength="10" skin="paginateCollection.html" />
+
+    <solr:RecordSetList id="recordSetListIccd" dataProvider="{collectionResult}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="iccd_list.html" recordType="iccd" enabled="false">
+        <solr:field name="Tipo di scheda" />
+        <solr:field name="Codice univoco" />
+        <solr:field name="Definizione culturale: autore" />
+        <solr:field name="Titolo sintetica" />
+        <solr:field name="Soggetto: identificazione" />
+    </solr:RecordSetList>
+
+    <solr:RecordSetList id="recordSetListSbn" dataProvider="{collectionResult}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="solr_list.html" recordType="sbn" enabled="false">
+        <solr:field name="Autore" />
+        <solr:field name="Titolo" />
+        <solr:field name="Pubblicazione" />
+        <solr:field name="Livello bibliografico" />
+        <solr:field name="Tipo documento" />
+    </solr:RecordSetList>
+
+    <solr:RecordSetList id="recordSetListArchive" dataProvider="{collectionResult}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="archive_ud_list.html" recordType="archive" enabled="false">
+        <solr:field name="Titolo originale + Cronologia.Estremo cronologico testuale | Titolo attribuito + Cronologia.Estremo cronologico testuale (UN)" />
+        <solr:field name="Denominazione + Estremo cronologico testuale (relativo)" />
+        <solr:field name="Primo livello (label)" />
+        <solr:field name="Livello superiore (UN)" />
+    </solr:RecordSetList>
+
+    <solr:RecordSetList id="recordSetListMetaindice" dataProvider="{collectionResult}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="metaindice_list.html" recordType="metaindice" enabled="false">
+      <solr:field name="dominio" />
+      <solr:field name="denominazione/titolo" />
+      <solr:field name="responsabilita" />
+      <solr:field name="complessoDAppartenenza" />
+    </solr:RecordSetList>
+  </mvc:State>
+</mvc:Page>

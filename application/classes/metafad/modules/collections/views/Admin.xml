@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:include
+  xmlns:cms="pinaxcms.views.components.*"
+  src="pinaxcms.views.TemplateModuleAdmin">
+  <pnx:template name="model" value="metafad.modules.collections.models.Model" />
+  <pnx:template name="show_external_id" value="false" />
+  <pnx:template name="show_permissions" value="false" />
+
+  <pnx:template name="grid_fields">
+    <pnx:DataGridColumn columnName="title" headerText="{i18n:Titolo}" renderCell="pinaxcms.contents.views.renderer.DocumentTitle" width="50" />
+    <pnx:DataGridColumn columnName="type" headerText="{i18n:Tipo}" width="5" />
+    <pnx:DataGridColumn columnName="position" headerText="{i18n:Posizione}" width="10" />
+    <pnx:DataGridColumn columnName="document_creationDate" headerText="{i18n:Data Creazione}" width="15" />
+    <pnx:DataGridColumn columnName="document_detail_modificationDate" headerText="{i18n:Data Ultima Modifica}" width="15"/>
+  </pnx:template>
+
+  <pnx:template name="form_fields">
+    <pnx:Input id="title" label="{i18n:Titolo}" size="90" required="true" />
+    <pnx:Input id="menuVoice" label="{i18n:Voce di menù}" size="90" required="true" />
+    <pnx:Input id="position" label="{i18n:Posizione}" size="90" type="number" required="true" />
+    <pnx:Input id="institute" label="{i18n:Istituto}" required="true" data="type=selectfrom;return_object=true;multiple=false;add_new_values=false;proxy=metafad.institutes.models.proxy.InstituteProxy;"/>
+    <pnx:Input id="image" label="{i18n:Immagine}" size="90" required="true" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+    <pnx:Input id="text" label="{i18n:Testo}" required="true" type="multiline" htmlEditor="true" wrap="false" rows="10"/>
+    <pnx:List id="type" label="{i18n:Tipo}" required="true">
+      <pnx:ListItem key="ICCD" value="ICCD" selected="true"/>
+      <pnx:ListItem key="SBN" value="SBN" />
+      <pnx:ListItem key="archive" value="Archivi" />
+      <pnx:ListItem key="metaindice" value="Metaindice" />
+    </pnx:List>
+    <pnx:Input id="query" label="{i18n:Query}" required="true" />
+  </pnx:template>
+
+</pnx:include>

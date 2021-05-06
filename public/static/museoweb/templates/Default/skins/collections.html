@@ -1,0 +1,46 @@
+<div class="u-background-grey-60 u-padding-r-top u-padding-r-bottom u-text-r-xxl">
+    <section class="u-background-grey-60 u-padding-r-all">
+        <div class="u-layout-medium u-layoutCenter">
+            <div class="Grid">
+                <h2 id="carousel-heading" class="Grid-cell u-text-h2 u-color-white u-layout-centerLeft">Le collezioni digitali</h2>
+                <!-- <next / prev buttons> -->
+                <div class="Grid-cell u-layout-centerRight">
+                    <button class="owl-prev u-padding-bottom-xl u-padding-right-xxl u-text-r-xl u-color-teal-50" aria-controls="carousel-1">
+                        <span class="u-hiddenVisually">Vai alla slide precedente</span>
+                        <span class="u-alignMiddle Icon Icon-arrow-left" role="presentation"></span>
+                    </button>
+                    <button class="owl-next u-padding-bottom-xl u-padding-left u-text-r-xl u-color-teal-50" aria-controls="carousel-1">
+                        <span class="u-hiddenVisually">Vai alla slide successiva</span>
+                        <span class="u-alignMiddle Icon Icon-arrow-right" role="presentation"></span>
+                    </button>
+                    <p class="u-hiddenVisually">È possibile navigare le slide utilizzando i tasti freccia</p>
+                </div>
+                <!-- </next / prev buttons> -->
+            </div>
+            <div class="owl-carousel owl-theme" role="region" id="carousel-1">
+                <tal:block tal:repeat="item Component/firstCollections">
+                <div class="Carousel-item" tal:repeat="subItem item">
+                    <div class="u-color-grey-30">
+                        <figure>
+                            <div class="gcp-t-CIT-image-wrap gcp-t-CIT-image-wrap-h300">
+                                <a tal:attributes="href php: __Link::makeUrl('collections_detail',array('document_id'=>subItem['id']))" class="u-block u-padding-all-xxs"><img tal:attributes="src subItem/image" alt="" /></a>
+                            </div>
+                            <figcaption class="u-padding-r-top">
+                                <div class="Grid">
+                                    <span class="Grid-cell u-sizeFit Icon-camera u-color-white u-floatLeft u-text-r-l" aria-hidden="true"></span>
+                                    <h3 class="Grid-cell u-sizeFill u-padding-left-s u-lineHeight-l u-color-white u-text-r-xs u-textWeight-700" tal:content="subItem/title">
+              </h3>
+                                    <p tal:content="subItem/description"></p>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+              </tal:block>
+            </div>
+            <p class="u-padding-r-top u-text-r-xl">
+                <a href="" class="u-layout-centerLeft u-padding-r-top u-text-h4 u-textWeight-700 u-color-teal-50" tal:attributes="href Component/firstCollectionLink">Vedi tutte le collezioni</a>
+            </p>
+        </div>
+    </section>
+</div>

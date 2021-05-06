@@ -1,0 +1,38 @@
+<div id="viewer" tal:attributes="data-url Component/manifestUrl; data-sidepanel Component/drawSidePanel"></div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $(function() {
+            Mirador({
+                id: "viewer",
+                buildPath: "",
+                data: [{ "manifestUri": $('#viewer').data('url'), "location":
+                "Intronati"}],
+                mainMenuSettings: {
+                    show: true
+                },
+                annotationEndpoint: {
+                    name: 'Local Storage Endpoint',
+                    module: 'LocalStorageEndpoint',
+                },
+                windowObjects: [{
+                    loadedManifest: $('#viewer').data('url'),
+                    viewType: "ImageView",
+                    displayLayout: false,
+                    bottomPanel: true,
+                    bottomPanelAvailable: false,
+                    bottomPanelVisible: false,
+                    sidePanel: $('#viewer').data('sidepanel'),
+                    showAnnotations: true,
+                    annotationLayer: false
+                }],
+                imageCropper: {
+                    activeOnStart: false,
+                    roundingPrecision: 3,
+                    showLicense: true,
+                    showShareButtonsInfo: false
+                }
+            });
+        });
+    });
+</script>

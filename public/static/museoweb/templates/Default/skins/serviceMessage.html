@@ -1,0 +1,11 @@
+<div tal:condition="php: !__Session::get('pinax.userLogged')" id="requestWarning">
+  <h1 tal:condition="php: __Request::get('type')" class="block-title" tal:content="php:__T('Attenzione')" />
+  <p tal:condition="php: __Request::get('type') != 'copies' AND __Request::get('type') != null " tal:content="structure php: __T('noLogService')" />
+  <p tal:condition="php: __Request::get('type') == 'copies' " tal:content="structure php: __T('noLogServiceDigital')" />
+</div>
+
+<div tal:condition="php: __Session::get('pinax.userLogged')" id="requestWarning">
+  <h1 tal:condition="php: __Request::get('type')" class="block-title" tal:content="php:__T('Benvenuto')" />
+  <p tal:condition="php: __Request::get('type') != 'copies' AND __Request::get('type') != null " tal:content="structure php: __T('logService')" />
+  <p tal:condition="php: __Request::get('type') == 'copies' " tal:content="structure php: __T('logServiceDigital')" />
+</div>

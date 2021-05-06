@@ -1,0 +1,41 @@
+{
+    "name": "icariccu/metafad_portale",
+    "description": "metaFAD - Portale",
+    "license": "AGPL",
+    "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/ICARICCU/Pinax"
+      }
+   ],
+    "require": {
+        "icariccu/pinax": "dev-main"
+    },
+    "require-dev": {
+      "vimeo/psalm": "^4.3",
+      "phpstan/phpstan": "^0.12.64"
+    },
+    "autoload": {
+      "psr-0": {
+          "metafad_": "application/classes/metafad/",
+          "museoweb_": "application/classes/museoweb/"
+      }
+    },
+    "scripts": {
+        "phpstan": [
+          "phpstan analyse --memory-limit 1G -c phpstan.neon"
+        ],
+        "psalm": [
+          "psalm"
+        ],
+        "psalm-nocache": [
+          "psalm --clear-global-cache",
+          "psalm --clear-cache",
+          "psalm"
+        ],
+        "quality-test": [
+          "@phpstan",
+          "@psalm"
+        ]
+    }
+}

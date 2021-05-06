@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mwf="metafad.viewer.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    controllerName="metafad.modules.solr.controllers.*"
+    templateType="php"
+    templateFileName="viewer.php"
+    defaultEditableRegion="content">
+    <pnx:Import src="Common.xml" />
+
+    <mvc:State name="index">
+      <pnx:EmptyComponent editableRegion="backButton" skin="backButton_detail.html" />
+      <mwf:Viewer id="viewer" />
+    </mvc:State>
+
+</mvc:Page>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+        xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+        xmlns:model="pinax.models.*/"
+        model:tableName="ecommrequests_tbl"
+        model:connection="3">
+
+</model:Model>

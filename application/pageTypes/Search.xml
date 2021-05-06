@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+	xmlns:solr="metafad.modules.solr.views.components.*"
+	xmlns:mvc="pinax.mvc.components.*"
+	xmlns:arc="metafad.archive.views.components.*"
+	xmlns:mwf="metafad.views.components.*"
+	controllerName="metafad.modules.solr.controllers.*"
+	templateType="php"
+	templateFileName="search.php"
+	defaultEditableRegion="content">
+	<pnx:Import src="Common.xml" />
+	<pnx:EmptyComponent editableRegion="detailBox" skin="detailBox.html" />
+
+	<mvc:State name="index,sbn">
+		<solr:Solr id="solr" paginate="{paginate}" recordType="sbn"/>
+		<pnx:Panel cssClass="clearfix">
+			<solr:Facet editableRegion="filters" id="facet" title="{i18n:Raffina la ricerca}" dataProvider="{solr}" skin="solr_facet_service.html" numFacetsToShow="20" routeUrl="solr_search" isSbn="true"/>
+			<solr:RecordSetList id="recordSetList" dataProvider="{solr}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="solr_list.html" recordType="sbn" processCell="metafad.modules.solr.views.renderers.ProcessCell" controllerName="museoweb.modules.ecommerce.controllers.AddCart">
+				<solr:field name="Autore" />
+				<solr:field name="Titolo" />
+				<solr:field name="Fa parte di" />
+				<solr:field name="Pubblicazione" />
+				<solr:field name="Livello bibliografico" />
+				<solr:field name="Tipo documento" />
+				<solr:field name="Visibility" />
+			</solr:RecordSetList>
+		</pnx:Panel>
+
+		<mwf:PaginateResult editableRegion="paginate" id="paginate" pageLength="15" skin="paginate_service.html" showSortingFilters="true"/>
+	</mvc:State>
+
+	<mvc:State name="iccd">
+		<solr:Solr id="solr" paginate="{paginate}" solrUrl="solr.core.iccd" recordType="iccd" generalField="text" fieldList="solr.fl.list.iccd" facetList="solr.facet.list.iccd"/>
+
+		<pnx:Panel cssClass="clearfix">
+			<solr:Facet editableRegion="filters" id="facet" title="{i18n:Raffina la ricerca}" dataProvider="{solr}" skin="solr_facet.html" numFacetsToShow="20" routeUrl="solr_search_iccd" />
+			<solr:RecordSetListNoService id="recordSetList" dataProvider="{solr}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="iccd_list.html" recordType="iccd" processCell="metafad.modules.solr.views.renderers.ProcessCell"  controllerName="museoweb.modules.ecommerce.controllers.AddCart" />
+		</pnx:Panel>
+
+		<mwf:PaginateResult editableRegion="paginate" id="paginate" pageLength="15" skin="paginate.html" showSortingFilters="true"/>
+	</mvc:State>
+
+	<mvc:State name="archive">
+		<solr:Solr id="solr" paginate="{paginate}" solrUrl="solr.core.archive" recordType="archive" generalField="text" fieldList="solr.fl.list.archive" facetList="solr.facet.list.archive"/>
+
+		<pnx:Panel cssClass="clearfix">
+			<solr:Facet editableRegion="filters" id="facet" title="{i18n:Raffina la ricerca}" dataProvider="{solr}" skin="solr_facet.html" numFacetsToShow="20" routeUrl="solr_search_archive" />
+			<solr:RecordSetListNoService id="recordSetList" dataProvider="{solr}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="archive_list.html" recordType="archive" processCell="metafad.modules.solr.views.renderers.ProcessCell"  controllerName="museoweb.modules.ecommerce.controllers.AddCart" />
+		</pnx:Panel>
+
+		<mwf:PaginateResult editableRegion="paginate" id="paginate" pageLength="15" skin="paginate.html" showSortingFilters="true"/>
+	</mvc:State>
+
+	<mvc:State name="metaindice">
+		<solr:Solr id="solr" paginate="{paginate}" solrUrl="metafad.solr.metaindice.url" solrFieldUrl="solr.fl.list.metaindice" recordType="metaindice" fieldList="solr.fl.list.metaindice" facetList="solr.facet.list.metaindice"/>
+		<pnx:Panel cssClass="clearfix">
+			<solr:Facet editableRegion="filters" id="facet" title="{i18n:Raffina la ricerca}" dataProvider="{solr}" skin="solr_facet.html" numFacetsToShow="20" routeUrl="solr_search_metaindice" />
+			<solr:RecordSetListNoService id="recordSetList" dataProvider="{solr}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="metaindice_list.html" recordType="metaindice" processCell="metafad.modules.solr.views.renderers.ProcessCell" controllerName="museoweb.modules.ecommerce.controllers.AddCart">
+			</solr:RecordSetListNoService>
+		</pnx:Panel>
+		<mwf:PaginateResult editableRegion="paginate" id="paginate" pageLength="15" skin="paginate.html" showSortingFilters="true"/>
+	</mvc:State>
+
+	<mvc:State name="metaindiceau">
+		<solr:Solr id="solr" paginate="{paginate}" solrUrl="metafad.metaindice-au.url" solrFieldUrl="metafad.metaindice-au.field.url" recordType="metaindiceau"/>
+
+		<pnx:Panel cssClass="clearfix">
+			<solr:Facet editableRegion="filters" id="facet" title="{i18n:Raffina la ricerca}" dataProvider="{solr}" skin="solr_facet.html" numFacetsToShow="20" routeUrl="solr_search_metaindice_au" />
+			<solr:RecordSetList id="recordSetList" dataProvider="{solr}" title="{i18n:Search results}" routeUrl="solr.detail" cssClass="odd,even" skin="metaindice_au_list.html" recordType="authority" processCell="metafad.modules.solr.views.renderers.ProcessCell" >
+				<solr:field name="tipo entità" />
+				<solr:field name="tipo scheda" />
+				<solr:field name="denominazione/nome/sintetica" />
+				<solr:field name="denominazione/nome" />
+			</solr:RecordSetList>
+		</pnx:Panel>
+
+		<mwf:PaginateResult editableRegion="paginate" id="paginate" pageLength="15" skin="paginate.html" />
+	</mvc:State>
+
+	<mvc:State name="detail">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+
+		<pnx:JSscript folder="metafad/modules/solr/js"/>
+
+		<solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html"/>
+
+		<solr:Detail id="detail" skin="OpacDetail.html" mediaType="sbn"/>
+	</mvc:State>
+
+	<mvc:State name="genericdetail">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+		<pnx:Resources>
+			<pnx:js editableRegion="content" src="{path:APPLICATION_TO_ADMIN}/classes/metafad/modules/solr/js/advancedSearch.js"/>
+		</pnx:Resources>
+
+		<solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="metaindice"/>
+
+		<solr:RecordDetail id="detail" skin="standard_detail.html" solrUrl="metafad.solr.metaindice.url" processCell="metafad.modules.solr.views.renderers.DetailCell" />
+	</mvc:State>
+
+	<mvc:State name="detailiccd">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+		<pnx:Resources>
+			<pnx:js editableRegion="content" src="{path:APPLICATION_TO_ADMIN}/classes/metafad/modules/solr/js/advancedSearch.js"/>
+		</pnx:Resources>
+
+		<solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="patrimonio"/>
+
+		<solr:RecordDetail id="detail" skin="standard_detail.html" solrUrl="solr.core.iccd" processCell="metafad.modules.solr.views.renderers.DetailCell" />
+	</mvc:State>
+
+	<mvc:State name="detailarchive,detailarchiveud">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:Hidden id="id" value=""/>
+		<pnx:Hidden id="parentId" value=""/>
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+		<pnx:Resources>
+			<pnx:js editableRegion="content" src="{path:APPLICATION_TO_ADMIN}/classes/metafad/modules/solr/js/advancedSearch.js"/>
+		</pnx:Resources>
+
+		<pnx:Panel editableRegion="filters" cssClass="module-column mcp-module-column-aside-search w-all-wm-xxl  no-gutter bw-f w-1-3">
+			<solr:SearchType id="searchType" skin="searchType_archive_s.html" section="archivi"/>
+			<pnx:EmptyComponent id="gerarchia" skin="gerarchia.html"/>
+		</pnx:Panel>
+
+		<arc:Tree id="treeview" startId="0" title="" controllerName="metafad.archive.controllers.Gerarchia"/>
+
+		<pnx:Resources>
+			<pnx:js editableRegion="tail" src="{path:APPLICATION_TO_ADMIN}/classes/metafad/archive/js/Tree.js"/>
+		</pnx:Resources>
+
+		<solr:RecordDetail id="detail" skin="standard_detail.html" solrUrl="solr.core.archive" processCell="metafad.modules.solr.views.renderers.DetailCell" />
+	</mvc:State>
+
+	<mvc:State name="detailaut">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:Panel editableRegion="filters" cssClass="module-column mcp-module-column-aside-search padding-top w-all-wm-xxl  no-gutter bw-f w-1-3">
+			<solr:SearchType id="searchType" skin="searchType_aut.html" section="metaindiceau"/>
+			<solr:Roles id="roles" skin="opac_roles.html"/>
+		</pnx:Panel>
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+		<pnx:Resources>
+			<pnx:js src="{path:APPLICATION_TO_ADMIN}/classes/metafad/modules/solr/js/advancedSearch.js" editableRegion="tail" />
+		</pnx:Resources>
+		<solr:Detail id="detail" skin="OpacDetail.html" solrUrl="metafad.opac-au.detail.url"/>
+	</mvc:State>
+
+	<mvc:State name="detailiccdaut">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+		<pnx:Resources>
+			<pnx:js editableRegion="content" src="{path:APPLICATION_TO_ADMIN}/classes/metafad/modules/solr/js/advancedSearch.js"/>
+		</pnx:Resources>
+
+		<solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="patrimonio"/>
+
+		<solr:RecordDetail id="detail" skin="standard_detail.html" solrUrl="solr.core.iccdaut" processCell="metafad.modules.solr.views.renderers.DetailCell" />
+	</mvc:State>
+
+	<mvc:State name="detailarchiveaut">
+		<pnx:Modifier target="Page" attribute="templateFileName" value="detail.php" />
+
+		<pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+		<pnx:Resources>
+			<pnx:js editableRegion="content" src="{path:APPLICATION_TO_ADMIN}/classes/metafad/modules/solr/js/advancedSearch.js"/>
+		</pnx:Resources>
+
+		<solr:SearchType id="searchType" editableRegion="filters" skin="searchType.html" section="archive"/>
+
+		<solr:RecordDetail id="detail" skin="standard_detail.html" solrUrl="solr.core.archiveaut" processCell="metafad.modules.solr.views.renderers.DetailCell" />
+	</mvc:State>
+
+</mvc:Page>

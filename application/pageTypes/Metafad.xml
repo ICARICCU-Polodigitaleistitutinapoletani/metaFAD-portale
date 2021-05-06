@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<mvc:Page id="Page"
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+	xmlns:mvc="pinax.mvc.components.*"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content"
+	adm:editComponents="responsabile,menuVoice1,menuVoice2,menuVoice3,projectTitle,projectText,groupTitle,groupText,reservedTitle,reservedAreaText,requestText"
+	controllerName="metafad.controllers.*">
+	<pnx:Import src="Common.xml" />
+	<pnx:Modifier target="searchSections" attribute="visible" value="false"/>
+	<pnx:Text id="responsabile" label="{i18n:Responsabile}" visible="false" adm:required="true"/>
+
+	<pnx:Text id="menuVoice1" label="{i18n:Voce men&#249; progetto}" adm:required="true" visible="false"/>
+	<pnx:Text id="menuVoice2" label="{i18n:Voce men&#249; gruppo}" adm:required="true" visible="false"/>
+	<pnx:Text id="menuVoice3" label="{i18n:Voce men&#249; area riservata}" adm:required="true" visible="false"/>
+
+	<mvc:State name="index">
+		<pnx:Text id="projectTitle" label="{i18n:Titolo pagina progetto}" adm:required="true" skin="metafadSectionTitle.html"/>
+		<pnx:EmptyComponent id="back" skin="backButton.html" editableRegion="buttons"/>
+		<pnx:EmptyComponent id="navigation" editableRegion="filters" skin="metafadNavigation.html" />
+		<pnx:LongText id="projectText" label="{i18n:Testo progetto}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" skin="longText.html"/>
+	</mvc:State>
+
+	<mvc:State name="group">
+		<pnx:Text id="groupTitle" label="{i18n:Titolo pagina gruppo}" adm:required="true" skin="metafadSectionTitle.html"/>
+		<pnx:EmptyComponent id="back" skin="backButton.html" editableRegion="buttons"/>
+		<pnx:EmptyComponent id="navigation" editableRegion="filters" skin="metafadNavigation.html" />
+		<pnx:LongText id="groupText" label="{i18n:Testo gruppo di lavoro}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" skin="longText.html" />
+	</mvc:State>
+
+	<mvc:State name="reserved">
+		<pnx:Text id="reservedTitle" label="{i18n:Titolo pagina area riservata}" adm:required="true" skin="metafadSectionTitle.html"/>
+		<pnx:EmptyComponent id="back" skin="backButton.html" editableRegion="buttons"/>
+		<pnx:EmptyComponent id="navigation" editableRegion="filters" skin="metafadNavigation.html" />
+		<pnx:LongText id="reservedAreaText" label="{i18n:Testo area riservata}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" skin="longText.html" />
+
+		<pnx:Form id="reservedareaemail" cssClass="module-main-search--opac form-reserved-area">
+			<pnx:Input id="name" cssClassLabel="" label="{i18n:MW_USER_NAME}" maxLength="50" required="true" validationType="not_empty" />
+			<pnx:Input id="surname" cssClassLabel="" label="{i18n:MW_USER_SURNAME}" maxLength="50" required="true" validationType="not_empty" />
+			<pnx:Input id="email" cssClassLabel="" label="{i18n:Email personale}" maxLength="50" required="true" validationType="email" />
+			<pnx:Input id="company" cssClassLabel="" label="{i18n:Ente/Azienda}" maxLength="50" required="true" validationType="not_empty" />
+			<pnx:Input id="companynumber" cssClassLabel="" label="{i18n:Telefono ente/azienda}" maxLength="50" required="true" validationType="not_empty" />
+			<pnx:Input id="companyemail" cssClassLabel="" label="{i18n:Mail ente/azienda}" maxLength="50" required="true" validationType="email" />
+			<pnx:Input id="companynation" cssClassLabel="" label="{i18n:Nazione ente/azienda}" maxLength="50" required="true" validationType="not_empty" />
+			<pnx:Input id="motivation" type="multiline" cssClassLabel="" label="{i18n:Motivazione}" wrap="on" rows="5" maxLength="500" required="true" validationType="not_empty" />
+
+			<pnx:EmptyComponent id="captchaSection" skin="captcha.html" acceptOutput="true">
+				<pnx:EmptyComponent id="captchaImage" skin="captchaImage.html"/>
+			</pnx:EmptyComponent>
+
+			<pnx:Panel cssClass="formButtons" >
+				<pnx:HtmlButton id="submit" label="{i18n:MW_SUBMIT}" value="submit" name="submit" cssClass="submitButton reserved-area-button" />
+			</pnx:Panel>
+		</pnx:Form>
+	</mvc:State>
+
+	<mvc:State name="requested">
+		<pnx:EmptyComponent id="navigation" editableRegion="filters" skin="metafadNavigation.html" />
+		<pnx:EmptyComponent skin="metafadRequestDone.html" acceptOutput="true" editableRegion="content">
+			<pnx:LongText id="requestText" label="{i18n:Testo richiesta completata}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" />
+		</pnx:EmptyComponent>
+	</mvc:State>
+</mvc:Page>

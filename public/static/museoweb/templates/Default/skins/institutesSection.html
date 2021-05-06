@@ -1,0 +1,36 @@
+<!-- module-parallax -->
+<div tal:condition="php: !__Session::get('instituteKey')" class="module-parallax js-anchor-step4 gcp-bg-ct7 js-detect-window-min-height-fixed">
+
+  <div class="mcp-module-heading-parallax-section ps-institute content-align-right padding-right">
+    <h1 class="block-title gcp-text-weight-300 gcp-super-title">Gli istituti</h1>
+  </div>
+
+  <!-- mcp-module-parallax-content -->
+  <div class="mcp-module-parallax-content padding-left padding-right clearfix">
+
+    <!-- module-list-archive -->
+    <section class="module-list-archive mcp-module-list-archive--in-parallax-mode clearfix">
+
+      <article class="block-item-post w-1-3 bw-f bcp-block-institute list clearfix">
+      </article>
+
+      <article tal:repeat="item Component/institutes" style="padding-bottom: 0 !important" tal:attributes="class php: (repeat.item.index % 3 == 1) ? 'block-item-post last w-1-3 bw-f bcp-block-institute list block-item-post-card-list clearfix' : 'block-item-post w-1-3 bw-f bcp-block-institute list block-item-post-card-list clearfix'">
+        <figure class="pull-left">
+          <a tal:attributes="href php: __Link::addParams(array('instituteKey'=>item['instituteKey']))"><img tal:attributes="src php: json_decode(item['image']).src" alt="" /></a>
+        </figure>
+        <h1 class="block-title"><a tal:attributes="href php: __Link::addParams(array('instituteKey'=>item['instituteKey']))" tal:content="item/name"></a></h1>
+        <p tal:content="item/text"/>
+
+      </article>
+    </section>
+    <!-- module-list-archive -->
+
+  </div>
+  <!-- mcp-module-parallax-content -->
+
+  <!-- bcp-parallax-slide-controller -->
+  <div class="bcp-parallax-slide-controller last">
+    <a class="js-back-top bcp-btn-slide-controller" ><span class="icon-arrowup12231"></span></a>
+  </div>
+  <!-- bcp-parallax-slide-controller -->
+</div>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Routing>
+	<pnx:Route method="GET" value="rest/metasearch" controller="metafad.rest.controllers.Metasearch" />
+	<pnx:Route name="link-login" value="rest/login" controller="metafad.controllers.rest.login.Login" method="POST"/>
+    
+    <pnx:Route name="manifest" method="GET" value="metadata/{valueRaw=uid}/manifest.json" controller="iiif.controllers.Manifest"/>
+    <pnx:Route name="iiifimage_metadata" method="GET" value="iiif/{valueRaw=uid}" controller="iiif.controllers.ImageMetadata"/>
+    <pnx:Route name="iiifimage_info" method="GET" value="iiif/{valueRaw=uid}/info.json" controller="iiif.controllers.ImageMetadata"/>
+    <pnx:Route name="iiifimage" method="GET" value="iiif/{valueRaw=uid}/{value=region}/{value=size}/{value=rotation}/{value=quality}.{value=format}" controller="iiif.controllers.Image"/>
+    
+    <pnx:Route name="viewer-service" value="rest/viewer/metadato/{value=id}" controller="metafad.viewer.controllers.rest.Viewer" method="GET"/>
+
+    <pnx:Route name="redirect" value="go/{value=module}/{value=id}" controller="museoweb.controllers.cms.Redirect" skipLanguage="true"/>
+
+    <pnx:Route name="collections" value="{pageId=metafad.modules.collections.views.FrontEnd}" />
+    <pnx:Route name="collections_detail" value="{pageId=metafad.modules.collections.views.FrontEnd}/{static=action=show}/{integer=document_id}/{value=title}" />
+
+    <pnx:Route name="registration" value="{pageId=registration}" />
+    <pnx:Route name="lostpassword" value="{pageId=lostpassword}" />
+    <pnx:Route name="userdetails" value="{pageId=userdetails}" />
+    <pnx:Route name="logout" value="{pageId=Logout}" />
+
+    <pnx:Route name="solr_addfacet" value="{pageId}/solr/{facetAction=add}" />
+    <pnx:Route name="solr_removefacet" value="{pageId}/solr/{facetAction=remove}" />
+    <pnx:Route name="solr_search" value="{pageId=Search}/" />
+    <pnx:Route name="solr_search_iccd" value="{pageId=Search}/{action=iccd}/" />
+    <pnx:Route name="solr_search_archive" value="{pageId=Search}/{action=archive}/" />
+    <pnx:Route name="solr_search_archive_ud" value="{pageId=Search}/{action=archiveud}/" />
+    <pnx:Route name="solr_search_metaindice" value="{pageId=Search}/{action=metaindice}/" />
+    <pnx:Route name="solr_search_metaindice_au" value="{pageId=Search}/{action=metaindiceau}/" />
+    <pnx:Route name="solr_advancedSearch" value="{pageId=AdvancedSearch}/{value=action}/" />
+
+    <pnx:Route name="request" value="{pageId=Requests}/{value=action}/{value=type}/{value=id}/" />
+
+    <pnx:Route name="opac_detail" value="{pageId=Search}/{action=detail}/{value=id}/" />
+    <pnx:Route name="iccd_detail" value="{pageId=Search}/{action=detailIccd}/{value=id}/" />
+    <pnx:Route name="archive_detail" value="{pageId=Search}/{action=detailarchive}/{value=id}/" />
+    <pnx:Route name="archive_detail_ud" value="{pageId=Search}/{action=detailarchiveud}/{value=id}/" />
+
+    <pnx:Route name="opac_detail_au" value="{pageId=Search}/{action=detailaut}/{value=id}/" />
+    <pnx:Route name="iccd_detail_au" value="{pageId=Search}/{action=detailiccdaut}/{value=id}/" />
+    <pnx:Route name="archive_detail_au" value="{pageId=Search}/{action=detailarchiveaut}/{value=id}/" />
+
+    <pnx:Route name="opac_detail_popup" value="{pageId=DetailPopup}/{action=detail}/{value=id}/" />
+    <pnx:Route name="opac_detail_au_popup" value="{pageId=DetailPopup}/{action=detailaut}/{value=id}/" />
+    <pnx:Route name="archive_detail_au_popup" value="{pageId=DetailPopup}/{action=detailarchiveaut}/{value=id}/" />
+    <pnx:Route name="iccd_detail_au_popup" value="{pageId=DetailPopup}/{action=detailiccdaut}/{value=id}/" />
+
+	<pnx:Route name="generic_detail" value="{pageId=Search}/{action=genericdetail}/{value=id}/" />
+
+    <pnx:Route name="services" value="{pageId=Services}/{action=login}" />
+    <pnx:Route name="linkChangeAction" value="{pageId}/{pageTitle}/{value=action}" />
+    <pnx:Route name="link" value="{pageId}/{pageTitle}" />
+
+	<pnx:Route name="ecommerce_popup" value="{pageId=CarrelloPopup}/{pageTitle}" />
+</pnx:Routing>

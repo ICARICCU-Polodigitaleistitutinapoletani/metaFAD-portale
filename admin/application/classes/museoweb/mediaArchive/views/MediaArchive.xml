@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:cms="pinaxcms.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:ma="pinaxcms.mediaArchive.views.components.*"
+    controllerName="museoweb.mediaArchive.controllers.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+    <pnx:Import src="_common.xml" />
+
+    <mvc:StateTabNavigation id="tab" cssClass="nav nav-tabs" cssClassCurrent="active" visible="false" />
+
+    <mvc:State name="index">
+        <pnx:TabGroup id="tabs" defaultState="allMedia" cssClass="nav nav-pills" rememberState="true">
+            <pnx:Tab name="allMedia" label="{i18n:MW_SM_SHOW_ALL_MEDIA}"></pnx:Tab>
+            <pnx:Tab name="allImage" label="{i18n:MW_SM_SHOW_IMAGES}"></pnx:Tab>
+            <pnx:Tab name="allOffice" label="{i18n:MW_SM_SHOW_DOCUMENTS}"></pnx:Tab>
+            <pnx:Tab name="allPdf" label="{i18n:MW_SM_SHOW_PDF}"></pnx:Tab>
+            <pnx:Tab name="allArchive" label="{i18n:MW_SM_SHOW_COMPRESSED}"></pnx:Tab>
+            <pnx:Tab name="allAudio" label="{i18n:MW_SM_SHOW_AUDIO_FILES}"></pnx:Tab>
+            <pnx:Tab name="allVideo" label="{i18n:MW_SM_SHOW_VIDEO}"></pnx:Tab>
+        </pnx:TabGroup>
+
+        <cms:VisualSearch id="filters" label="{i18n:Search}" cssClass="row-fluid clearfix my-filters" model="pinaxcms.models.Media">
+            <cms:VisualSearchItem id="media_author" label="{i18n:Author}" type="facet" />
+            <cms:VisualSearchItem id="media_category" label="{i18n:Category}" type="facet" />
+            <cms:VisualSearchItem id="media_description" label="{i18n:Description}" />
+            <cms:VisualSearchItem id="media_originalFileName" label="{i18n:File name}" />
+            <cms:VisualSearchItem id="media_title" label="{i18n:Title}" />
+
+            <pnx:Panel cssClass="pull-left">
+                <pnx:HtmlButton label="{i18n:PNX_SEARCH}" value="SEARCH" target="{filters}" cssClass="btn btn-primary" />
+                <pnx:HtmlButton label="{i18n:PNX_RESET}" value="RESET" target="{filters}" cssClass="btn" />
+            </pnx:Panel>
+        </cms:VisualSearch>
+
+        <pnx:Panel cssClass="row-fluid">
+            <pnx:Script extendParent="true"><![CDATA[
+public function render_html_onStart()
+{
+    $this->_application->addLightboxJsCode();
+    parent::render_html_onStart();
+}
+            ]]></pnx:Script>
+
+            <pnx:DataProvider id="dp" recordClassName="pinaxcms.models.Media" order="media_title" queryOperator="OR" />
+            <pnx:RecordSetList id="list" dataProvider="{dp}" processCell="pinaxcms.mediaArchive.views.renderer.CellMediaArchive" paginate="{paginate}" filters="{filters}" skin="{listSKIN}" />
+            <pnx:PaginateResult id="paginate" pageLength="42" cssClass="pagination" showTotal="true" />
+        </pnx:Panel>
+
+        <pnx:Link id="deleteSelectedButton" label="{i18n:Delete selected}" cssClass="{config:pinaxcms.form.actionLink.cssClass}" icon="icon-remove" routeUrl="" editableRegion="actions" acl="*,delete"/>
+        <pnx:Link label="{i18n:MW_MEDIA_ADD}" cssClass="{config:pinaxcms.form.actionLink.cssClass}" icon="icon-plus" routeUrl="pinaxcmsMediaArchiveAdd" editableRegion="actions" acl="*,new"/>
+
+        <pnx:JSscript><![CDATA[
+        $(document).ready(function() {
+            $('#deleteSelectedButton').addClass('disabled');
+
+            $('#deleteSelectedButton').on('click', function() {
+                var pattern = new RegExp("disabled");
+                if (!pattern.test($(this).prop('class'))) {
+                    if (confirm('{i18n:Do you want to confirm the deletion?}')) {
+                        var removalList = new Array();
+                        $('[id^=mediacheckbox]').each(function() {
+                            if ($(this).is(':checked')) {
+                                removalList.push($(this).prop('id').split('_')[1]);
+                            }
+                        });
+
+                        if (removalList.length) {
+                            $('#deleteSelectedButton').addClass('disabled');
+                            var ids = removalList.join(',');
+                            $.ajax({
+                                type: 'POST',
+                                url: Pinax.ajaxUrl + 'Delete',
+                                data: 'ids=' + ids,
+                                success: function(data) {
+                                    location.reload();
+                                },
+                                error: function() {
+                                    alert('{i18n:Error}');
+                                    $('#deleteSelectedButton').removeClass('disabled');
+                                }
+                            });
+                        }
+                    }
+                } else {
+
+                }
+
+                return false;
+            });
+
+            $('[id^=mediacheckbox]').on('change', function() {
+                var oneChecked = false;
+                $('[id^=mediacheckbox]').each(function() {
+                    if ($(this).is(':checked')) {
+                        oneChecked = true;
+                        return;
+                    }
+                });
+
+                if (oneChecked) {
+                    $('#deleteSelectedButton').removeClass('disabled');
+               } else {
+                    $('#deleteSelectedButton').addClass('disabled');
+               }
+            });
+        });
+        ]]></pnx:JSscript>
+    </mvc:State>
+
+    <mvc:State name="add" label="{i18n:MW_MEDIA_ADD}">
+        <pnx:Modifier target="tab" attribute="visible" value="true" />
+        <cms:FormEdit id="myForm" controllerName="museoweb.mediaArchive.controllers.mediaEdit.*" >
+            <pnx:Input id="fileuploader" label="{i18n:PNX_UPLOAD}" data="type=file;fieldsetid=medias" />
+            <pnx:Fieldset id="medias" label="Media" data="type=repeat;collapsable=false;noAddRowButton=true">
+                <pnx:Hidden id="__uploadFilename" />
+                <pnx:Hidden id="__originalFileName" />
+                <pnx:Input id="media_title" label="{i18n:Title}" size="90" required="true" />
+                <pnx:Input id="media_category" label="{i18n:Category}" data="type=selectfrom;multiple=true;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                <pnx:Input id="media_author" label="{i18n:Author}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                <pnx:Input id="media_date" label="{i18n:Date}" size="90" />
+                <pnx:Input id="media_copyright" label="{i18n:Copyright}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                <pnx:Input id="media_description" label="{i18n:Description}" size="90" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+                <pnx:Checkbox id="media_zoom" label="{i18n:Show zoom}" />
+                <pnx:Checkbox id="media_allowDownload" label="{i18n:Allow download}" />
+                <pnx:Checkbox id="media_watermark" label="{i18n:Insert watermark}" />
+            </pnx:Fieldset>
+            <cms:FormButtonsPanel>
+                <!--<pnx:HtmlButton label="{i18n:PNX_SAVE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=save" />-->
+                <pnx:HtmlButton label="{i18n:PNX_SAVE_CLOSE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=saveClose" />
+                <pnx:HtmlButton label="{i18n:PNX_CLOSE}" type="button" cssClass="btn js-pinaxcms-cancel" data="action=cancel" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State id="addFromServer" name="addFromServer" label="Aggiungi file da server">
+        <pnx:Modifier target="tab" attribute="visible" value="true" />
+        <cms:FormEdit id="myForm" controllerName="museoweb.mediaArchive.controllers.mediaEdit.*" >
+            <ma:FilePicker id="mediaFileServer" pageId="MediaStorageBrowser" label="{i18n:File}" required="true"/>
+            <pnx:Input id="media_title" label="{i18n:Title}" size="90" required="true" />
+            <pnx:Input id="media_category" label="{i18n:Category}" data="type=selectfrom;multiple=true;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+            <pnx:Input id="media_author" label="{i18n:Author}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+            <pnx:Input id="media_date" label="{i18n:Date}" size="90" />
+            <pnx:Input id="media_copyright" label="{i18n:Copyright}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+            <pnx:Input id="media_description" label="{i18n:Description}" size="90" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+            <pnx:Checkbox id="media_zoom" label="{i18n:Show zoom}" />
+            <pnx:Checkbox id="media_allowDownload" label="{i18n:Allow download}" data="type=checkbox" defaultValue="1" />
+            <pnx:Checkbox id="media_watermark" label="{i18n:Insert watermark}" />
+            <pnx:Panel cssClass="formButtons">
+                <pnx:HtmlButton label="{i18n:PNX_SAVE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=save" />
+                <pnx:HtmlButton label="{i18n:PNX_SAVE_CLOSE}" type="button" cssClass="btn js-pinaxcms-save" data="action=saveClose" />
+                <pnx:HtmlButton label="{i18n:PNX_CLOSE}" type="button" cssClass="btn js-pinaxcms-cancel" data="action=cancel" />
+            </pnx:Panel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State name="edit,delete">
+
+        <cms:FormEdit id="myForm" controllerName="museoweb.mediaArchive.controllers.mediaEdit.*" >
+            <pnx:Hidden id='media_id' />
+            <pnx:Input id="media_originalFileName" label="{i18n:File name}" size="90" disabled="true"/>
+            <pnx:JSTabGroup id="editImage" visible="true">
+                <pnx:JSTab id="generalData" label="{i18n:General data}">
+                    <pnx:Input id="media_title" label="{i18n:Title}" size="90" required="true" />
+                    <pnx:Input id="media_category" label="{i18n:Category}" data="type=selectfrom;multiple=true;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                    <pnx:Input id="media_author" label="{i18n:Author}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                    <pnx:Input id="media_date" label="{i18n:Date}" size="90" />
+                    <pnx:Input id="media_copyright" label="{i18n:Copyright}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                    <pnx:Input id="media_description" label="{i18n:Description}" size="90" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+                    <pnx:Checkbox id="media_zoom" label="{i18n:Show zoom}" />
+                    <pnx:Checkbox id="media_allowDownload" label="{i18n:Allow download}" data="type=checkbox" defaultValue="1"/>
+                    <pnx:Checkbox id="media_watermark" label="{i18n:Insert watermark}" />
+                    <pnx:Input id="media_download" label="{i18n:Downloads}" size="90" disabled="true"/>
+                </pnx:JSTab>
+                <pnx:JSTab id="nisoData" label="{i18n:Niso data}">
+                    <pnx:Fieldset label="{i18n:Image Dimensions}">
+                        <pnx:Input id="niso_imagelength" label="{i18n:Image lenght (height)}" size="90" disabled="true" />
+                        <pnx:Input id="niso_imagewidth" label="{i18n:Image width}" size="90" disabled="true" />
+                        <pnx:Input id="niso_source_ydimension" label="{i18n:Source Y dimension}" size="90" data="type=number" />
+                        <pnx:Input id="niso_source_xdimension" label="{i18n:Source X dimension}" size="90" data="type=number" />
+                    </pnx:Fieldset>
+                    <pnx:Fieldset label="{i18n:Image Metrics}">
+                        <pnx:List id="niso_samplingfrequencyunit" label="{i18n:Sampling frequency unit}" emptyValue="-" >
+                            <pnx:ListItem key="1" value="{i18n:no unit}" />
+                            <pnx:ListItem key="2" value="{i18n:inch}" />
+                            <pnx:ListItem key="3" value="{i18n:centimeter}" />
+                        </pnx:List>
+                        <pnx:List id="niso_samplingfrequencyplane" label="{i18n:Sampling frequency plane}" emptyValue="-"  >
+                            <pnx:ListItem key="1" value="{i18n:camera/scanner focal plane}" />
+                            <pnx:ListItem key="2" value="{i18n:object plane}" />
+                            <pnx:ListItem key="3" value="{i18n:source object plane}" />
+                        </pnx:List>
+                        <pnx:Input id="niso_ysamplingfrequency" label="{i18n:Y sampling frequency}" size="90" data="type=number" />
+                        <pnx:Input id="niso_xsamplingfrequency" label="{i18n:X sampling frequency}" size="90" data="type=number" />
+                        <pnx:List id="niso_photometricinterpretation" label="{i18n:Photometric interpretation}" emptyValue="-" >
+                            <pnx:ListItem key="WhiteIsZero" value="{i18n:White is zero}" />
+                            <pnx:ListItem key="BlackIsZero" value="{i18n:Black is zero}" />
+                            <pnx:ListItem key="RGB" value="{i18n:RGB}" />
+                            <pnx:ListItem key="Palette color" value="{i18n:Palette color}" />
+                            <pnx:ListItem key="Transparency Mask" value="{i18n:Transparency Mask}" />
+                            <pnx:ListItem key="CMYK" value="{i18n:CMYK}" />
+                            <pnx:ListItem key="YcbCr" value="{i18n:YcbCr}" />
+                            <pnx:ListItem key="CIELab" value="{i18n:CIELab}" />
+                        </pnx:List>
+                         <pnx:List id="niso_bitpersample" label="{i18n:Bit per sample}" emptyValue="-" >
+                            <pnx:ListItem key="1" value="{i18n:Black and white}" />
+                            <pnx:ListItem key="4" value="{i18n:4-bit grayscale}" />
+                            <pnx:ListItem key="8" value="{i18n:8-bit grayscale or 256 colours}" />
+                            <pnx:ListItem key="8,8,8" value="24-bit RGB" />
+                            <pnx:ListItem key="16,16,16" value="48-bit TIFF/HDR" />
+                            <pnx:ListItem key="8,8,8,8" value="32-bit CMYK" />
+                        </pnx:List>
+                    </pnx:Fieldset>
+                    <pnx:Fieldset label="{i18n:Format}">
+                        <pnx:Input id="niso_name" label="{i18n:Name (image extension)}" size="90" disabled="true" />
+                         <pnx:List id="niso_mime" label="{i18n:Mime type}" emptyValue="-" disabled="true" >
+                            <pnx:ListItem key="image/jpeg" value="image/jpeg" />
+                            <pnx:ListItem key="image/tiff" value="image/tiff" />
+                            <pnx:ListItem key="image/gif" value="image/gif" />
+                            <pnx:ListItem key="image/png" value="image/png" />
+                            <!-- <pnx:ListItem key="image/vnd.dvju" value="image/vnd.dvju" />
+                            <pnx:ListItem key="application/pdf" value="application/pdf" />-->
+                        </pnx:List>
+                        <pnx:List id="niso_compression" label="{i18n:Compression}" emptyValue="-" >
+                            <pnx:ListItem key="Uncompressed" value="{i18n:Uncompressed}" />
+                            <pnx:ListItem key="CCITT 1D" value="CCITT 1D" />
+                            <pnx:ListItem key="CCITT Group 3" value="CCITT Group 3" />
+                            <pnx:ListItem key="CCITT Group 4" value="CCITT Group 4" />
+                            <pnx:ListItem key="LZW" value="LZW" />
+                            <pnx:ListItem key="JPG" value="JPG" />
+                            <pnx:ListItem key="PNG" value="PNG" />
+                            <!--pnx:ListItem key="DJVU" value="DJVU" /-->
+                        </pnx:List>
+                     </pnx:Fieldset>
+                     <pnx:Fieldset label="{i18n:Scanning}">
+                        <pnx:List id="niso_sourcetype" label="{i18n:Source type}" emptyValue="-" >
+                            <pnx:ListItem key="negativo" value="{i18n:Negative}" />
+                            <pnx:ListItem key="positivo" value="{i18n:Positive}" />
+                            <pnx:ListItem key="diapositiva" value="{i18n:Slide}" />
+                            <pnx:ListItem key="unicum" value="{i18n:Unicum}" />
+                            <pnx:ListItem key="fotografia" value="{i18n:Photo}" />
+                            <pnx:ListItem key="virtuale" value="{i18n:Virtual}" />
+                            <pnx:ListItem key="vario" value="{i18n:Various}" />
+                        </pnx:List>
+                        <pnx:Input id="niso_scanningagency" label="{i18n:Scanning agency}" size="90" />
+                        <pnx:Input id="niso_devicesource" label="{i18n:Device source}" size="90" />
+                        <pnx:Fieldset label="{i18n:Scanning System}">
+                             <pnx:Input id="niso_scanner_manufacturer" label="{i18n:Scanner Manufacturer}" size="90"  />
+                             <pnx:Input id="niso_scanner_model" label="{i18n:Scanner model}" size="90"  />
+                              <pnx:Input id="niso_capture_software" label="{i18n:Capture software}" size="90"  />
+                        </pnx:Fieldset>
+                     </pnx:Fieldset>
+                     <pnx:Fieldset label="{i18n:Target}">
+                      <pnx:List id="niso_targetType" label="{i18n:Target type}" emptyValue="-">
+                        <pnx:ListItem key="esterno" value="{i18n:External}" />
+                        <pnx:ListItem key="interno" value="{i18n:Internal}" />
+                      </pnx:List>
+                       <pnx:Input id="niso_targetID" label="{i18n:Target id}" size="90" />
+                        <pnx:Input id="niso_imageData" label="{i18n:Image data}" size="90" />
+                         <pnx:Input id="niso_performanceData" label="{i18n:Performance data}" size="90" />
+                          <pnx:Input id="niso_profiles" label="{i18n:Profiles}" size="90" />
+                    </pnx:Fieldset>
+                </pnx:JSTab>
+                <pnx:JSTab id="exifData" label="{i18n:Exif data}">
+                    <pnx:Fieldset>
+                        <ma:ShowExif imageId="{php:__Request::get('id')}"/>
+                    </pnx:Fieldset>
+                </pnx:JSTab>
+            </pnx:JSTabGroup>
+            <cms:FormButtonsPanel>
+                <pnx:HtmlButton label="{i18n:PNX_SAVE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=save" />
+                <pnx:HtmlButton label="{i18n:PNX_SAVE_CLOSE}" type="button" cssClass="btn js-pinaxcms-save" data="action=saveClose" />
+                <pnx:HtmlButton label="{i18n:PNX_CLOSE}" type="button" cssClass="btn js-pinaxcms-cancel" data="action=cancel" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+
+    <pnx:SkinDefine id="listSKIN"><![CDATA[
+<span tal:omit-tag="">
+    <script>
+$("a.lightbox").colorbox({photo:true, maxHeight: 300, maxWidth: 300, scalePhotos: true});
+    </script>
+    <div class="row-fluid">
+    <ul class="thumbnails">
+        <li class="span2" tal:repeat="item Component/records">
+            <input type="checkbox" tal:attributes="id php: 'mediacheckbox_' . item.media_id" class="delete-media js-delete-media" />
+            <a class="thumbnail" tal:attributes="href item/__url__; title php:__T('Edit')">
+                <img class="js-pinaxMediaPicker" tal:attributes="src item/thumb_filename; id item/media_id; fileName item/media_fileName; title item/media_title" />
+            </a>
+            <div class="title">
+                <div class="inner" tal:content="php: pinax_strtrim(item.media_title, 20)"></div>
+            </div>
+            <div class="actions">
+                <a tal:attributes="href item/__urlPreview__; title php:__T('Preview')" class="lightbox"><i class="icon-eye-open icon-white"></i></a>
+                <a tal:attributes="href item/__urlDownload__; title php:__T('Download')"><i class="icon-download-alt icon-white"></i></a>
+                <a tal:condition="item/__url__" tal:attributes="href item/__url__; title php:__T('Edit')"><i class="icon-pencil icon-white"></i></a>
+                <a tal:condition="item/__urlDelete__" onclick="if (!confirm('conferma cancellazione record')){return false;}" tal:attributes="href item/__urlDelete__; title php:__T('Delete')"><i class="icon-remove icon-white"></i></a>
+            </div>
+        </li>
+    </ul>
+</div>
+</span>
+    ]]></pnx:SkinDefine>
+
+</mvc:Page>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:include
+    xmlns:cms="pinaxcms.views.components.*"
+    src="pinaxcms.views.TemplateModuleAdmin">
+    <pnx:template name="model" value="museoweb.modules.ecommerce.models.Licence" />
+    <pnx:template name="show_permissions" value="false" />
+
+    <pnx:template name="grid_fields">
+        <pnx:DataGridColumn columnName="licence_name" headerText="{i18n:Nome}" renderCell="pinaxcms.contents.views.renderer.DocumentTitle" />
+        <pnx:DataGridColumn columnName="licence_use" headerText="{i18n:Uso}" />
+    </pnx:template>
+
+<!-- todo: localizzare -->
+    <pnx:template name="form_fields">
+        <pnx:Input id="licence_name" label="{i18n:Nome licenza}" size="90" required="true"/>
+        <pnx:Input id="licence_use" label="{i18n:Uso}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.ecommerce.models.Licence" size="255" />
+        <pnx:Input id="licence_price" label="{i18n:Prezzo}" required="true" data="type=number" size="5" />
+        <pnx:List id="licence_action" label="{i18n:Azione}" data="target=licence_w,licence_h;val_0=0,0;val_1=1,1">
+            <pnx:ListItem key="download" value="{i18n:Scarica}" />
+            <pnx:ListItem key="resize" value="{i18n:Ridimensiona}" />
+        </pnx:List>
+
+        <pnx:Input id="licence_w" label="{i18n:Larghezza}" required="true" data="type=integer" />
+        <pnx:Input id="licence_h" label="{i18n:Altezza}" required="true" data="type=integer" />
+        <pnx:Input id="licence_description" label="{i18n:Descrizione}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+    </pnx:template>
+
+</pnx:include>

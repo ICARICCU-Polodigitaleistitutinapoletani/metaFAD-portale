@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pnx:Routing>
+    <pnx:Route method="GET" value="dam/{value=instance}/bytestream/edit/{value=downloadMode}/{value=mediaId}/{value=name}/{value=parameter}" controller="metafad.modules.dam.rest.controllers.Download"/>
+    <pnx:Route method="GET" value="dam/{value=instance}/get/{value=mediaId}/{value=bytestreamName}" controller="metafad.modules.dam.rest.controllers.Download"/>
+    <pnx:Route method="GET" value="dam/{value=instance}/resize/{value=mediaId}/{value=bytestreamName}" controller="metafad.modules.dam.rest.controllers.Resize"/>
+</pnx:Routing>

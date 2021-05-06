@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:EmptyComponent
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:cms="pinaxcms.views.components.*">
+
+    <pnx:Authenticator accessPageId="Login" logoutPageId="Logout" cssClass="logout" editableRegion="logout" />
+
+    <pnx:NavigationMenu id="menu" startFrom="home" depth="+3" forceLink="true" drawAllChilds="false" selectParent="false" showOnlyChilds="true" editableRegion="leftSidebar" showPath="true" attributeToSelect="class" cssCurrent="active" />
+    <pnx:MessageBox type="SUCCESS" cssClass="alert welcome alert-info" />
+    <pnx:MessageBox type="ERROR" cssClass="alert alert-error"/>
+
+    <cms:EditLanguage id="language-menu" editableRegion="languageMenu" cssClass="pull-left" />
+    <pnx:PageTitle id="pageTitle" wrap="true" wrapCssClass="section-title" drawIcon="true" />
+
+    <pnx:JSscript src="static/templates/js/bootstrap.min.js" editableRegion="head" />
+
+</pnx:EmptyComponent>

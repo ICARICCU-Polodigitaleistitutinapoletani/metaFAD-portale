@@ -1,0 +1,17 @@
+.DS_Store
+core
+cache/*
+!cache/.gitkeep
+admin/cache/*
+!admin/cache/.gitkeep
+application/mediaArchive/*/*
+!application/mediaArchive/*/.gitkeep
+application/classes/userModules
+application/pageTypes/userModule_*
+application/startup/modules_custom.php
+admin/application/startup/solr.php
+public/cache/*
+public/admin/cache/*
+!public/cache/.gitkeep
+!public/admin/cache/.gitkeep
+vendor/

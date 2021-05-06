@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:EmptyComponent
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+	xmlns:cms="pinaxcms.views.components.*"
+	xmlns:ins="metafad.institutes.views.components.*"
+	xmlns:mwf="metafad.views.components.*"
+	xmlns:mw="museoweb.views.components.*">
+
+    <pnx:MessageBox id="messageSuccess" type="SUCCESS" cssClass="alert alert-info" />
+    <pnx:MessageBox id="messageError" type="ERROR" cssClass="alert alert-warning" />
+
+	<mwf:Metanavigation id="metanavigation" cssClass="bcp-block-meta-header-menu" startFrom="2" showOnlyChilds="true" depth="+1" forceLink="true" selectParent="false" attributeToSelect="class" showPath="true" selectLink="true" editableRegion="metanavigation" flat="true" />
+	<pnx:NavigationMenu id="footerLinks" startFrom="3" showOnlyChilds="true" depth="+1" forceLink="true" selectParent="false" attributeToSelect="class" showPath="true" selectLink="true" editableRegion="linkFooter" flat="true" />
+	<cms:LanguageNavigation id="languages" editableRegion="languages" />
+	<ins:InstituteTitle id="selectedInstitute" editableRegion="selectedInstitute" skin="selectedInstitute.html" />
+
+	<ins:PageTitle id="pagetitle" editableRegion="pageTitle"/>
+
+	<pnx:LoginBox id="formLoginPage" title="{i18n:MW_LOGIN_TITLE}" cssClass="box box-login"
+					userLabel="username" passwordLabel="password"
+					userField="username" passwordField="password"
+ 					registrationLabel="{i18n:MW_LOGIN_REGISTER}"
+					registrationUrl="Registration"
+					confirmLabel="{i18n:MW_LOGIN_CONFIRM}" errorLabel="{i18n:MW_LOGIN_ERROR}"
+					rememberLabel="{i18n:MW_LOGIN_REMEMBER}" askPasswordLabel="{i18n:MW_LOGIN_ASK_PASSWORD}" askPasswordUrl="lostpassword"
+					editableRegion="loginPopup" visible="{php:!$user->isLogged()}" skin="loginPopup.html" enabled="true" />
+
+	<pnx:SimpleList id="boxUserMenu" visible="{php:$user->isLogged()}" cssClass="bcp-block-meta-header-menu" editableRegion="metanavigation">
+		<mw:WelcomeBox cssClass="userdetails" id="userwelcome" value="Benvenuto/a" key="userdetails" />
+		<pnx:ListItem cssClass="myorders" value="{i18n:Carrello}" key="museoweb_ecommShowCart" visible="{config:mwcms.ecomm.enabled}"/>
+		<pnx:ListItem cssClass="logout" value="{i18n:MW_LOGOUT}" key="logout" />
+	</pnx:SimpleList>
+
+	<pnx:EmptyComponent skin="searchSolr.html" editableRegion="searchSolr" />
+
+	<pnx:EmptyComponent skin="siteLink.html" editableRegion="siteLink" />
+
+	<mwf:SearchSections id="searchSections" skin="searchSections.html" editableRegion="searchSections" />
+
+	<pnx:EmptyComponent id="socialFooter" skin="socialFooter.html" editableRegion="socialFooter" controllerName="metafad.controllers.Social"/>
+
+	<pnx:SearchBox id="boxSearch" title="{i18n:MW_SEARCH}" searchPageId="search" cssClass="box box-search" skin="BoxSearch.html" editableRegion="leftSidebar" enabled="false" />
+</pnx:EmptyComponent>

@@ -1,0 +1,130 @@
+<div tal:condition="php: Component['Ecommerce']" class="bcp-block-pop-up-cart js-my-pop-up g-right">
+  <div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+  <!-- block-my-pop-up-content -->
+  <div class="block-my-pop-up-content clearfix">
+
+    <h2 class="block-sub-title not-have-title" style="margin: 10px;">Scegli il tipo di licenza e il formato immagine</h2>
+
+    <!-- block-item-post -->
+    <article class="block-item-post padding-top bcp-block-item-post--result list clearfix">
+
+      <div class="gcp-wrapper-figure pull-left" style="float: none;margin-left: auto;margin-right: auto;">
+
+        <figure class="gcp-wrapper-img">
+          <a href="#"><img tal:attributes="src php: Component['Image'].thumbnail" alt="" /></a>
+        </figure>
+
+      </div>
+
+      <!-- <h1 class="block-sub-title not-have-title">
+        <span tal:condition="php: item.{'Titolo sintetica'}" tal:content="php: item.{'Titolo sintetica'}"></span>
+        <span tal:condition="php: !item.{'Titolo sintetica'} AND item.{'Soggetto: titolo'}" tal:content="php: item.{'Soggetto: titolo'}"></span>
+        <span tal:condition="php: !item.{'Titolo sintetica'} AND !item.{'Soggetto: titolo'}" >Senza titolo</span>
+      </h1>
+
+      <p tal:condition="php: item.{'Tipo di scheda'}" tal:content="php: 'Tipo di scheda: ' .item.{'Tipo di scheda'}"/>
+      <p tal:condition="php: ! item.{'Tipo di scheda'}">N.D.</p>
+      <p>
+        <span class="bcp-block-item-pot-field">Codice univoco:</span>
+        <span tal:omit-tag="" tal:condition="php: item.{'Codice univoco'}" tal:content="php: item.{'Codice univoco'}"/>
+        <span tal:omit-tag="" tal:condition="php: ! item.{'Codice univoco'}">N.D.</span>
+        <span tal:omit-tag="" tal:condition="php: item.Level" tal:content="item/Level"></span>
+      </p>
+      <p>
+        <span class="bcp-block-item-pot-field">Definizione culturale: autore: </span>
+        <span tal:omit-tag="" tal:condition="php: item.{'Definizione culturale: autore'}" tal:content="php: item.{'Definizione culturale: autore'}"/>
+        <span tal:omit-tag="" tal:condition="php: ! item.{'Definizione culturale: autore'}">N.D.</span>
+      </p> -->
+
+    </article>
+    <!-- block-item-post -->
+
+    <!-- block-form -->
+    <div class="block-form">
+      <form>
+        <input type="hidden" name="addToCart" value="true"/>
+        <input type="hidden" name="mediaId" tal:attributes="value Component/Image/id"/>
+        <input type="hidden" name="id" tal:attributes="value Component/id"/>
+        <input type="hidden" name="takeAll" value="true"/>
+        <!-- <input type="hidden" name="recordDetailUrl" tal:attributes="value php: __Link::makeUrl('iccd_detail', array('id'=> item.id ))"/> -->
+        <input type="hidden" name="image" tal:attributes="value Component/Image/thumbnail"/>
+        <input type="hidden" name="buyAll" value="false"/>
+        <input type="hidden" name="imagesNumber" value="1" />
+        <input type="hidden" name="fromUrl" tal:attributes="value php: __Link::addParams()"/>
+        <!-- table -->
+        <div class="Rtable bcp-Rtable-cart Rtable--collapse Rtable--5cols">
+
+          <!-- bcp-block-note -->
+          <div class="bcp-block-note container" style="width: 100%">
+            <div class="row">
+              </div>
+              <div class="block-heading">
+                <h2 class="block-title">Licenze disponibili</h2>
+              </div>
+              <div class="block-text">
+                <div tal:repeat="sintetic Component/Licenses" class="row">
+                  <div class="col-xs-6">
+                    <h3 tal:content="php: sintetic.title"/>
+                    <p tal:content="php: sintetic.description"/>
+                  </div>
+                  <div class="col-xs-6">
+                    <label>
+                      <span tal:content="php: sintetic.price . '€' "/>
+                      <input type="radio" name="license" tal:attributes="value php: sintetic.id"/>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- bcp-block-note -->
+
+          </div>
+          <!-- table -->
+
+          <div class="block-wrapper-button btn-758682 content-align-center gutter-bottom-large">
+            <input type="submit" class="btn-758682" value="Aggiungi al carrello" />
+            <input type="submit" class="btn-758682" value="Acquista" />
+          </div>
+
+        </form>
+      </div>
+      <!-- block-form -->
+
+      <!-- bcp-block-note -->
+      <div class="bcp-block-note">
+        <div class="block-heading-red">
+          <h2 class="block-title">Note sui formati dell'immagine</h2>
+        </div>
+        <div class="block-text block-text-no-background">
+          <p><span class="highlight">Bassa densità:</span> formato Jpeg, dimensioni in pixel pari a un quarto di quelle originali</p>
+          <p><span class="highlight">Media densità:</span> formato Jpeg, dimensioni in pixel pari alla metà di quelle originali</p>
+          <p><span class="highlight">Alta densità:</span> formato Tiff, dimensioni in pixel pari a quelle originali</p>
+        </div>
+      </div>
+      <!-- bcp-block-note -->
+
+    </div>
+    <!-- block-my-pop-up-content -->
+
+  </div>
+
+  <div tal:condition="php: !Component['Ecommerce']" class="bcp-block-pop-up-cart js-my-pop-up g-right">
+    <div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+    <!-- block-my-pop-up-content -->
+    <div class="block-my-pop-up-content clearfix">
+
+      <h2 class="block-sub-title not-have-title" style="margin: 10px;">Immagine non in vendita.</h2>
+      <article class="block-item-post padding-top bcp-block-item-post--result list clearfix">
+
+        <div class="gcp-wrapper-figure pull-left" style="float: none;margin-left: auto;margin-right: auto;">
+
+          <figure class="gcp-wrapper-img">
+            <a href="#"><img tal:attributes="src php: Component['Image'].thumbnail" alt="" /></a>
+          </figure>
+
+        </div>
+      </article>
+    </div>
+  </div>

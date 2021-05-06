@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:cms="pinaxcms.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:ec="museoweb.modules.ecommerce.views.components.admin.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <pnx:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <!-- todo localizzare -->
+        <cms:FormEdit id="editForm" controllerName="museoweb.modules.ecommerce.controllers.admin.*" customValidation="ecommValidation">
+            <pnx:Checkbox id="enabled" label="{i18n:Attiva ecommerce}" data="type=checkbox" />
+            <pnx:Input id="prefix" label="{i18n:Prefisso ordine}" size="5" />
+            <pnx:Input id="confirmEmail" label="{i18n:Indirizzo email di conferma interno}" size="5" data="type=email" />
+            <pnx:Input id="numDownloads" label="{i18n:Massimo download consentiti (0=nessun limite)}" size="5" data="type=number" defaultValue="0" />
+            <pnx:Input id="downloadExpirationDays" label="{i18n:Giorni consentiti per il download (0=nessun limite)}" size="5" data="type=number" defaultValue="0" />
+
+            <ec:ChoiceModules label="Moduli attivi" />
+
+            <cms:FormButtonsPanel>
+                <pnx:HtmlButton label="{i18n:PNX_SAVE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=save" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+</mvc:Page>

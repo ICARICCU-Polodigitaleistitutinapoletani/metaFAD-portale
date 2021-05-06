@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:cms="pinaxcms.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:ma="pinaxcms.mediaArchive.views.components.*"
+    controllerName="museoweb.mediaArchive.controllers.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Popup.php">
+
+    <mvc:StateTabNavigation id="tab" cssClass="nav nav-tabs" cssClassCurrent="active" visible="false" />
+
+    <mvc:State name="index">
+        <pnx:Panel cssClass="row-fluid formButtonsTop" editableRegion="">
+            <pnx:HtmlButton label="{i18n:MW_MEDIA_ADD}" type="button" routeUrl="pinaxcmsMediaArchiveAdd" cssClass="btn" />
+            <pnx:Button id="btnNoImage" value="{i18n:MW_NO_MEDIA}" cssClass="btn js-pinaxcmsMediaPicker-noMedia" />
+        </pnx:Panel>
+        <cms:VisualSearch id="filters" label="{i18n:Search}" removeGetValues="false" cssClass="row-fluid clearfix my-filters" model="pinaxcms.models.Media">
+            <cms:VisualSearchItem id="media_author" label="{i18n:Author}" type="facet" />
+            <cms:VisualSearchItem id="media_category" label="{i18n:Category}" type="facet" />
+            <cms:VisualSearchItem id="media_description" label="{i18n:Description}" type="facet" />
+            <cms:VisualSearchItem id="media_originalFileName" label="{i18n:File name}" />
+            <cms:VisualSearchItem id="media_title" label="{i18n:Title}" />
+
+            <pnx:Panel cssClass="pull-right span2">
+                <pnx:HtmlButton label="{i18n:PNX_SEARCH}" value="SEARCH" target="{filters}" cssClass="btn btn-primary" />
+                <pnx:HtmlButton label="{i18n:PNX_RESET}" value="RESET" target="{filters}" cssClass="btn" />
+            </pnx:Panel>
+        </cms:VisualSearch>
+
+        <pnx:Panel cssClass="row-fluid">
+            <pnx:Script extendParent="true"><![CDATA[
+public function render_html_onStart()
+{
+    $this->_application->addLightboxJsCode();
+    parent::render_html_onStart();
+}
+            ]]></pnx:Script>
+
+            <pnx:DataProvider id="dp" recordClassName="pinaxcms.models.Media" order="media_title" queryOperator="OR" >
+            </pnx:DataProvider>
+            <pnx:RecordSetList id="list" dataProvider="{dp}" processCell="pinaxcms.mediaArchive.views.renderer.CellMediaArchive" paginate="{paginate}" filters="{filters}" skin="{listSKIN}" />
+            <pnx:PaginateResult id="paginate" pageLength="42" cssClass="pagination" />
+        </pnx:Panel>
+    </mvc:State>
+
+    <mvc:State name="add" label="Aggiungi media">
+        <pnx:Modifier target="tab" attribute="visible" value="true" />
+        <cms:FormEdit id="myForm" cssClass="form-horizontal row-fluid" controllerName="pinaxcms.mediaArchive.controllers.mediaEdit.*" >
+            <pnx:Input id="fileuploader" label="{i18n:PNX_UPLOAD}" data="type=file;fieldsetid=medias" />
+            <pnx:Fieldset id="medias" label="Media" data="type=repeat;collapsable=false;noAddRowButton=true">
+                <pnx:Hidden id="__uploadFilename" />
+                <pnx:Hidden id="__originalFileName" />
+                <pnx:Input id="media_title" label="{i18n:Title}" size="90" required="true" />
+                <pnx:Input id="media_category" label="{i18n:Category}" data="type=selectfrom;multiple=true;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                <pnx:Input id="media_author" label="{i18n:Author}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                <pnx:Input id="media_date" label="{i18n:Date}" size="90" />
+                <pnx:Input id="media_copyright" label="{i18n:Copyright}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+                <pnx:Input id="media_description" label="{i18n:Description}" size="90" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+                <pnx:Checkbox id="media_zoom" label="{i18n:Show zoom}" />
+                <pnx:Checkbox id="media_allowDownload" label="{i18n:Allow download}" />
+                <pnx:Checkbox id="media_watermark" label="{i18n:Insert watermark}" />
+            </pnx:Fieldset>
+            <pnx:Panel cssClass="formButtons">
+                <pnx:HtmlButton label="{i18n:PNX_SAVE_CLOSE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=saveClose" />
+                <pnx:HtmlButton label="{i18n:PNX_CLOSE}" type="button" cssClass="btn js-pinaxcms-save" data="action=cancel" />
+            </pnx:Panel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State id="addFromServer" name="addFromServer" label="Aggiungi file da server">
+        <pnx:Modifier target="tab" attribute="visible" value="true" />
+        <cms:FormEdit id="myForm" cssClass="form-horizontal row-fluid" controllerName="museoweb.mediaArchive.controllers.mediaEdit.*" >
+            <ma:FilePicker id="mediaFileServer" pageId="MediaStorageBrowser" label="{i18n:File}" required="true"/>
+            <pnx:Input id="media_title" label="{i18n:Title}" size="90" required="true" />
+            <pnx:Input id="media_category" label="{i18n:Category}" data="type=selectfrom;multiple=true;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+            <pnx:Input id="media_author" label="{i18n:Author}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+            <pnx:Input id="media_date" label="{i18n:Date}" size="90" />
+            <pnx:Input id="media_copyright" label="{i18n:Copyright}" data="type=selectfrom;multiple=false;add_new_values=true;model=pinaxcms.models.Media" size="255" />
+            <pnx:Input id="media_description" label="{i18n:Description}" size="90" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+            <pnx:Checkbox id="media_zoom" label="{i18n:Show zoom}" />
+            <pnx:Checkbox id="media_allowDownload" label="{i18n:Allow download}" />
+                <pnx:Checkbox id="media_watermark" label="{i18n:Insert watermark}" />
+            <pnx:Panel cssClass="formButtons">
+                <pnx:HtmlButton label="{i18n:PNX_SAVE}" type="button" cssClass="btn btn-primary js-pinaxcms-save" data="action=save" />
+                <pnx:HtmlButton label="{i18n:PNX_SAVE_CLOSE}" type="button" cssClass="btn js-pinaxcms-save" data="action=saveClose" />
+                <pnx:HtmlButton label="{i18n:PNX_CLOSE}" type="button" cssClass="btn js-pinaxcms-save" data="action=cancel" />
+            </pnx:Panel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <pnx:SkinDefine id="listSKIN"><![CDATA[
+<span tal:omit-tag="">
+    <script>
+$("a.lightbox").colorbox({photo:true, maxHeight: 300, maxWidth: 300, scalePhotos: true});
+    </script>
+    <div class="row-fluid">
+    <ul class="thumbnails">
+        <li class="span2" tal:repeat="item Component/records">
+            <a class="thumbnail js-pinaxMediaPicker-a" style="cursor:pointer;" tal:attributes="title php:__T('Select')">
+                <img class="js-pinaxMediaPicker" tal:attributes="src item/thumb_filename; data-id item/media_id; data-filename item/media_fileName; title item/media_title; data-width item/media_w; data-height item/media_h; data-category item/media_category; data-author item/media_author; data-date item/media_date; data-copyright item/media_copyright;" />
+            </a>
+            <div class="title">
+                <div class="inner" tal:content="php: pinax_strtrim(item.media_title, 20)"></div>
+            </div>
+            <div class="actions">
+                <a tal:attributes="href item/__urlPreview__" class="lightbox"><i class="icon-eye-open icon-white"></i></a>
+            </div>
+        </li>
+    </ul>
+</div>
+</span>
+    ]]></pnx:SkinDefine>
+
+</mvc:Page>

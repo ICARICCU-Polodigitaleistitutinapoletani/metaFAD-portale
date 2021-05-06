@@ -1,0 +1,20 @@
+<div class="module-preview-section mcp-module-introducing-content gcp-have-border-bottom padding-bottom margin-bottom">
+
+    <h1 class="block-title" tal:content="Component/title"></h1>
+    <p tal:condition="Component/shortText" id="shortText" tal:content="Component/shortText"/>
+    <p tal:attributes="class php: (Component['shortText']) ? 'hide' : ''" id="longText" tal:content="Component/text"/>
+    <!-- block-wrapper-button -->
+    <div class="block-wrapper-button clearfix">
+         <span tal:condition="Component/shortText" class="pull-right"><a class="gcp-link-to-read-more" href="#"><span class="readHideAll">Leggi tutto</span><span class="hide readHideAll">Nascondi</span></a> &raquo;</span>
+    </div>
+    <!-- block-wrapper-button -->
+    <script>
+      $(document).ready(function(){
+        $('.gcp-link-to-read-more').on('click',function(){
+          $('#shortText').toggleClass('hide');
+          $('#longText').toggleClass('hide');
+          $('.readHideAll').toggleClass('hide');
+        });
+      });
+    </script>
+ </div>

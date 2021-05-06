@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+	xmlns:mvc="pinax.mvc.components.*"
+	xmlns:cmp="museoweb.modules.ecommerce.views.components.*"
+	templateType="php"
+	templateFileName="popup.php"
+	defaultEditableRegion="content">
+	<pnx:Import src="Common.xml" />
+
+	<mvc:State name="index">
+		<cmp:CartPopup skin="carrello_popup.html" editableRegion="content" controllerName="museoweb.modules.ecommerce.controllers.AddCart"/>
+	</mvc:State>
+</mvc:Page>

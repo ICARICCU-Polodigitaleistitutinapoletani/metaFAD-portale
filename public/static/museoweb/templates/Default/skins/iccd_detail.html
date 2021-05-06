@@ -1,0 +1,75 @@
+<div class="module-preview-section padding-bottom mcp-module-introducing-content padding-bottom margin-bottom">
+
+    <tal:block tal:repeat="item Component">
+        <!-- module-accordion -->
+        <div class="module-accordion">
+            <!-- block-accordion -->
+            <div class="block-accordion">
+                <div class="block-accordion-heading js-show-element-reverse">
+                    <h2 class="block-title" tal:content="item/label"></h2>
+                </div>
+                <div tal:attributes="id repeat/item/key" class="block-accordion-content js-collapse-box-reverse hidden">
+                    <dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse">
+                        <tal:block tal:repeat="children item/children">
+                            <tal:block tal:repeat="child children">
+                                <tal:block condition="php: !child.children">
+									<tal:block tal:condition="php: is_string(child.value)">
+										<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="child/label"></dt>
+										<dd tal:condition="php: child.value" class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="child/value"></dd>
+									</tal:block>
+									<tal:block tal:condition="php: ! is_string(child.value)">
+										<tal:block tal:repeat="c php: child.value" >
+											<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="php: (repeat.c.key == 0) ? child.label : ''"></dt>
+											<tal:block tal:condition="php: !is_string(c)">
+												<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="php: is_string(end(get_object_vars(c))) ? end(get_object_vars(c)) : end(get_object_vars(c)).text"></dd>
+											</tal:block>
+											<tal:block tal:condition="php: is_string(c)">
+												<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="c"></dd>
+											</tal:block>
+										</tal:block>
+									</tal:block>
+                                </tal:block>
+                                <tal:block condition="php: child.children">
+                                    <tal:block metal:use-macro="repeatBlock" tal:define="item child"/>
+                                </tal:block>
+                            </tal:block>
+                        </tal:block>
+                    </dl>
+                </div>
+            </div>
+            <!-- block-accordion -->
+        </div>
+        <!-- module-accordion -->
+    </tal:block>
+
+</div>
+
+<tal:block metal:define-macro="repeatBlock">
+	<div class="parent-archive" tal:content="item/label"></div>
+	<dl class="Rtable bcp-definition-list Rtable--2cols Rtable--collapse children-elements">
+		<tal:block tal:repeat="children item/children">
+			<tal:block tal:repeat="child children">
+				<tal:block condition="php: !child.children">
+					<tal:block tal:condition="php: is_string(child.value)">
+						<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="child/label"></dt>
+						<dd tal:condition="php: child.value" class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="child/value"></dd>
+					</tal:block>
+					<tal:block tal:condition="php: ! is_string(child.value)">
+						<tal:block tal:repeat="c php: child.value" >
+							<dt class="Rtable-cell gcp-no-border Rtable-cell--1of4 Rtable-cell--light" tal:content="php: (repeat.c.key == 0) ? child.label : ''"></dt>
+							<tal:block tal:condition="php: !is_string(c)">
+								<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="php: is_string(end(get_object_vars(c))) ? end(get_object_vars(c)) : end(get_object_vars(c)).text"></dd>
+							</tal:block>
+							<tal:block tal:condition="php: is_string(c)">
+								<dd class="Rtable-cell gcp-no-border Rtable-cell--3of4 " tal:content="c"></dd>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+				</tal:block>
+				<tal:block condition="php: child.children">
+					<tal:block metal:use-macro="repeatBlock" tal:define="item child"/>
+				</tal:block>
+			</tal:block>
+		</tal:block>
+	</dl>
+</tal:block>

@@ -1,0 +1,121 @@
+<!-- block-my-pop-up -->
+<div id="plogin" style="width: 300px; top: 0px; margin-top:55px;" class="block-my-pop-up hide bcp-block-pop-up-iframe js-my-pop-up hide">
+   <div class="arrow-top g-left" style="margin-left:85px;"></div>
+
+   <!-- block-my-pop-up-content -->
+   <div style="height:300px;" class="block-my-pop-up-content clearfix">
+
+       <a data-popup-target-close="#plogin" class="gcp-btn-close-pop-up js-close-my-pop-up"><i class="icon-remove2231 g-right g-top margin-top margin-right"></i></a>
+
+       <div class="module-list-archive mcp-module-list-archive--results-list clearfix">
+       <!-- mcp-module-aside-login -->
+       <div tal:condition="php: !__Session::get('pinax.userLogged')" class="mcp-module-column-aside-search w-all-wm-xxl  no-gutter bw-f w-1-3">
+
+           <!-- bcp-block-login -->
+           <div class="bcp-block-login">
+
+               <h2 class="block-title">Login</h2>
+
+                <!-- block-form -->
+                <div class="block-form bcp-block-form--login clearfix">
+
+                  <form method="post" action="">
+
+                      <!-- block-row-field -->
+                      <div class="block-row-field block-width width_4_4">
+
+                          <div class="block-width width_4_4">
+                              <p><input id="login-username" type="text" required="required" placeholder="Inserisci email o nome utente" name="username" /></p>
+                          </div>
+
+                          <div class="block-width last width_4_4">
+                              <p><input id="login-password" type="password" required="required"  placeholder="Inserisci la password" name="password" /></p>
+                              <p><input type="checkbox" name="" value="" /> <label class="text-field--small">Resta collegato</label></p>
+                          </div>
+
+                          <div id="js-login-error" class="lh login-error width_4_4 block-width hide" />
+                      </div>
+                      <!-- block-row-field -->
+
+                      <!-- block-wrapper-button -->
+                      <div class="block-wrapper-button content-align-center block-width clearfix width_4_4">
+
+                          <input id="js-login" type="submit" class="button btn-ct10" name="go" value="Entra" />
+
+                          <div class="block-info">
+                            <span><a tal:attributes="href php: __Link::makeUrl('lostPassword')">Hai dimenticato la password?</a></span>
+                          </div>
+
+                      </div>
+                      <!-- block-wrapper-button -->
+
+                  </form>
+
+                  </div>
+                  <!-- block-form -->
+
+           </div>
+           <!-- bcp-block-login -->
+
+           <!-- bcp-block-new-user -->
+           <div class="bcp-block-new-user clearfix">
+
+                <h2 class="block-title">Nuovo utente?</h2>
+
+                <p class="content-align-center"><a tal:attributes="href php: __Link::makeUrl('link',array('pageId'=>'Registration'))" class="btn-link btn-ct10">Iscriviti</a></p>
+
+           </div>
+           <!-- bcp-block-new-user -->
+
+       </div>
+       <!-- mcp-module-aside-login -->
+
+   </div>
+ </div>
+   <!-- block-my-pop-up-content -->
+   <script>
+   	$(document).ready(function() {
+   		$('#js-login').click(function(e){
+   			e.stopPropagation();
+   			e.preventDefault();
+   			var username = $('#login-username').val();
+   			var password = $('#login-password').val();
+
+   			if(username === '' || password === '')
+   			{
+   				var message = "<tal:block tal:content="structure php: __T('Username/password sbagliati')"/>";
+   				showLoginError(message);
+   			} else
+   			{
+   				$.ajax({
+   					url: Pinax.baseUrl + '/rest/login/',
+   					type: 'POST',
+   					data: {
+   						username: username,
+   						password: password
+   					},
+   					complete: function(result){
+   					  var error = result.responseJSON.error;
+   					  if(error)
+   					  {
+   						  showLoginError(error);
+   					  }
+   					  else
+   					  {
+   						  location.reload();
+   					  }
+   					}
+   				});
+   			}
+   		});
+
+   		function showLoginError(error)
+   		{
+   			$('#js-login-error').removeClass('hide');
+   			$('#js-login-error').html(error);
+   			$('#js-login-error').fadeIn(100).fadeOut(100).fadeIn(100);
+   		}
+   	});
+   	</script>
+</div>
+<!-- block-my-pop-up -->

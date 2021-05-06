@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:cms="pinaxcms.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="page.php"
+    adm:editComponents="text,loginPage"
+    controllerName="org.pinaxcms.userManager.fe.controllers.login.*"
+    defaultAction="logout">
+
+</mvc:Page>

@@ -1,0 +1,11 @@
+<div class="module-column mcp-module-column-aside-search w-all-wm-xxl padding-top no-gutter bw-f w-1-3" id="subnav">
+    <ul class="Linklist Linklist--padded u-layout-prose u-text-r-xs">
+      <li tal:repeat="item Component/allCollections">
+         <a tal:attributes="class php: 'Linklist-link ' . (__Request::get('document_id') == item['id']  ? 'Linklist-link--lev1' : '') ;href php: __Link::makeUrl('collections_detail',array('document_id'=>item['id'])) . '?paginate_pageNum=1'">
+           <span tal:omit-tag="" tal:content="item/title"/>
+           <span class="icon-angle-right"></span>
+         </a>
+       </li>
+    </ul>
+</div>
+

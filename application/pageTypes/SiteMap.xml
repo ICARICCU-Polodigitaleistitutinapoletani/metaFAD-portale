@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Page id="Page"
+	xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content">
+	<pnx:Import src="Common.xml" />
+	<pnx:NavigationMenu startFrom="1" depth="10" showBrothers="true" forceLink="true" />
+</pnx:Page>

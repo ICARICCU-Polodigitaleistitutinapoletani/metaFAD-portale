@@ -1,0 +1,56 @@
+<div class="u-background-grey-20 u-text-r-xxl u-padding-r-bottom" tal:condition="php: count(Component['newDoc'])">
+    <div class="u-layout-medium u-layoutCenter">
+        <div class="u-layout-centerContent u-background-grey-20 u-padding-r-bottom">
+            <section class="u-layout-wide">
+                <div class="Grid Grid--withGutter">
+                  <h2 class="Grid-cell u-padding-r-bottom u-padding-r-top u-text-r-l u-layout-centerLeft">I nuovi documenti digitalizzati</h2>
+                  <div class="Grid-cell u-layout-centerRight">
+                    <button class="owl-prev u-padding-bottom-xl u-padding-right-xxl u-text-r-xl u-color-teal-50" aria-controls="carousel-2">
+                        <span class="u-hiddenVisually">Vai alla slide precedente</span>
+                        <span class="u-alignMiddle Icon Icon-arrow-left" role="presentation"></span>
+                    </button>
+                    <button class="owl-next u-padding-bottom-xl u-padding-left u-text-r-xl u-color-teal-50" aria-controls="carousel-2">
+                        <span class="u-hiddenVisually">Vai alla slide successiva</span>
+                        <span class="u-alignMiddle Icon Icon-arrow-right" role="presentation"></span>
+                    </button>
+                    <p class="u-hiddenVisually">È possibile navigare le slide utilizzando i tasti freccia</p>
+                </div>
+                </div>
+                <div class="Grid Grid--withGutter">
+                  <div class="owl-carousel owl-theme" role="region" id="carousel-2">
+                    <tal:block tal:repeat="item Component/newDoc">
+                        <tal:block tal:repeat="item2 item">
+                            <div class="Carousel-item Grid-cell" tal:repeat="item3 item2">
+                                <div class="u-color-grey-30 u-border-top-xxs u-padding-right-xxl u-padding-r-all">
+                                  <div class="gcp-t-CIT-image-wrap gcp-t-CIT-image-wrap-h200">
+                                    <figure>
+                                        <a tal:condition="php: item3.visibility != 'r'" tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item3.id . '&type=' . item3.type"><img tal:attributes="src item3/firstImage" alt="" /></a>
+                                        <img tal:condition="php: item3.visibility == 'r'" tal:attributes="src item3/firstImage" alt="" />
+                                    </figure>
+                                  </div>
+                                  <h3 class="u-padding-r-top u-padding-r-bottom">
+                                    <span tal:condition="php: item3.type == 'archive'" tal:omit-tag="">
+                                      <a tal:attributes="href php: __Link::makeUrl('archive_detail_ud', array('id'=> item3.id ))" tal:content="item3/titolo" style="cursor:initial;">Senza titolo</a>
+                                      <a tal:attributes="href php: __Link::makeUrl('archive_detail_ud', array('id'=> item3.id ))" tal:condition="php: !item3.titolo" style="cursor:initial;"></a>
+                                    </span>
+                                    <span tal:condition="php: item3.type == 'iccd'" tal:omit-tag="">
+                                      <a tal:attributes="href php: __Link::makeUrl('iccd_detail', array('id'=> item3.id ))" tal:content="item3/titolo" style="cursor:initial;">Senza titolo</a>
+                                      <a tal:attributes="href php: __Link::makeUrl('iccd_detail', array('id'=> item3.id ))" tal:condition="php: !item3.titolo" style="cursor:initial;"></a>
+                                    </span>
+                                    <span tal:condition="php: item3.type == 'sbn'" tal:omit-tag="">
+                                      <a tal:attributes="href php: __Link::makeUrl('opac_detail', array('id'=> item3.id ))" tal:content="item3/titolo" style="cursor:initial;">Senza titolo</a>
+                                      <a tal:attributes="href php: __Link::makeUrl('opac_detail', array('id'=> item3.id ))" tal:condition="php: !item3.titolo" style="cursor:initial;"></a>
+                                    </span>
+                                  </h3>
+                                  <p tal:condition="item3/descrizione" class="u-lineHeight-l u-text-r-xs u-textSecondary u-padding-r-right"><span tal:omit-tag="" tal:content="structure php: substr( item3.descrizione , 0 , 130)"></span><span tal:omit-tag="" tal:condition="php: strlen( item3.descrizione ) > 130">...</span></p>
+                                  <p tal:condition="php: !item3.descrizione">Nessuna descrizione</p>
+                                </div>
+                            </div>
+                        </tal:block>
+                    </tal:block>
+                  </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

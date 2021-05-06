@@ -1,0 +1,12 @@
+<!-- block-footer -->
+<div tal:condition="php: __Config::get('metafad.fe.hasSocial')" class="block-footer content-align-right pull-right footer-info">
+	<div class="block-social-network">
+		<ul>
+			<li><a tal:attributes="href php: 'mailto:?subject=Visita questo sito&amp;body=Visita questo sito: '. Component['url']"><span class="wrapper-icon"><i class="icon-at"></i></span></a></li>
+			<li><a tal:attributes="href php: 'https://www.facebook.com/sharer/sharer.php?u='. Component['url']" ><span class="wrapper-icon"><i class="icon-facebookf"></i></span></a></li>
+			<li><a tal:attributes="href php: 'https://twitter.com/home?status='. Component['url']"><span class="wrapper-icon"><i class="icon-twitter"></i></span></a></li>
+			<li><a tal:attributes="href php: 'https://plus.google.com/share?url='. Component['url']"><span class="wrapper-icon"><i class="icon-googleplus"></i></span></a></li>
+		</ul>
+	</div>
+</div>
+<!-- block-footer -->

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:EmptyComponent
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:r="pinaxcms.roleManager.views.*" visible="{php:__Config::get('ACL_MODULES')}">
+
+    <pnx:Fieldset label="Permessi di modifica (Back-end)" cssClass="permessi" visible="{php:$user->acl($application->getPageId(),'all')}">
+         <r:Input id="__aclEdit" label="{i18n:Ruoli}" size="90" data="type=permission" />
+    </pnx:Fieldset>
+    
+    <pnx:Fieldset label="Permessi di visualizzazione (Front-end)" cssClass="permessi" visible="{php:$user->acl($application->getPageId(),'all')}">
+         <r:Input id="__aclView" label="{i18n:Ruoli}" size="90" data="type=permission" />
+    </pnx:Fieldset>
+
+</pnx:EmptyComponent>

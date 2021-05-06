@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Config xmlns:pnx="http://www.pinax.org/dtd/1.0/">
+    <pnx:Param name="CHARSET" value="UTF-8" />
+    <pnx:Param name="APP_NAME" value="Metafad Frontend" />
+    <pnx:Param name="APP_VERSION" value="1.0 beta 5" />
+    <pnx:Param name="APP_AUTHOR">
+    <![CDATA[ICAR - ICCU]]>
+    </pnx:Param>
+
+    <pnx:Param name="DB_TYPE" value="mysql" />
+    <pnx:Param name="DB_HOST" value="{{env:MYSQL_HOST}}" />
+    <pnx:Param name="DB_NAME" value="{{env:MYSQL_DB_NAME_FE}}" />
+    <pnx:Param name="DB_USER" value="{{env:MYSQL_USERNAME}}" />
+    <pnx:Param name="DB_PSW" value="{{env:MYSQL_PASSWORD}}" />
+    <pnx:Param name="DB_PREFIX" value="" />
+
+    <pnx:Param name="DB_TYPE#2" value="mysql" />
+    <pnx:Param name="DB_HOST#2" value="{{env:MYSQL_HOST}}" />
+    <pnx:Param name="DB_NAME#2" value="{{env:MYSQL_DB_NAME_BE}}" />
+    <pnx:Param name="DB_USER#2" value="{{env:MYSQL_USERNAME}}" />
+    <pnx:Param name="DB_PSW#2" value="{{env:MYSQL_PASSWORD}}" />
+    <pnx:Param name="DB_PREFIX#3" value="" />
+
+    <pnx:Param name="DB_TYPE#3" value="mysql" />
+    <pnx:Param name="DB_HOST#3" value="{{env:MYSQL_HOST}}" />
+    <pnx:Param name="DB_NAME#3" value="{{env:MYSQL_DB_NAME_ECOMMERCE}}" />
+    <pnx:Param name="DB_USER#3" value="{{env:MYSQL_USERNAME}}" />
+    <pnx:Param name="DB_PSW#3" value="{{env:MYSQL_PASSWORD}}" />
+    <pnx:Param name="DB_PREFIX#3" value="" />
+
+    <pnx:Param name="SMTP_HOST" value="{{env:SMTP_HOST}}" />
+    <pnx:Param name="SMTP_USER" value="{{env:SMTP_USER}}" />
+    <pnx:Param name="SMTP_PSW" value="{{env:SMTP_PSW}}" />
+    <pnx:Param name="SMTP_SENDER" value="{{env:SMTP_SENDER}}" />
+    <pnx:Param name="SMTP_EMAIL" value="{{env:SMTP_EMAIL}}" />
+    <pnx:Param name="SMTP_PORT" value="{{env:SMTP_PORT}}" />
+
+    <pnx:Param name="IMG_WIDTH" value="400" />
+    <pnx:Param name="IMG_HEIGHT" value="300" />
+    <pnx:Param name="THUMB_SMALL_WIDTH" value="56" />
+    <pnx:Param name="THUMB_SMALL_HEIGHT" value="56" />
+    <pnx:Param name="THUMB_WIDTH" value="*" />
+    <pnx:Param name="THUMB_HEIGHT" value="80" />
+    <pnx:Param name="IMG_LIST_WIDTH" value="100" />
+    <pnx:Param name="IMG_LIST_HEIGHT" value="*" />
+
+    <pnx:Param name="IMG_DOWNLOAD_WIDTH" value="800" />
+    <pnx:Param name="IMG_DOWNLOAD_HEIGHT" value="800" />
+    <pnx:Param name="IMG_WATERMARK" value="watermark.png" />
+    <pnx:Param name="IMG_WATERMARK_SIZE_PERC" value="45" />
+    <pnx:Param name="IMG_WATERMARK_MIN_WIDTH" value="150" />
+    <pnx:Param name="IMG_WATERMARK_MIN_HEIGHT" value="150" />
+    <pnx:Param name="IMG_WATERMARK_POS" value="RT" />
+    <pnx:Param name="pinax.media.imageMagick" value="false" />
+
+    <pnx:Param name="SEF_URL" value="full" />
+    <pnx:Param name="CACHE_CODE" value="-1" />
+    <pnx:Param name="USER_LOG" value="false" />
+    <pnx:Param name="DEBUG" value="false" />
+    <pnx:Param name="DB_CHARSET" value="utf8" />
+    <pnx:Param name="DATASOURCE_MODE" value="db" />
+    <pnx:Param name="START_PAGE" value="1" />
+    <pnx:Param name="PSW_METHOD" value="MD5" />
+    <pnx:Param name="MULTILANGUAGE_ENABLED" value="true" />
+    <pnx:Param name="DEFAULT_LANGUAGE" value="it" />
+
+    <pnx:Param name="SMTP_HOST" value="" />
+    <pnx:Param name="SMTP_USER" value="" />
+    <pnx:Param name="SMTP_PSW" value="" />
+    <pnx:Param name="SMTP_SENDER" value="Polo Digitale Napoli" />
+    <pnx:Param name="SMTP_EMAIL" value="info@polodigitale.it" />
+
+    <pnx:Param name="QUERY_CACHING_INIT" value="true" />
+    <pnx:Param name="QUERY_CACHING_LIFETIME" value="1000" />
+
+    <pnx:Param name="SESSION_PREFIX" value="mwcms_fe" />
+
+    <pnx:Param name="ACL_ENABLED" value="true" />
+    <pnx:Param name="ACL_ROLES" value="true" />
+    <pnx:Param name="ACL_MODULES" value="true" />
+    <pnx:Param name="ACL_CLASS" value="pinax.application.AclAdvanced" />
+
+    <pnx:Param name="PINAX_ADD_CORE_JS" value="false" />
+    <pnx:Param name="PINAX_ADD_JS_LIB" value="false" />
+    <pnx:Param name="PINAX_ADD_JQUERY_JS" value="false" />
+    <pnx:Param name="TEMPLATE_FOLDER" value="../public/static/museoweb/templates/" />
+
+    <pnx:Param name="pinaxcms.template.default" value="Default" />
+    <pnx:Param name="pinaxcms.contents.templateEnabled" value="true" />
+    <pnx:Param name="pinaxcms.mediaArchive.mediaMappingEnabled" value="true" />
+    <pnx:Param name="pinax.dataAccess.serializationMode" value="json" />
+    <pnx:Param name="pinax.dataAccess.documentVisibility" value="true" />
+    <pnx:Param name="pinax.routing.newParser" value="false" />
+    <pnx:Param name="mwcms.ecomm.enabled" value="true" />
+    <pnx:Param name="museoweb.ecommerce.gateway" value="museoweb.modules.ecommerce.gateway.Simulate" />
+
+    <pnx:Param name="FORM_ITEM_TEMPLATE"><![CDATA[
+        <div class="row">
+          <div class="col-md-3 col-lg-3 content-align-right">
+            ##FORM_LABEL##
+          </div>
+          <div class="col-md-9 col-lg-9">
+            <div class="block-field bselect-show-input-search">
+              <p>
+                ##FORM_ITEM##
+              </p>
+            </div>
+          </div>
+        </div>
+    ]]></pnx:Param>
+    <pnx:Param name="FORM_ITEM_RIGHT_LABEL_TEMPLATE"><![CDATA[
+      <div class="control-group clearfix">
+        ##FORM_LABEL##
+        <div class="controls col-lg-9">
+          ##FORM_ITEM##
+        </div>
+      </div>
+    ]]></pnx:Param>
+    <pnx:Param name="pinaxcms.form.buttonsPanel"><![CDATA[
+        <div class="control-group col-lg-12 clearfix" id="##ID##">
+          ##CONTENT##
+        </div>
+    ]]></pnx:Param>
+
+    <pnx:Param name="PINAX_ADD_JQUERY_JS" value="true"/>
+    <pnx:Param name="PINAX_JQUERY" value="jquery-1.8.3.min.js"/>
+    <pnx:Param name="PINAX_ADD_JQUERYUI_JS" value="true"/>
+    <pnx:Param name="PINAX_JQUERYUI_THEME" value="jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css"/>
+    <pnx:Param name="PINAX_JQUERYUI" value="jquery-ui-1.10.0.custom.min.js"/>
+
+    <pnx:Param name="pinax.form.cssClass" value="form-horizontal" />
+    <pnx:Param name="pinax.searchFilters.cssClass" value="form-horizontal" />
+    <pnx:Param name="pinax.formElement.cssClass" value="form-control" />
+    <pnx:Param name="pinax.formElement.cssClassLabel" value="col-lg-6" />
+    <pnx:Param name="pinax.formButton.cssClass" value="btn btn-default" />
+
+    <pnx:Param name="pinaxcms.pageEdit.editUrlEnabled" value="true" />
+    <pnx:Param name="pinaxcms.mediaArchive.exifEnabled" value="true" />
+
+
+    <pnx:Param name="oaipmh.protocolVersion" value="2.0" />
+    <pnx:Param name="oaipmh.granularity" value="YYYY-MM-DDThh:mm:ssZ" />
+    <pnx:Param name="oaipmh.delimiter" value=":" />
+    <pnx:Param name="oaipmh.idPrefix" value="" />
+    <pnx:Param name="oaipmh.maxRecords" value="50" />
+    <pnx:Param name="oaipmh.maxIds" value="200" />
+    <pnx:Param name="oaipmh.title" value="" />
+    <pnx:Param name="oaipmh.adminEmail" value="" />
+    <pnx:Param name="oaipmh.earliestDatestamp" value="2011-01-01T00:00:00Z" />
+    <pnx:Param name="oaipmh.repositoryIdentifier" value="" />
+    <pnx:Param name="oaipmh.oaiPrefix" value="oai{{oaipmh.delimiter}}{{oaipmh.repositoryIdentifier}}{{oaipmh.delimiter}}{{oaipmh.idPrefix}}" />
+
+    <pnx:Param name="BASE_REGISTRY_PATH" value="museoweb" />
+    <pnx:Param name="STATIC_FOLDER" value="static/museoweb/" />
+    <pnx:Param name="museoweb.homeSlider.width" value="1200" />
+    <pnx:Param name="museoweb.homeSlider.height" value="311" />
+    <pnx:Param name="museoweb.homeSlider.crop" value="true" />
+
+    <pnx:Param name="metafad.url" value="{{env:METAFAD_URL_EXTERNAL}}"/>
+    <pnx:Param name="metafad.base" value="{{env:METAFAD_URL}}"/>
+    <pnx:Param name="metafad.serviceBase" value="{{env:SEARCH_SERVICES_HOST}}"/>
+    <pnx:Param name="metafad.solr.base" value="{{env:SOLR_HOST}}"/>
+
+    <pnx:Param name="metafad.solr.url" value="{{metafad.serviceBase}}/opac/search"/>
+    <pnx:Param name="metafad.solr.field.url" value="{{metafad.serviceBase}}/opac/fields"/>
+    <pnx:Param name="metafad.solr.autocomplete.url" value="{{metafad.serviceBase}}/opac/facet"/>
+    <pnx:Param name="metafad.solr.detail.url" value="{{metafad.serviceBase}}/opac/resource"/>
+
+    <pnx:Param name="metafad.iccd.url" value="{{metafad.serviceBase}}/iccd/search"/>
+    <pnx:Param name="metafad.iccd.field.url" value="{{metafad.serviceBase}}/iccd/fields"/>
+    <pnx:Param name="metafad.iccd.autocomplete.url" value="{{metafad.serviceBase}}/iccd/facet"/>
+    <pnx:Param name="metafad.iccd.detail.url" value="{{metafad.serviceBase}}/iccd/resource"/>
+	  <pnx:Param name="metafad.iccd.solr.sortingPrefix" value="_sort_s" />
+
+    <pnx:Param name="metafad.archive-ca.url" value="{{metafad.serviceBase}}/archivio-ca/search"/>
+    <pnx:Param name="metafad.archive-ca.field.url" value="{{metafad.serviceBase}}/archivio-ca/fields"/>
+    <pnx:Param name="metafad.archive-ca.autocomplete.url" value="{{metafad.serviceBase}}/archivio-ca/facet"/>
+    <pnx:Param name="metafad.archive-ca.detail.url" value="{{metafad.serviceBase}}/archivio-ca/resource"/>
+
+    <pnx:Param name="metafad.archive-ud.url" value="{{metafad.serviceBase}}/archivio-ud/search"/>
+    <pnx:Param name="metafad.archive-ud.field.url" value="{{metafad.serviceBase}}/archivio-ud/fields"/>
+    <pnx:Param name="metafad.archive-ud.autocomplete.url" value="{{metafad.serviceBase}}/archivio-ud/facet"/>
+    <pnx:Param name="metafad.archive-ud.detail.url" value="{{metafad.serviceBase}}/archivio-ud/resource"/>
+    <pnx:Param name="metafad.archive-ua.detail.url" value="{{metafad.serviceBase}}/archivio-ua/resource"/>
+
+    <pnx:Param name="metafad.metaindice.url" value="{{metafad.serviceBase}}/metaindice/search"/>
+    <pnx:Param name="metafad.metaindice.field.url" value="{{metafad.serviceBase}}/metaindice/fields"/>
+    <pnx:Param name="metafad.metaindice.autocomplete.url" value="{{metafad.serviceBase}}/metaindice/facet"/>
+    <pnx:Param name="metafad.metaindice.detail.url" value="{{metafad.serviceBase}}/metaindice/resource"/>
+
+    <pnx:Param name="metafad.metaindice-au.url" value="{{metafad.serviceBase}}/metaindice-au/search"/>
+    <pnx:Param name="metafad.metaindice-au.field.url" value="{{metafad.serviceBase}}/metaindice-au/fields"/>
+    <pnx:Param name="metafad.metaindice-au.autocomplete.url" value="{{metafad.serviceBase}}/metaindice-au/facet"/>
+    <pnx:Param name="metafad.metaindice-au.detail.url" value="{{metafad.serviceBase}}/metaindice-au/resource"/>
+
+    <pnx:Param name="metafad.opac-au.detail.url" value="{{metafad.serviceBase}}/opac-au/resource"/>
+
+    <pnx:Param name="metafad.iccd-au.detail.url" value="{{metafad.serviceBase}}/iccdau/resource"/>
+
+    <pnx:Param name="metafad.archivio-au.detail.url" value="{{metafad.serviceBase}}/archivio-au/resource"/>
+
+    <pnx:Param name="solr.core.be" value="{{env:SOLR_CORE_BE}}"/>
+    <pnx:Param name="solr.core.fe" value="{{env:SOLR_CORE_FE}}"/>
+    <pnx:Param name="solr.core.metaindice" value="{{env:SOLR_CORE_METAINDICE}}"/>
+    <pnx:Param name="solr.core.iccd" value="{{metafad.solr.base}}/solr/{{env:SOLR_CORE_FE_ICCD}}/" />
+    <pnx:Param name="solr.core.iccdaut" value="{{metafad.solr.base}}/solr/{{env:SOLR_CORE_FE_ICCD_AUT}}/" />
+    <pnx:Param name="solr.core.archive" value="{{metafad.solr.base}}/solr/{{env:SOLR_CORE_FE_ARCHIVE}}/" />
+    <pnx:Param name="solr.core.archiceAut" value="{{metafad.solr.base}}/solr/{{env:SOLR_CORE_FE_ARCHIVE_AUT}}/" />
+
+    <pnx:Param name="metafad.solr.url" value="{{metafad.solr.base}}/solr/{{solr.core.be}}/"/>
+    <pnx:Param name="metafad.solr.url.fe" value="{{metafad.solr.base}}/solr/{{solr.core.fe}}/"/>
+    <pnx:Param name="metafad.solr.metaindice.url" value="{{metafad.solr.base}}/solr/{{solr.core.metaindice}}/"/>
+
+	  <!-- PARAMETRO CHE INDICA L'ESISTENZA DEI SERVIZI DI RICERCA NON STANDARD -->
+  	<pnx:Param name="metafad.fe.search.hasCustomServices" value="{{env:SEARCH_HAS_CUSTOM_SERVICES}}" />
+  	<pnx:Param name="metafad.fe.search.hasMultiSearch" value="{{env:SEARCH_HAS_MULTI_SEARCH}}" />
+  	<pnx:Param name="metafad.fe.search.checkPermission" value="{{env:SEARCH_CHECK_PERMISSION}}" />
+
+  	<pnx:Param name="metafad.opac.roles" value="{{metafad.serviceBase}}/opac/roles?bid="/>
+    <pnx:Param name="metafad.archive.roles" value="{{metafad.serviceBase}}/archivio-ud/roles?id="/>
+    <pnx:Param name="metafad.iccd.roles" value="{{metafad.serviceBase}}/iccd/roles?id="/>
+
+    <pnx:Param name="metafad.fe.urlViewerService" value="{{metafad.base}}/rest/viewer/metadato/" />
+    <pnx:Param name="getNewDocumentsService" value="{{metafad.base}}/rest/newDoc" />
+
+    <pnx:Param name="portale.dam.url.local" value="{{env:DAM_REST_URL}}"/>
+    <pnx:Param name="metafad.modules.dam.maxResizeWidth" value="1200" />
+    <pnx:Param name="advancedSearch.model" value="metafad.opac.models.Model" />
+
+    <pnx:Param name="tinyUrl.url" value="http://tinyurl.com/api-create.php?url=" />
+
+    <!-- CONFIG INSTALLAZIONE -->
+    <pnx:Param name="metafad.fe.hasInstitutes" value="true" />
+	<pnx:Param name="metafad.default.institute" value="metafad" />
+    <pnx:Param name="metafad.fe.activeSearch"><![CDATA[
+        {"metaindice" : true,
+         "metaindiceau" : false,
+         "archive": true,
+         "iccd": true,
+         "sbn": true}
+    ]]></pnx:Param>
+    <pnx:Param name="metafad.fe.hasRequests" value="true" />
+    <pnx:Param name="metafad.fe.hasEcommerce" value="true" />
+    <pnx:Param name="metafad.fe.hasSocial" value="true" />
+    <pnx:Param name="metafad.fe.resultPerPage" value="15" />
+
+    <pnx:Param name="metafad.fe.lod.serverRoot" value="{{metafad.fe.serverRoot}}" />
+    <pnx:Param name="metafad.fe.lod.serverApi" value="{{metafad.fe.serverApi}}" />
+
+    <pnx:Param name="metafad.image.size.newDocs" value="w=*&amp;h=300"/>
+    <pnx:Param name="metafad.image.size.search" value="thumbnail"/>
+    <pnx:Param name="metafad.image.size.detail" value="w=250&amp;h=*"/>
+    <pnx:Param name="metafad.image.size.zoom" value="original"/>
+    <pnx:Param name="metafad.fe.viewer.viewerHeight" value=""/>
+
+  	<pnx:Param name="url.fe" value="{{env:URL_FE}}" />
+  	<pnx:Param name="url.be" value="{{env:URL_BE}}" />
+
+  	<pnx:Param name="solr.defaultSearch" value="{{env:SOLR_DEFAULT_SEARCH}}" />
+
+	<!--Lista vari parametri di default per la ricerca -->
+	<pnx:Param name="solr.fl.list.iccd">
+		<![CDATA[
+		[
+			"SGTI_ss",
+			"AUTN_ss",
+			"NCTR_ss",
+			"NCTN_ss",
+			"RVEL_ss",
+			"OGTD_ss",
+			"TSK_ss",
+			"visibility_nxs",
+			"id",
+			"digitale_idpreview_s"
+		]
+	]]></pnx:Param>
+
+	<pnx:Param name="solr.facet.list.iccd">
+		<![CDATA[
+		[
+			"TSK_ss",
+			"OGTD_ss",
+			"SGTI_ss",
+			"AUTN_ss",
+			"digitale_s"
+		]
+	]]></pnx:Param>
+
+	<pnx:Param name="metafad.iccd.solr.sortingFields">
+	<![CDATA[
+    	{
+			"Autore": "AUTN",
+			"Oggetto": "OGTD",
+			"Soggetto": "SGTI",
+			"N. Catalogo": "NCTN"
+		}
+	]]>
+	</pnx:Param>
+
+	<pnx:Param name="solr.fl.list.archive">
+		<![CDATA[
+		[
+			"id",
+			"digitale_s",
+			"livello_descrizione_ss",
+			"livello_superiore_ss",
+			"denominazione_ss",
+			"denominazione_titolo_ss",
+			"produttore_ss",
+			"conservatore_ss",
+			"digitale_idpreview_s",
+			"visibility_nxs"
+		]
+	]]></pnx:Param>
+
+	<pnx:Param name="solr.facet.list.archive">
+		<![CDATA[
+		[
+			"livello_descrizione_ss",
+			"produttore_ss",
+			"conservatore_ss",
+			"digitale_s"
+		]
+	]]></pnx:Param>
+
+	<pnx:Param name="metafad.archive.solr.sortingFields">
+	<![CDATA[
+    	{
+			"Produttore": "produttore",
+			"Conservatore": "conservatore",
+			"Livello": "livello_descrizione"
+		}
+	]]>
+	</pnx:Param>
+
+	<pnx:Param name="solr.fl.list.metaindice">
+		<![CDATA[
+		[
+			"id",
+			"dominio_s",
+			"denominazione_titolo_ss",
+			"responsabilita_ss",
+			"visibility_nxs",
+			"digitale_idpreview_s"
+		]
+	]]></pnx:Param>
+
+	<pnx:Param name="solr.facet.list.metaindice">
+		<![CDATA[
+		[
+			"dominio_s",
+			"responsabilita_ss",
+			"digitale_s"
+		]
+	]]></pnx:Param>
+
+  <pnx:Param name="metafad.archive.treeIcon">
+	  <![CDATA[
+    {
+			"archivi.models.UnitaArchivistica": "fa fa-folder",
+      "archivi.models.UnitaDocumentaria": "fa fa-file-text",
+      "archivi.models.ComplessoArchivistico": "fa fa-archive"
+		}
+    ]]>
+  </pnx:Param>
+  
+	<pnx:Param name="metafad.iccd.solr.sortingPrefix" value="_sort_s" />
+  <pnx:Param name="search.autocomplete.list.length" value="100" />
+</pnx:Config>

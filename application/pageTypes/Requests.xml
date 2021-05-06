@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:mwf="metafad.requests.views.components.*"
+    controllerName="metafad.requests.controllers.*"
+    templateType="php"
+    templateFileName="popup.php"
+    defaultEditableRegion="content">
+    <pnx:Import src="Common.xml" />
+
+    <mvc:State name="index">
+
+    </mvc:State>
+
+    <mvc:State name="request">
+      <pnx:EmptyComponent id="back" skin="backButton_detail.html" editableRegion="buttons"/>
+      <mwf:ShowRequest id="showRequest" skin="requestItem.html"/>
+    </mvc:State>
+
+    <mvc:State name="set">
+      <pnx:EmptyComponent id="backToSearch" skin="backToSearch.html" />
+    </mvc:State>
+
+    <mvc:State name="login">
+    	<pnx:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+
+    	<!-- <pnx:LoginBox editableRegion="contents" id="formLoginPage"
+              cssClass="col-md-offset-3 col-md-6"
+    					userField="username" passwordField="password"
+    					registrationUrl="Registration"
+              askPasswordUrl="lostpassword"
+              accessPageId="Home"
+    					skin="Login.html" /> -->
+
+      <pnx:EmptyComponent skin="requestMessage.html" />
+    </mvc:State>
+</mvc:Page>

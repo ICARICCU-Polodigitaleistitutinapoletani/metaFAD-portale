@@ -1,0 +1,42 @@
+<div id="collectionCollapsed" tal:condition="php: Component['institutes']" tal:attributes="class php: (__Request::get('backFromCollection') == 'true') ? 'bcp-block-slide-slogan hide-in-wm-l hide' : 'bcp-block-slide-slogan hide-in-wm-l'">
+    <div class="block-slogan-cell ">
+        <h1 class="block-title">Le collezioni digitali</h1>
+    </div>
+    <div class="block-slogan-cell">
+        <a id="showCollections" class="btn-link gpc-btn-link-go-to-archive">Accedi alle collezioni +</a>
+    </div>
+</div>
+
+<div id="collectionShowed" tal:attributes="class php: (__Request::get('backFromCollection') == 'true') ? 'mcp-wrapper-gate-all-collaction hide-in-wm-xl' : 'mcp-wrapper-gate-all-collaction hide-in-wm-xl hide'">
+  <span tal:omit-tag="" tal:condition="php: Component['institutes']">
+    <div tal:condition="Component/institutes" tal:repeat="item Component/institutes" class="module-cell">
+        <ul>
+            <li tal:repeat="item2 item">
+              <a class="btn-link js-show-element gpc-btn-link-go-to-archive" href=""><span tal:content="item2/name"/> <span class="icon-plus"></span><span class="icon-minus"></span></a>
+              <ul class="js-collapse-box sub-menu hidden">
+                <li tal:repeat="item3 item2/collections"><a tal:attributes="href php: __Link::makeUrl('collections_detail',array('document_id'=>item3['id']))" tal:content="item3/name"></a></li>
+                <li tal:condition="php: !item2['collections']"><a href="#">Nessuna collezione</a></li>
+              </ul>
+            </li>
+        </ul>
+        <h1 tal:condition="repeat/item/end" class="block-title">Le collezioni</h1>
+        <div tal:condition="repeat/item/end" class="block-slogan-cell">
+          <a id="hideCollections" class="btn-link gpc-btn-link-go-to-archive">Nascondi</a>
+      </div>
+    </div>
+  </span>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('#showCollections').on('click',function(){
+      $('#collectionCollapsed').addClass('hide');
+      $('#collectionShowed').removeClass('hide');
+    });
+
+    $('#hideCollections').on('click',function(){
+      $('#collectionCollapsed').removeClass('hide');
+      $('#collectionShowed').addClass('hide');
+    });
+  });
+</script>

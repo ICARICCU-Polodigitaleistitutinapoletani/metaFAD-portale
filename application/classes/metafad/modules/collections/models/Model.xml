@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:model="pinax.models.*/"
+    model:tableName="metafad.modules.collections" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <model:Field name="title" type="string" length="255" index="true" />
+        <model:Field name="menuVoice" type="string" index="true" />
+        <model:Field name="institute" type="object" readFormat="false"/>
+        <model:Field name="institute_index" type="string" index="true"/>
+        <model:Field name="image" type="string" length="255" />
+        <model:Field name="text" type="string" length="255" />
+        <model:Field name="query" type="string" />
+        <model:Field name="type" type="string" index="true" />
+        <model:Field name="position" type="integer" index="true" />
+    </model:Define>
+
+    <model:Script parent="model">
+    <![CDATA[
+    public function save($values=NULL, $forceNew=false, $status='DRAFT', $comment='') {
+      $this->createAddictionalIndex();
+      return parent::save($values, $forceNew, $status);
+    }
+
+    private function createAddictionalIndex()
+    {
+        $this->institute_index = $this->institute->id;
+    }
+    ]]>
+    </model:Script>
+
+</model:Model>

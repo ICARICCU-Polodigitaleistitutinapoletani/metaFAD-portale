@@ -1,0 +1,22 @@
+<script>
+$(window).on('load',function(){
+  $(document).ready(function(){
+    var imageLink = $('#imageLink').html();
+    var arrayIdBox = ["FirstWithImage","Autore","CODICI","AUTORE",
+                      "INTESTAZIONE UNIFORME","Informazioni descrittive","SOGGETTO",
+                      "OGGETTO",
+                      "Identificazione e qualificazione","Intestazione e descrizione","Relazioni",
+                      "Identificazione"];
+    $(".js-show-element-reverse").each(function(){
+      if($(this).siblings('.js-collapse-box-reverse').attr('id') == 'CODICI' && imageLink === undefined)
+      {
+        $(this).click();
+      }
+      if(!arrayIdBox.includes($(this).siblings('.js-collapse-box-reverse').attr('id')))
+      {
+        $(this).click();
+      }
+    });
+  });
+});
+</script>

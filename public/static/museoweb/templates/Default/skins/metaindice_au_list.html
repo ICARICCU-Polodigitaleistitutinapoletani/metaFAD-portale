@@ -1,0 +1,182 @@
+<article class="block-item-post not-have-image bcp-block-item-post--result list clearfix" tal:repeat="item Component/records">
+
+  <p tal:condition="php: item.{'tipo scheda'}" tal:content="php: item.{'tipo scheda'}"/>
+
+  <h1 class="block-title">
+    <span tal:condition="php: item.{'tipo scheda'} == 'SBN AUT'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione/nome/sintetica'}" tal:attributes="href php: __Link::makeUrl('opac_detail_au', array('id'=> item.id ))" tal:content="php: item.{'denominazione/nome/sintetica'}"></a></span>
+    <span tal:condition="php: item.{'tipo scheda'} == 'SBN AUT'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione/nome'} AND !item.{'denominazione/nome/sintetica'}" tal:attributes="href php: __Link::makeUrl('opac_detail_au', array('id'=> item.id ))" tal:content="php: item.{'denominazione/nome'}"></a></span>
+    <span tal:condition="php: item.{'tipo scheda'} == 'SBN AUT'" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione/nome/sintetica'} AND !item.{'denominazione/nome'}" tal:attributes="href php: __Link::makeUrl('opac_detail_au', array('id'=> item.id ))">Senza titolo</a></span>
+    <span tal:condition="php: item.{'tipo scheda'} == 'AUT 4.00' || item.{'tipo scheda'} == 'AUT 3.00'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione/nome'}" tal:attributes="href php: __Link::makeUrl('iccd_detail_au', array('id'=> item.id ))" tal:content="php: item.{'denominazione/nome'}"></a></span>
+    <span tal:condition="php: item.{'tipo scheda'} == 'AUT 4.00' || item.{'tipo scheda'} == 'AUT 3.00'" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione/nome'}" tal:attributes="href php: __Link::makeUrl('iccd_detail_au', array('id'=> item.id ))">Senza titolo</a></span>
+    <span tal:condition="php: item.{'tipo scheda'} == 'Entità'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione/nome'}" tal:attributes="href php: __Link::makeUrl('archive_detail_au', array('id'=> item.id ))" tal:content="php: metafad_utils_SkinHelper::checkDeniminazioneAut(item.{'denominazione/nome'})"></a></span>
+    <span tal:condition="php: item.{'tipo scheda'} == 'Entità'" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione/nome'}" tal:attributes="href php: __Link::makeUrl('archive_detail_au', array('id'=> item.id ))">Senza titolo</a></span>
+  </h1>
+
+  <p tal:condition="php: item.{'tipo entità'}" tal:content="php: item.{'tipo entità'}"/>
+
+  <!-- bcp-block-item-post-tool -->
+  <div class="bcp-block-item-post-tool padding-top content-align-right">
+    <ul>
+      <span tal:condition="php: item.{'tipo scheda'} == 'SBN AUT'" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('opac_detail_au', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+      <span tal:condition="php: item.{'tipo scheda'} == 'AUT 4.00' || item.{'tipo scheda'} == 'AUT 3.00'" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('iccd_detail_au', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+      <span tal:condition="php: item.{'tipo scheda'} == 'Entità'" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('archive_detail_au', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+      <li tal:condition="Component/hasSocial">
+         <a tal:attributes="href php: '#social'.item.id; data-popup-target php: '#social'.item.id"><span class="icon-share231"></span> Condividi</a>
+
+         <!-- block-my-pop-up -->
+         <div tal:attributes="id php: 'social'.item.id" style="width:230px;top:100%;" class="block-my-pop-up hide bcp-block-pop-up-share js-my-pop-up g-right">
+            <div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+           <!-- block-my-pop-up-content -->
+           <div class="block-my-pop-up-content clearfix">
+
+               <!-- block-form -->
+               <article class="block-form">
+
+               <!-- block-social-network -->
+               <div class="block-social-network">
+                 <ul>
+                  <li><a tal:attributes="href php: 'mailto:?subject=Visita questo sito&amp;body=Visita questo sito'.__Link::makeUrl('opac_detail_au', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-at"></i></span></a></li>
+                  <li><a tal:attributes="href php: 'https://www.facebook.com/sharer/sharer.php?u='.__Link::makeUrl('opac_detail_au', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-facebookf"></i></span></a></li>
+                  <li><a tal:attributes="href php: 'https://twitter.com/home?status='.__Link::makeUrl('opac_detail_au', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-twitter"></i></span></a></li>
+                  <li><a tal:attributes="href php: 'https://plus.google.com/share?url='.__Link::makeUrl('opac_detail_au', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-googleplus"></i></span></a></li>
+                 </ul>
+               </div>
+               <!-- block-social-network -->
+
+               </article>
+               <!-- block-form -->
+
+           </div>
+           <!-- block-my-pop-up-content -->
+
+         </div>
+         <!-- block-my-pop-up -->
+      </li>
+      <li tal:condition="php: item.id == 1519002">
+         <a href="#p1" data-popup-target="#p1"><span class="icon-shoppingcart1231"></span> Carrello</a>
+         <!-- carrello static -->
+         <div tal:condition="php: item.Ecommerce AND item.firstImage" tal:attributes="id php: 'p' . item.id" style="width:660px;top:100%;" class="block-my-pop-up hide bcp-block-pop-up-cart js-my-pop-up hidden g-right js-popup-carrello">
+          <div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+          <!-- block-my-pop-up-content -->
+          <div class="block-my-pop-up-content clearfix">
+
+            <a tal:attributes="data-popup-target-close php: '#p' . item.id" class="gcp-btn-close-pop-up js-close-my-pop-up"><i class="icon-remove2231 g-right g-top margin-top margin-right"></i></a>
+
+            <h2 class="block-sub-title not-have-title">Scegli il tipo di licenza e il formato immagine</h2>
+
+            <!-- block-item-post -->
+            <article class="block-item-post padding-top bcp-block-item-post--result list clearfix">
+
+              <div class="gcp-wrapper-figure pull-left">
+
+                <figure class="gcp-wrapper-img gcp-bg-CCCCCC">
+                  <a href="#"><img tal:attributes="src php: item.firstImage" alt="" /></a>
+                </figure>
+
+              </div>
+
+              <h1 class="block-sub-title not-have-title">
+                <span tal:condition="php: item.{'Titolo sintetica'}" tal:content="php: item.{'Titolo sintetica'}"></span>
+                <span tal:condition="php: !item.{'Titolo sintetica'} AND item.{'Soggetto: titolo'}" tal:content="php: item.{'Soggetto: titolo'}"></span>
+                <span tal:condition="php: !item.{'Titolo sintetica'} AND !item.{'Soggetto: titolo'}" >Senza titolo</span>
+              </h1>
+
+              <p tal:condition="php: item.{'Tipo di scheda'}" tal:content="php: 'Tipo di scheda: ' .item.{'Tipo di scheda'}"/>
+              <p tal:condition="php: ! item.{'Tipo di scheda'}">N.D.</p>
+              <p>
+                <span class="bcp-block-item-pot-field">Codice univoco:</span>
+                <span tal:omit-tag="" tal:condition="php: item.{'Codice univoco'}" tal:content="php: item.{'Codice univoco'}"/>
+                <span tal:omit-tag="" tal:condition="php: ! item.{'Codice univoco'}">N.D.</span>
+                <span tal:omit-tag="" tal:condition="php: item.Level" tal:content="item/Level"></span>
+              </p>
+              <p>
+                <span class="bcp-block-item-pot-field">Definizione culturale: autore: </span>
+                <span tal:omit-tag="" tal:condition="php: item.{'Definizione culturale: autore'}" tal:content="php: item.{'Definizione culturale: autore'}"/>
+                <span tal:omit-tag="" tal:condition="php: ! item.{'Definizione culturale: autore'}">N.D.</span>
+              </p>
+
+              </article>
+              <!-- block-item-post -->
+
+              <!-- block-form -->
+              <div class="block-form">
+                <form>
+                  <input type="hidden" name="addToCart" value="true"/>
+                  <input type="hidden" name="id" tal:attributes="value php: item.id"/>
+                  <input type="hidden" name="takeAll" value="true"/>
+                  <input type="hidden" name="recordDetailUrl" tal:attributes="value php: __Link::makeUrl('iccd_detail', array('id'=> item.id ))"/>
+                  <input type="hidden" name="image" tal:attributes="value php: item.firstImage"/>
+                  <input type="hidden" name="buyAll" value="true"/>
+                  <input type="hidden" name="imagesNumber" tal:attributes="value php: item.Ecommerce.imagesCount" />
+                  <input type="hidden" name="fromUrl" tal:attributes="value php: __Link::addParams()"/>
+                  <!-- table -->
+                  <div class="Rtable bcp-Rtable-cart Rtable--collapse Rtable--5cols">
+
+                    <!-- bcp-block-note -->
+                    <div class="bcp-block-note container">
+                      <div class="row">
+                        <p class="cartMessage">
+                          <span tal:condition="php: item.visibility_v">Clicca <a target="_blank" tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=iccd'">qui</a>
+                          <span tal:content="php: __T('cartMessage')" tal:omit-tag=""/></span>
+                          <span><b>Questo record contiene <span tal:omit-tag="" tal:content="php: item.Ecommerce.imagesCount"/> media associato/i</b>. Il prezzo fa riferimento al costo per ogni singola immagine.</span>
+                        </p>
+                      </div>
+                      <div class="block-heading">
+                        <h2 class="block-title">Licenze disponibili</h2>
+                      </div>
+                      <div class="block-text">
+                        <div tal:repeat="sintetic item/Ecommerce/sintetic" class="row">
+                          <div class="col-md-10">
+                            <h3 tal:content="php: sintetic.title"/>
+                            <p tal:content="php: sintetic.description"/>
+                          </div>
+                          <div class="col-md-2">
+                            <label>
+                              <span tal:content="php: sintetic.price . '€' "/>
+                              <input type="radio" name="license" tal:attributes="value php: sintetic.id"/>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- bcp-block-note -->
+
+                  </div>
+                  <!-- table -->
+
+                  <div class="block-wrapper-button btn-758682 content-align-center gutter-bottom-large">
+                    <input type="reset" class="btn-reset btn-758682" value="Annulla" />
+                    <input type="submit" class="btn-758682" value="Aggiungi al carrello" />
+                    <input type="submit" class="btn-758682" value="Acquista" />
+                  </div>
+
+                </form>
+              </div>
+              <!-- block-form -->
+
+              <!-- bcp-block-note -->
+              <div class="bcp-block-note">
+                <div class="block-heading-red">
+                  <h2 class="block-title">Note sui formati dell'immagine</h2>
+                </div>
+                <div class="block-text block-text-no-background">
+                  <p><span class="highlight">Bassa densità:</span> formato Jpeg, dimensioni in pixel pari a un quarto di quelle originali</p>
+                  <p><span class="highlight">Media densità:</span> formato Jpeg, dimensioni in pixel pari alla metà di quelle originali</p>
+                  <p><span class="highlight">Alta densità:</span> formato Tiff, dimensioni in pixel pari a quelle originali</p>
+                </div>
+              </div>
+              <!-- bcp-block-note -->
+
+            </div>
+            <!-- block-my-pop-up-content -->
+
+          </div>
+         <!-- carrello static -->
+       </li>
+    </ul>
+  </div>
+  <!-- bcp-block-item-post-tool -->
+
+</article>

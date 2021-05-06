@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Routing>
+    <pnx:Route name="museoweb_ecommShowCart" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/showCart" action="index" />
+    <pnx:Route name="museoweb_ecommReport" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=report}" />
+    <pnx:Route name="museoweb_ecommError" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=error}" />
+    <pnx:Route name="museoweb_ecommConfirm" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=confirm}" />
+    <pnx:Route name="museoweb_ecommConfirmError" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=confirmError}" />
+    <pnx:Route name="museoweb_ecommOrders" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=orders}" />
+    <pnx:Route name="museoweb_ecommS2S" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=Server}" />
+</pnx:Routing>

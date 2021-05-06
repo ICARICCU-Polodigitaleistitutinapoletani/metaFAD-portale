@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:WebSite>
+    <pnx:Page pageType="Dashboard" id="Home" value="{i18n:Dashboard}"  adm:acl="a" adm:aclLabel="Accesso amministrazione">
+        <pnx:Page id="pinaxcms_ContentsEdit_alias" value="{i18n:Site Management}" icon="icon-file" select="pinaxcms_ContentsEdit" acl="*" adm:aclPageTypes="pinaxcms_ContentsEdit,pinaxcms_SiteProperty,pinaxcms_TemplateSelect,pinaxcms_Languages">
+            <pnx:Page pageType="pinaxcms.contents.views.ContentsEdit" id="pinaxcms_ContentsEdit" value="{i18n:Pages}" adm:acl="*" adm:aclLabel="Gestione pagine" />
+            <pnx:Page pageType="museoweb.siteProperties.views.SiteProperties" id="pinaxcms_SiteProperty" value="{i18n:MW_SM_SITE_PROPERTIES}" icon="icon-cog" adm:acl="*" />
+            <pnx:Page pageType="pinaxcms.template.views.TemplateSelect" id="pinaxcms_TemplateSelect" value="{i18n:Template}" adm:acl="*" />
+            <pnx:Page pageType="pinaxcms.languages.views.Admin" id="pinaxcms_Languages" value="{i18n:MW_SM_MULTILINGUALISM}" icon="icon-globe" adm:acl="*" />
+        </pnx:Page>
+
+        <pnx:Page id="pinaxcms_modules" value="{i18n:Moduli}" icon="icon-file" select="*" sortChild="true">
+            <pnx:modulesAdmin />
+        </pnx:Page>
+
+        <pnx:Page pageType="museoweb.mediaArchive.views.MediaArchive" id="MediaArchive" value="{i18n:MW_SM_MEDIA_ARCHIVE}" icon="icon-picture" adm:acl="a,m,n,c,v" />
+
+        <pnx:Page id="userManager_alias" value="{i18n:Utenti e gruppi}" select="userManager" icon="icon-user" adm:acl="*" adm:aclPageTypes="userManager,groupManager,roleManager">
+            <pnx:Page pageType="pinaxcms.userManager.views.UserManagerEdit" id="userManager" value="{i18n:Gestione utenti}" />
+            <pnx:Page pageType="pinaxcms.groupManager.views.GroupManagerEdit" id="groupManager" value="{i18n:Gestione gruppi}" />
+            <pnx:Page pageType="pinaxcms.roleManager.AdminPage" id="roleManager" value="{i18n:Gestione ruoli}" />
+        </pnx:Page>
+
+		<pnx:Page id="link-be" value="{i18n:Torna a metaFAD}" url="route:link-portale-be" icon="icon-external-link" />
+    </pnx:Page>
+
+    <pnx:Page pageType="Login" id="login" value="{i18n:Login}" />
+    <pnx:Page pageType="Logout" id="Logout" value="{i18n:Logout}" />
+    <pnx:Page pageType="pinaxcms.mediaArchive.views.MediaPicker" id="MediaArchive_picker" />
+    <pnx:Page pageType="pinaxcms.mediaArchive.views.MediaPicker" id="MediaArchive_pickerTiny" />
+    <pnx:Page pageType="pinaxcms.mediaArchive.views.MediaStorageBrowser" id="MediaStorageBrowser" />
+    <pnx:Page pageType="museoweb.modules.pico.views.PicoPicker" id="PicoThesaurus_picker" />
+</pnx:WebSite>

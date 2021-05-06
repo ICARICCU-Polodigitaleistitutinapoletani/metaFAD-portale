@@ -1,0 +1,31 @@
+<div class="mcp-module-results-tool margin-bottom clearfix padding-h-0">
+
+    <!-- module-column -->
+    <div class="module-column w-1-3 no-gutter bw-f">
+
+        <div class="bcp-count-results">
+            <span><span tal:omit-tag="" tal:content="php: Component['recordsCount']"/> elementi nella collezione</span>
+        </div>
+
+    </div>
+    <!-- module-column -->
+
+    <!-- module-column -->
+    <div class="module-column w-2-3 padding-left no-gutter bw-f last">
+
+        <!-- bcp-count-results -->
+        <div class="bcp-count-results hide-in-wm-xxl pull-right">
+            <div tal:condition="php: !empty(Component['pagesLinks'])" class="pagination">
+                <ul>
+                    <li tal:repeat="item Component/pagesLinks" tal:attributes="class item/__cssClass__"><a tal:attributes="href item/__url__"><span tal:omit-tag="" tal:content="structure item/value"/></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- bcp-count-results -->
+        <script>
+          $('.current').addClass('active');
+        </script>
+    </div>
+    <!-- module-column -->
+
+</div>

@@ -1,0 +1,5 @@
+<?php
+class museoweb_mediaArchive_controllers_mediaEdit_ajax_Cancel extends pinaxcms_mediaArchive_controllers_mediaEdit_ajax_Cancel
+{
+
+}

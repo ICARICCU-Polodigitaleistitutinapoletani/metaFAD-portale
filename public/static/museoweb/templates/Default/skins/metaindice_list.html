@@ -1,0 +1,195 @@
+<article class="block-item-post not-have-image bcp-block-item-post--result list clearfix" tal:repeat="item Component/records">
+
+	<div class="gcp-wrapper-figure pull-left" tal:condition="php: item.digitale_idpreview_s">
+		<figure class="gcp-wrapper-img gcp-bg-CCCCCC">
+			<span tal:condition="php: item.{'dominio_s'} == 'bibliografico'" tal:omit-tag=""><a tal:attributes="href php: (item.visibility_v) ? __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=sbn' : '#'"><img tal:attributes="src php: item.digitale_idpreview_s" alt="" /></a></span>
+			<span tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio'" tal:omit-tag=""><a tal:attributes="href php: (item.visibility_v) ? __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=iccd' : '#'"><img tal:attributes="src php: item.digitale_idpreview_s" alt="" /></a></span>
+			<span tal:condition="php: item.{'dominio_s'} == 'Archivi' || item.{'dominio_s'} == 'archivi'" tal:omit-tag=""><a tal:attributes="href php: (item.visibility_v) ? __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=archive' : '#'"><img tal:attributes="src php: item.digitale_idpreview_s" alt="" /></a></span>
+		</figure>
+	</div>
+
+	<p tal:condition="php: item.{'dominio_s'}">
+		<tal:block tal:content="php: strtolower(item.{'dominio_s'})"></tal:block>
+	</p>
+
+	<h1 class="block-title">
+		<span tal:condition="php: item.{'dominio_s'} == 'bibliografico'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('opac_detail', array('id'=> item.id )) : '#'" tal:content="php: item.{'denominazione_titolo_ss'}"></a></span>
+		<span tal:condition="php: item.{'dominio_s'} == 'bibliografico'" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('opac_detail', array('id'=> item.id )) : '#'">Senza titolo</a></span>
+		<span tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('iccd_detail', array('id'=> item.id )) : '#'" tal:content="php: item.{'denominazione_titolo_ss'}"></a></span>
+		<span tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio'" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('iccd_detail', array('id'=> item.id )) : '#'">Senza titolo</a></span>
+		<span tal:condition="php: item.{'dominio_s'} == 'Archivi' || item.{'dominio_s'} == 'archivi'" tal:omit-tag=""><a tal:condition="php: item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('archive_detail_ud', array('id'=> item.id )) : '#'" tal:content="php: item.{'denominazione_titolo_ss'}"></a></span>
+		<span tal:condition="php: item.{'dominio_s'} == 'Archivi' || item.{'dominio_s'} == 'archivi'" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('archive_detail_ud', array('id'=> item.id )) : '#'">Senza titolo</a></span>
+		<span tal:condition="php: !in_array(item.{'dominio_s'}, array('archivi','patrimonio','bibliografico'))" tal:omit-tag=""><a tal:condition="php: item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('generic_detail', array('id'=> item.id )) : '#'" tal:content="php: item.{'denominazione_titolo_ss'}"></a></span>
+		<span tal:condition="php: !in_array(item.{'dominio_s'}, array('archivi','patrimonio','bibliografico'))" tal:omit-tag=""><a tal:condition="php: !item.{'denominazione_titolo_ss'}" tal:attributes="href php: (item.visibility_d) ? __Link::makeUrl('generic_detail', array('id'=> item.id )) : '#'">Senza titolo</a></span>
+	</h1>
+
+	<p tal:condition="php: item.{'responsabilita_ss'} AND item.{'dominio_s'} !== 'bibliografico'" tal:content="php: item.{'responsabilita_ss'}"/>
+	<p tal:condition="php: item.{'responsabilita_ss'} AND item.{'dominio_s'} !== 'bibliografico'" tal:content="php: item.{'responsabilita'}"/>
+	<p tal:condition="php: item.{'Autore'} AND item.{'dominio_s'} == 'bibliografico'" tal:content="php: item.{'Autore'}"/>
+	<p tal:condition="php: item.{'complesso'}" tal:content="php: item.{'complesso'}"/>
+	<p tal:condition="php: item.{'fa_parte_di'}" tal:content="php: 'fa parte di: ' . item.{'fa_parte_di'}"/>
+	<p tal:condition="php: item.{'collezione'}" tal:content="php: 'collana: ' . item.{'collezione'}"/>
+
+	<!-- bcp-block-item-post-tool -->
+	<div class="bcp-block-item-post-tool padding-top content-align-right">
+		<ul>
+			<span tal:condition="php: item.{'dominio_s'} == 'bibliografico' AND item.visibility_d" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('opac_detail', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+			<span tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio' AND item.visibility_d" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('iccd_detail', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+			<span tal:condition="php: (item.{'dominio_s'} == 'Archivi' OR item.{'dominio_s'} == 'archivi') AND item.visibility_d" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('archive_detail_ud', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+			<span tal:condition="php: !in_array(item.{'dominio_s'}, array('archivi','patrimonio','bibliografico')) AND item.visibility_d" tal:omit-tag=""><li><a tal:attributes="href php: __Link::makeUrl('generic_detail', array('id'=> item.id ))"><span class="icon-filetexto"></span> Scheda</a></li></span>
+			<span tal:condition="php: item.{'dominio_s'} == 'bibliografico' AND item.visibility_v" tal:omit-tag=""><li tal:condition="php: item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=sbn'"><span class="icon-view2331"></span> Vedi</a></li></span>
+			<span tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio' AND item.visibility_v" tal:omit-tag=""><li tal:condition="php: item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=iccd'"><span class="icon-view2331"></span> Vedi</a></li></span>
+			<span tal:condition="php: (item.{'dominio_s'} == 'Archivi' OR item.{'dominio_s'} == 'archivi') AND item.visibility_v" tal:omit-tag=""><li tal:condition="php: item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=archive'"><span class="icon-view2331"></span> Vedi</a></li></span>
+			<li tal:condition="Component/hasSocial">
+				<a tal:attributes="href php: '#social'.item.id; data-popup-target php: '#social'.item.id"><span class="icon-share231"></span> Condividi</a>
+				<!-- block-my-pop-up -->
+				<div tal:attributes="id php: 'social'.item.id" style="width:230px;top:100%;" class="block-my-pop-up hide bcp-block-pop-up-share js-my-pop-up g-right">
+					<div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+					<!-- block-my-pop-up-content -->
+					<div class="block-my-pop-up-content clearfix">
+
+						<!-- block-form -->
+						<article class="block-form">
+
+							<!-- block-social-network -->
+							<div class="block-social-network">
+								<ul>
+									<li><a tal:attributes="href php: 'mailto:?subject=Visita questo sito&amp;body=Visita questo sito'.__Link::makeUrl('opac_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-at"></i></span></a></li>
+									<li><a tal:attributes="href php: 'https://www.facebook.com/sharer/sharer.php?u='.__Link::makeUrl('opac_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-facebookf"></i></span></a></li>
+									<li><a tal:attributes="href php: 'https://twitter.com/home?status='.__Link::makeUrl('opac_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-twitter"></i></span></a></li>
+									<li><a tal:attributes="href php: 'https://plus.google.com/share?url='.__Link::makeUrl('opac_detail', array('id'=> item.id ))"><span class="wrapper-icon social"><i class="icon-googleplus"></i></span></a></li>
+								</ul>
+							</div>
+							<!-- block-social-network -->
+
+						</article>
+						<!-- block-form -->
+
+					</div>
+					<!-- block-my-pop-up-content -->
+
+				</div>
+				<!-- block-my-pop-up -->
+			</li>
+			<li tal:condition="php: item.Ecommerce.sintetic">
+				<a tal:attributes="href php: '#p' . item.id; data-popup-target php: '#p' . item.id" ><span class="icon-shoppingcart1231"></span> Carrello</a>
+				<!-- carrello static -->
+				<div tal:condition="php: item.Ecommerce.sintetic AND item.digitale_idpreview_s" tal:attributes="id php: 'p' . item.id" style="width:660px;top:100%;" class="block-my-pop-up hide bcp-block-pop-up-cart js-my-pop-up hidden g-right js-popup-carrello">
+					<div class="arrow-top g-right" style="margin-right:20px;"></div>
+
+					<!-- block-my-pop-up-content -->
+					<div class="block-my-pop-up-content clearfix">
+
+						<a tal:attributes="data-popup-target-close php: '#social'.item.id" class="gcp-btn-close-pop-up js-close-my-pop-up"><i class="icon-remove2231 g-right g-top margin-top margin-right"></i></a>
+						<h2 class="block-sub-title not-have-title">Scegli il tipo di licenza e il formato immagine</h2>
+
+						<!-- block-item-post -->
+						<article class="block-item-post padding-top bcp-block-item-post--result list clearfix">
+
+							<div class="gcp-wrapper-figure pull-left">
+
+								<figure class="gcp-wrapper-img gcp-bg-CCCCCC">
+									<a href="#"><img tal:attributes="src php: item.digitale_idpreview_s" alt="" /></a>
+								</figure>
+
+							</div>
+
+							<h1 class="block-sub-title not-have-title">
+								<span tal:omit-tag=""><span tal:condition="php: item.{'denominazione_titolo_ss'}" tal:content="php: item.{'denominazione_titolo_ss'}"/></span>
+								<span tal:omit-tag=""><span tal:condition="php: !item.{'denominazione_titolo_ss'}">Senza titolo</span></span>
+							</h1>
+
+							<p tal:condition="php: item.{'responsabilita'}" tal:content="php: item.{'responsabilita'}"/>
+
+							<p tal:condition="php: item.{'complessoDAppartenenza'}" tal:content="php: item.{'complessoDAppartenenza'}"/>
+
+						</article>
+						<!-- block-item-post -->
+
+						<!-- block-form -->
+						<div class="block-form">
+							<form>
+								<input type="hidden" name="addToCart" value="true"/>
+								<input type="hidden" name="id" tal:attributes="value php: item.id"/>
+								<input type="hidden" name="takeAll" value="true"/>
+								<input type="hidden" name="recordDetailUrl" tal:condition="php: item.{'dominio_s'} == 'bibliografico'" tal:attributes="value php: __Link::makeUrl('opac_detail', array('id'=> item.id ))" />
+								<input type="hidden" name="recordDetailUrl" tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio'" tal:attributes="value php: __Link::makeUrl('iccd_detail', array('id'=> item.id ))" />
+								<input type="hidden" name="recordDetailUrl" tal:condition="php: item.{'dominio_s'} == 'Archivi' || item.{'dominio_s'} == 'archivi'" tal:attributes="value php: __Link::makeUrl('archive_detail_ud', array('id'=> item.id ))" />
+								<input type="hidden" name="image" tal:attributes="value php: item.digitale_idpreview_s"/>
+								<input type="hidden" name="buyAll" value="true"/>
+								<input type="hidden" name="imagesNumber" tal:attributes="value php: item.Ecommerce.imagesCount" />
+								<input type="hidden" name="fromUrl" tal:attributes="value php: __Link::addParams()"/>
+								<!-- table -->
+								<div class="Rtable bcp-Rtable-cart Rtable--collapse Rtable--5cols">
+
+									<!-- bcp-block-note -->
+									<div class="bcp-block-note container">
+										<div class="row">
+											<p class="cartMessage">
+												<span tal:condition="php: item.{'dominio_s'} == 'bibliografico' AND item.visibility_v">Clicca <li tal:omit-tag="" tal:condition="php: item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=sbn'">qui</a></li></span>
+												<span tal:condition="php: strtolower(item.{'dominio_s'}) == 'patrimonio' AND item.visibility_v">Clicca <li tal:omit-tag="" tal:condition="php: item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=iccd'">qui</a></li></span>
+												<span tal:condition="php: (item.{'dominio_s'} == 'Archivi' || item.{'dominio_s'} == 'archivi') AND item.visibility_v">Clicca <li tal:omit-tag="" tal:condition="php: item.digitale_idpreview_s"><a tal:attributes="href php: __Link::makeUrl('link', array('pageId'=> 'Viewer' )) . '#/main/viewer?idMetadato=' . item.id . '&type=archive'">qui</a></li></span>
+												<span tal:condition="php: item.visibility_v" tal:content="php: __T('cartMessage')" tal:omit-tag=""/>
+												<span><b>Questo record contiene <span tal:omit-tag="" tal:content="php: item.Ecommerce.imagesCount"/> media associato/i</b>. Il prezzo fa riferimento al costo per ogni singola immagine.</span>
+											</p>
+										</div>
+										<div class="block-heading">
+											<h2 class="block-title">Licenze disponibili</h2>
+										</div>
+										<div class="block-text">
+											<span tal:omit-tag="" tal:condition="php: item.Ecommerce.sintetic">
+												<div tal:repeat="sintetic item/Ecommerce/sintetic" class="row">
+													<div class="col-md-10 col-sm-10 col-xs-8">
+														<h3 tal:content="php: sintetic.title"/>
+														<p tal:content="php: sintetic.description"/>
+													</div>
+													<div class="col-md-2 col-sm-2 col-xs-4">
+														<label>
+															<span tal:content="php: sintetic.price . '€' "/>
+															<input type="radio" name="license" tal:attributes="value php: sintetic.id; class php: 'js-radio-cart'; data-itemid php: item.id"/>
+														</label>
+													</div>
+												</div>
+											</span>
+										</div>
+									</div>
+									<!-- bcp-block-note -->
+
+								</div>
+								<!-- table -->
+
+								<div class="block-wrapper-button btn-758682 content-align-center gutter-bottom-large">
+									<input type="reset" class="btn-reset btn-758682 js-resetCart" tal:attributes="data-itemid php: item.id" value="Annulla" />
+									<input type="submit" class="btn-758682" tal:attributes="id php: 'js-addToCart-' . item.id" value="Aggiungi al carrello" />
+									<input type="submit" class="btn-758682" value="Acquista" />
+								</div>
+
+							</form>
+						</div>
+						<!-- block-form -->
+
+						<!-- bcp-block-note -->
+						<div class="bcp-block-note">
+							<div class="block-heading-red">
+								<h2 class="block-title">Note sui formati dell'immagine</h2>
+							</div>
+							<div class="block-text block-text-no-background">
+								<p><span class="highlight">Bassa densità:</span> formato Jpeg, dimensioni in pixel pari a un quarto di quelle originali</p>
+								<p><span class="highlight">Media densità:</span> formato Jpeg, dimensioni in pixel pari alla metà di quelle originali</p>
+								<p><span class="highlight">Alta densità:</span> formato Tiff, dimensioni in pixel pari a quelle originali</p>
+							</div>
+						</div>
+						<!-- bcp-block-note -->
+
+					</div>
+					<!-- block-my-pop-up-content -->
+
+				</div>
+				<!-- carrello static -->
+			</li>
+		</ul>
+	</div>
+	<!-- bcp-block-item-post-tool -->
+</article>
+<tal:block metal:use-macro="_macro_requestPopup.html/requestPopup" />

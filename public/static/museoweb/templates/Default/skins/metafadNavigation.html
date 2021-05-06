@@ -1,0 +1,10 @@
+<div class="u-sizeFull" id="subnav">
+    <ul class="Linklist Linklist--padded u-layout-prose u-text-r-xs">
+        <li tal:condition="php: Component['menu']" tal:repeat="item Component/menu">
+            <a tal:attributes="class php: 'Linklist-link ' . (item['active'] ? 'Linklist-link--lev1' : 'Linklist-link--lev2'); href php: item['url']">
+                 <span tal:omit-tag="" tal:content="item/text"></span>
+                 <span class="icon-angle-right"></span>
+               </a>
+        </li>
+    </ul>
+</div>

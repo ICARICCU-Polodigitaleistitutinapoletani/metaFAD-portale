@@ -1,0 +1,64 @@
+
+    <!-- block-form -->
+        <form method="get" class="Form" tal:attributes="action php: __Link::makeUrl(__Config::get('solr.defaultSearch'))">
+			<div class="Form-field Form-field--withPlaceholder Grid u-background-white u-color-grey-30 u-borderRadius-s" role="search">
+		    <input name="search" class="Form-input Form-input--ultraLean Grid-cell u-sizeFill u-text-r-s u-color-black u-text-r-xs u-borderRadius-s" id="cerca" tal:attributes="value php: (__Request::get('search') !== '*' AND __Request::get('search') !== '**') ? __Request::get('search') : '' " />
+		    <label class="Form-label u-color-grey-50 u-text-r-xxs" for="cerca">cerca nel sito</label>
+		    <button class="Grid-cell u-sizeFit Icon-search Icon--rotated u-color-grey-50 u-padding-all-s u-textWeight-700" title="Avvia la ricerca" aria-label="Avvia la ricerca">
+		  </button>
+		  </div>
+            <!-- block-row-field -->
+            <div tal:condition="php: __Config::get('metafad.fe.search.hasMultiSearch')" class="block-row-field clearfix">
+
+                <!-- block-field -->
+                <div class="block-field w-4-4 bw-f last no-gutter">
+
+                    <!-- bcp-block-checkbox -->
+                    <div class="bcp-block-dropdown u-background-90">
+
+                        <a class="js-show-element js-catalogues bcp-block-dropdown-btn">Tutti i cataloghi</a>
+
+                        <!-- bcp-block-dropdown-content -->
+                        <div class="js-collapse-box u-background-90 bcp-block-dropdown-content clearfix bcp-block-dropdown-content--catalogue hidden">
+
+                            <!-- bcp-block-search-feature -->
+                            <div class="bw-f w-4-4 u-background-90 last bcp-block-search-feature">
+                                <ul>
+									<li><input class="allcatalogues" type="checkbox" name="metaindice" value="true" /> <a tal:attributes="href php: __Link::makeUrl('solr_advancedSearch',array('action'=>'metaindice')) .'?mask=Ricerca semplice';" class="gcp-btn-controller-child">metaindice</a></li>
+                                    <li><input class="allcatalogues" type="checkbox" name="archivistico" value="true" /> <a tal:attributes="href php: __Link::makeUrl('solr_advancedSearch',array('action'=>'archive')) .'?mask=Ricerca avanzata CA';" class="gcp-btn-controller-child">archivistico</a></li>
+                                    <li><input class="allcatalogues" type="checkbox" name="patrimonio" value="true" /> <a tal:attributes="href php: __Link::makeUrl('solr_advancedSearch',array('action'=>'iccd')) .'?mask=Ricerca semplice';" class="gcp-btn-controller-child">storico-artistico</a></li>
+                                    <li><input class="allcatalogues" type="checkbox" name="bibliografico" value="true" /> <a tal:attributes="href php: __Link::makeUrl('solr_advancedSearch',array('action'=>'index')) .'?mask=Ricerca semplice';" class="gcp-btn-controller-child">bibliografico</a></li>
+                                </ul>
+                            </div>
+                            <!-- bcp-block-search-feature -->
+
+                        </div>
+                        <!-- bcp-block-dropdown-content -->
+
+                    </div>
+                    <!-- bcp-block-checkbox -->
+
+                </div>
+                <!-- block-field -->
+
+            </div>
+            <!-- block-row-field -->
+
+        </form>
+    <!-- block-form -->
+
+<script>
+  $(document).ready(function(){
+    $('.allcatalogues').on('click',function(){
+      $('.allcatalogues').removeAttr('checked');
+	  $(this).attr('checked','checked');
+    });
+
+    $('.js-catalogues').on('click',function(){
+      if($('.js-authorities').hasClass('active'))
+      {
+        $('.js-authorities').click();
+      }
+    })
+  });
+</script>

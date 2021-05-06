@@ -1,0 +1,27 @@
+  <!-- bcp-block-widget-result -->
+  <div class="bcp-block-widget-result gutter-top-large">
+    <div class="roles">
+      <div class="roles-go">Vedi record collegati</div>
+      <select id="bselect-roles" class="bselect">
+        <option value="">Selezionare un ruolo</option>
+        <span tal:omit-tag="" tal:repeat="item Component/list">
+          <span tal:content="item/name" />
+          <option tal:condition="php: item['name'] !== '' " tal:attributes="value item/value" tal:content="item/name" />
+          <option tal:condition="php: item['name'] == '' " class="hide" id="allRoles" tal:attributes="value item/value" />
+        </span>
+      </select>
+    </div>
+  </div>
+  <!-- bcp-block-widget-result -->
+<script>
+  $('.roles-go').on('click',function(){
+    if($('#bselect-roles').val() != '')
+    {
+      window.location.href = $('#bselect-roles').val();
+    }
+    else
+    {
+      window.location.href = $('#allRoles').val();
+    }
+  });
+</script>

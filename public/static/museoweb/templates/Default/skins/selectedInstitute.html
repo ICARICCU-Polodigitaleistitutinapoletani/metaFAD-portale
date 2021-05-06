@@ -1,0 +1,18 @@
+<div class="title-institute-section content clearfix">
+  <div class="module-column mcp-module-header-sx bw-f w-1-3 no-gutter title-institute-position">
+    <div tal:condition="Component/image" class="module-column mcp-module-header-sx bw-f institute-image-container">
+      <a tal:attributes="href php: __Link::makeUrl('link',array('pageId'=>1))">
+        <img class="institute-image" tal:attributes="src Component/image" />
+      </a>
+    </div>
+    <div class="module-column mcp-module-header-sx bw-f institute-name-container">
+      <div class="bcp-block-header-page-title padding-left">
+        <a class="institute_link" tal:attributes="href php: __Link::makeUrl('link',array('pageId'=>1))">
+          <h1 class="block-title gcp-text-weight-100 ten-padding" tal:content="Component/name"></h1>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="module-column mcp-module-header-sx bw-f w-2-3 no-gutter">
+  </div>
+</div>

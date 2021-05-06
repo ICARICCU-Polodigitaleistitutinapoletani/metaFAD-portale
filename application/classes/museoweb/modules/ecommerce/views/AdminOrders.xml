@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:cms="pinaxcms.views.components.*"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:ec="museoweb.modules.ecommerce.views.components.admin.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <pnx:Import src="_common.xml" />
+
+    <mvc:State name="index">
+       <pnx:DataGridAjax id="dataGrid" recordClassName="museoweb.modules.ecommerce.models.Order" query="completed" cssClass="table table-bordered table-striped">
+            <pnx:DataGridColumn columnName="order_code" headerText="{i18n:Codice}" />
+            <pnx:DataGridColumn columnName="order_date" headerText="{i18n:Data}" />
+            <pnx:DataGridColumn columnName="user_lastName" headerText="{i18n:Utente}" renderCell="museoweb.modules.ecommerce.views.renderers.CellUser" />
+            <pnx:DataGridColumn columnName="order_id" sortable="false" searchable="false" cssClass="actions" renderCell="museoweb.modules.ecommerce.views.renderers.CellShow" />
+        </pnx:DataGridAjax>
+    </mvc:State>
+
+    <mvc:State name="show">
+        <ec:OrderDetail />
+    </mvc:State>
+</mvc:Page>

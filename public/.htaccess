@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(ajax\.php|feed\.php|public/|cache/|favicon\.ico|oaipmh/) - [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^dam/(.*)$ rest.php?$1 [QSA,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^rest/(.*)$ rest.php?$1 [QSA,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+

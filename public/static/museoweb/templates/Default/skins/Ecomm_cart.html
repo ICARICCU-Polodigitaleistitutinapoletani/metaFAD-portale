@@ -1,0 +1,58 @@
+  <section class="module-list-archive">
+    <span tal:omit-tag="" tal:condition="php: count(Component['records'])">
+      <article tal:repeat="item Component/records" class="block-item-post bcp-block-item-post-in-cart clearfix list">
+        <!-- block-text -->
+        <div class="block-text">
+
+          <div class="gcp-wrapper-figure pull-left">
+
+            <figure class="gcp-wrapper-img with-frame gcp-bg-FFF0C4">
+              <a href="#"><img tal:attributes="src item/image" alt="Anteprima" /></a>
+            </figure>
+
+          </div>
+
+          <h1 class="block-title"><a target="_blank" tal:attributes="href item/detailUrl; title item/title" tal:content="structure item/title"></a></h1>
+
+        </div>
+        <!-- block-text -->
+        <div class="bcp-block-item-post-in-cart-tool">
+
+          <!-- block-license-note -->
+          <div class="block-license-note">
+            <h3 class="block-title">Licenza</h3>
+            <div class="block-wrapper-license">
+              <p tal:content="structure item/licence_name" />
+              <p tal:content="structure item/licence_use" />
+            </div>
+          </div>
+          <!-- block-license-note -->
+
+          <!-- block-wrapper-price -->
+          <div class="block-wrapper-price clearfix">
+            <span class="block-info">Prezzo: EUR <span tal:omit-tag="" tal:content="structure item/licence_price"></span> (<span tal:omit-tag="" tal:content="item/imagesNumber"/> immagine/i)</span>
+            <a class="delete btn-link-delete" tal:condition="php: !Component['isReport']" tal:attributes="href item/__url__; title php: __T('Cancella')"><i class="icon-bin"></i></a>
+          </div>
+          <!-- block-wrapper-price -->
+
+        </div>
+        <!-- bcp-block-item-post-in-cart-tool -->
+
+      </article>
+    </span>
+  </section>
+  <div class="mcp-total-cart">
+
+    <!-- block-wrapper-total -->
+    <div tal:condition="php: count(Component['records'])" class="block-wrapper-total clearfix">
+      <span class="block-info">Prezzo: EUR <span tal:omit-tag="" tal:content="Component/total" /></span>
+    </div>
+
+    <div tal:condition="php: ! count(Component['records'])" class="block-wrapper-total clearfix">
+      <span class="block-info">Il carrello è vuoto</span>
+    </div>
+    <!-- block-wrapper-total -->
+
+  </div>
+
+  <!-- module-wrapper-button -->

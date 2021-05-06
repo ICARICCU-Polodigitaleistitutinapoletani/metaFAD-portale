@@ -1,0 +1,57 @@
+<!-- bcp-block-login -->
+<span tal:omit-tag="" tal:condition="php: !__Session::get('pinax.userLogged')">
+  <div class="bcp-block-login">
+
+    <h2 class="block-title">Login</h2>
+
+    <!-- block-form -->
+    <div class="block-form bcp-block-form--login clearfix">
+
+      <form method="post" action="">
+
+        <!-- block-row-field -->
+        <div class="block-row-field block-width width_4_4">
+
+          <div class="block-width width_4_4">
+            <p><input type="text" required="required" placeholder="Inserisci email o nome utente" name="username" /></p>
+          </div>
+
+          <div class="block-width last width_4_4">
+            <p><input type="password" required="required"  placeholder="Inserisci la password" name="password" /></p>
+            <p><input type="checkbox" name="" value="" /> <label class="text-field--small">Resta collegato</label></p>
+          </div>
+
+          <div id="js-error-login" class="lh login-error width_4_4 block-width" tal:content="structure Component/errorLabel"/>
+        </div>
+        <!-- block-row-field -->
+
+        <!-- block-wrapper-button -->
+        <div class="block-wrapper-button content-align-center block-width clearfix width_4_4">
+
+          <input type="submit" class="button btn-ct10" name="go" value="Entra" />
+
+          <div class="block-info">
+            <span><a tal:attributes="href php: __Link::makeUrl('lostPassword')">Hai dimenticato la password?</a></span>
+          </div>
+
+        </div>
+        <!-- block-wrapper-button -->
+
+      </form>
+
+    </div>
+    <!-- block-form -->
+
+  </div>
+  <!-- bcp-block-login -->
+
+  <!-- bcp-block-new-user -->
+  <div class="bcp-block-new-user clearfix">
+
+    <h2 class="block-title">Nuovo utente?</h2>
+
+    <p class="content-align-center"><a tal:attributes="href php: __Link::makeUrl('link',array('pageId'=>'Registration'))" class="btn-link btn-ct10">Iscriviti</a></p>
+
+  </div>
+  <!-- bcp-block-new-user -->
+</span>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:pnx="http://www.pinax.org/dtd/1.0/"
+    xmlns:mvc="pinax.mvc.components.*"
+    xmlns:ec="museoweb.modules.ecommerce.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="page_right_filter.php"
+    controllerName="museoweb.modules.ecommerce.controllers.*"
+    >
+  	<pnx:Import src="Common.xml" />
+
+<!-- todo: localizzare -->
+	<mvc:State name="index">
+    <pnx:Panel cssClass="module-column padding-top">
+      <ec:Cart id="cart" title="{i18n:Il mio carrello}" skin="Ecomm_cart.html" controllerName="museoweb.modules.ecommerce.controllers.DeleteCart" />
+  		<pnx:Panel id="panelButtons" cssClass="formButtons module-wrapper-button content-align-center padding-top">
+          <!-- <a href="" class="btn-link btn-ct8">Continua a fare acquisti</a> -->
+        <pnx:HtmlButton cssClass="btn-link btn-ct8 submitButton" label="{i18n:Continua a fare acquisti}" routeUrl="solr_search_metaindice" />
+  			<pnx:HtmlButton cssClass="btn-link btn-ct8 submitButton" label="{i18n:Vai alla cassa}" routeUrl="museoweb_ecommReport" />
+  		</pnx:Panel>
+    </pnx:Panel>
+    
+	</mvc:State>
+
+	<mvc:State name="report">
+    <pnx:Panel cssClass="payment-form">
+		<ec:Cart id="cart" title="{i18n:Il mio carrello}" isReport="true" skin="Ecomm_cart.html" />
+  </pnx:Panel>
+        <pnx:MessageBox type="ERROR" cssClass="message error" message="{i18n:Controllare i seguenti errori:}" />
+        <pnx:Form id="registration" cssClass="module-main-search--opac payment-form">
+            <pnx:LongText adm:htmlEditor="true"><![CDATA[
+                <h2 class="block-title-smaller">Dati utente</h2>
+            ]]></pnx:LongText>
+            <pnx:Input id="email" cssClassLabel="" label="{i18n:MW_USER_EMAIL}" size="50" readOnly="true" />
+            <pnx:Input id="name" cssClassLabel="" label="{i18n:MW_USER_NAME}" size="50" required="true" validationType="not_empty" />
+            <pnx:Input id="surname" cssClassLabel="" label="{i18n:MW_USER_SURNAME}" size="50" required="true" validationType="not_empty" />
+            <pnx:Input id="address" cssClassLabel="" label="{i18n:MW_USER_ADDRESS}" size="50" required="true" validationType="not_empty" />
+            <pnx:Input id="city" cssClassLabel="" label="{i18n:MW_USER_CITY}" size="50" required="true" validationType="not_empty" />
+            <pnx:Input id="userstate" cssClassLabel="" label="{i18n:MW_USER_STATE}" size="10" required="true" validationType="not_empty" minLength="2" />
+            <pnx:Input id="zip" cssClassLabel="" label="{i18n:MW_USER_ZIP}" size="10" required="true" validationType="not_empty" minLength="5" maxLength="5" />
+            <pnx:Input id="country" cssClassLabel="" label="{i18n:MW_USER_COUNTRY}" size="50" required="true" validationType="not_empty" />
+            <pnx:Input id="vat" cssClassLabel="" label="{i18n:Partita Iva}"  size="50" />
+            <pnx:Input id="fiscalCode" cssClassLabel="" label="{i18n:Codice Fiscale}"  size="50" required="true" />
+            <pnx:Panel cssClass="formButtons" >
+                <pnx:HtmlButton label="{i18n:Vai al pagamento}" value="submit" name="submit" cssClass="submitButton" />
+            </pnx:Panel>
+        </pnx:Form>
+	</mvc:State>
+
+    <mvc:State name="login">
+        <pnx:Modifier target="pagetitle" attribute="value" value="{i18n:Login}" reprocess="true" />
+        <pnx:LongText adm:htmlEditor="true"><![CDATA[
+            <p>Per proseguire con l'acquisto è necessario effettuare l'accesso.</p>
+        ]]></pnx:LongText>
+        <pnx:LoginBox id="formLoginPage" title="{i18n:MW_LOGIN_TITLE}" cssClass="sidebox_first"
+                    userField="username" passwordField="password" editableRegion="filters"
+                    userLabel="{i18n:MW_LOGIN_USER}" passwordLabel="{i18n:MW_LOGIN_PSW}"
+                    registrationLabel="{i18n:MW_LOGIN_REGISTER}" registrationUrl="Registration"
+                    confirmLabel="{i18n:MW_LOGIN_CONFIRM}" errorLabel="{i18n:MW_LOGIN_ERROR}"
+                    rememberLabel="{i18n:MW_LOGIN_REMEMBER}" askPasswordLabel="{i18n:MW_LOGIN_ASK_PASSWORD}" askPasswordUrl="lostpassword"
+                    skin="LoginCart.html" />
+    </mvc:State>
+
+    <mvc:State name="orders">
+        <pnx:Modifier target="pagetitle" attribute="value" value="{i18n:I miei acquisti}" reprocess="true" />
+        <ec:Orders id="orders" skin="Ecomm_orders.html" controllerName="museoweb.modules.ecommerce.controllers.Download" />
+    </mvc:State>
+
+    <mvc:State name="confirm">
+      <pnx:Panel cssClass="checkout-message">
+        <pnx:LongText adm:htmlEditor="true"><![CDATA[
+<p>L'ordine &egrave; stato inviato correttamente. Sarete contattati via e-mail da un operatore per procedere con il pagamento ed il download degli acquisti.</p>
+        ]]></pnx:LongText>
+      </pnx:Panel>
+    </mvc:State>
+    <mvc:State name="confirmError">
+      <pnx:Panel cssClass="checkout-message">
+        <pnx:LongText adm:htmlEditor="true"><![CDATA[
+<p>La transazione non &egrave; stata accettata dalla banca.</p><p>Per qualsiasi dubbio pu&ograve; scrivere ad <a href="{{config:SMTP_EMAIL}}">{{config:SMTP_EMAIL}}</a>.</p>
+        ]]></pnx:LongText>
+      </pnx:Panel>
+    </mvc:State>
+</mvc:Page>

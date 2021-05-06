@@ -1,0 +1,32 @@
+<div id="requestItem">
+  <h4>Per inoltrare la richiesta relativa al documento selezionato clicca su "Prosegui"</h4>
+  <div id="requestInfo" class="block-item-post not-have-image bcp-block-item-post--result list clearfix bcp-block-item-post--result">
+    <div tal:condition="Component/image" class="gcp-wrapper-figure pull-left">
+      <figure class="gcp-wrapper-img gcp-bg-CCCCCC">
+        <a href="#"><img alt="Immagine anteprima" tal:attributes="src Component/image" /></a>
+      </figure>
+    </div>
+    <div><span tal:omit-tag="" tal:content="structure Component/info" /></div>
+  </div>
+  <div class="buttonRequest block-item-post not-have-image list clearfix">
+    <form id="setRequestForm" method="POST" tal:attributes="action php: __Link::makeUrl('request', array('action' => 'set','type' => Component.type, 'id' => Component.id ))">
+      <div class="row select-institute">
+        <div class="col-md-2 col-lg-2">
+          <label for="username" class="required">Istituto</label>
+        </div>
+        <div class="col-md-10 col-lg-10">
+          <div class="block-field bselect-show-input-search">
+            <p>
+              <select id="bselect-instituteKey" name="instituteKey" class="bselect">
+                <option tal:repeat="item Component/institutes" tal:attributes="value item/key" tal:content="item/value" />
+              </select>
+            </p>
+          </div>
+        </div>
+      </div>
+      <textarea name="description" class="requestText" rows="4" maxlength="500"/>
+      <p style="font-size:10px;margin-bottom:10px;">N.B: Se lo desideri puoi aggiungere una descrizione o domande relativamente alla tua richiesta nel box qui sopra (max 500 caratteri).</p>
+      <input type="submit" class="button btn-ct10" name="go" value="Prosegui" />
+    </form>
+  </div>
+</div>

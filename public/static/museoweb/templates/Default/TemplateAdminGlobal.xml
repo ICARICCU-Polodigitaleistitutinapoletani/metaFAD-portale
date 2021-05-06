@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:EmptyComponent
+    xmlns:t="pinaxcms.template.views.components.*">
+
+    <pnx:Fieldset label="{i18n:Testata}">
+        <pnx:Image id="headerLogo" label="{i18n:Logo}" required="true" />
+    </pnx:Fieldset>
+
+    <pnx:Fieldset id="footer" label="{i18n:Footer}" data="type=repeat">
+        <pnx:Image id="footerLogo" label="{i18n:Logo aggiuntivo}" />
+        <pnx:Input id="footerLogoLink" label="{i18n:Link logo}" />
+        <pnx:Input id="footerLogoTitle" label="{i18n:Titolo logo}" />
+    </pnx:Fieldset>
+
+</pnx:EmptyComponent>

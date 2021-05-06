@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pnx:Config xmlns:pnx="http://www.pinax.org/dtd/1.0/">
+    <pnx:Import src="config_common.xml" />
+    <pnx:Param name="DEBUG" value="true" />
+</pnx:Config>

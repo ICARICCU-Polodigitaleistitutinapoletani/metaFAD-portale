@@ -1,0 +1,96 @@
+<!-- module-column -->
+<div tal:attributes="class php: Component['selected'] ? 'module-column mcp-module-column-aside-search gutter-top-large w-all-wm-xxl  no-gutter bw-f w-1-3' : 'module-column mcp-module-column-aside-search w-all-wm-xxl  no-gutter bw-f w-1-3' ">
+
+  <!-- bcp-block-widget-result -->
+  <div class="bcp-block-widget-result" tal:condition="php: Component['selected']">
+
+    <h3 class="block-title u-background-95 u-color-white u-padding-left-s u-padding-top-s u-padding-bottom-s u-padding-right-s">Mostra i risultati per:</h3>
+
+    <!-- block-content -->
+    <div class="block-content" tal:condition="php: Component['selected']">
+      <ul class="bcp-block-result-list">
+        <li tal:repeat="item Component/selected">
+          <a class="gcp-btn-remove" tal:attributes="href item/link"><span class="icon-remove2231"></span></a>
+          <span class="bcp-field-name" tal:content="structure item/fieldName"/>: <span class="bcp-field-value" tal:content="item/label"></span>
+        </li>
+      </ul>
+    </div>
+    <!-- block-content -->
+
+  </div>
+  <!-- bcp-block-widget-result -->
+
+  <!-- bcp-block-widget-result -->
+  <div tal:attributes="class php: (repeat.item.key == 0) ? 'bcp-block-widget-result gutter-top-large' : 'bcp-block-widget-result'" tal:repeat="item Component/facetLabel">
+
+    <h3 tal:condition="php: repeat.item.key == 0" class="block-title u-background-95 u-color-white u-padding-left-s u-padding-top-s u-padding-bottom-s u-padding-right-s">Raffina la ricerca</h3>
+
+    <!-- block-content -->
+    <div class="block-content">
+
+      <!-- bcp-block-group-item-list -->
+      <span tal:omit-tag="" tal:condition="php: item['title'] != 'Area digitale'">
+        <div class="bcp-block-group-item-list margin-top" tal:condition="php: count(Component['facet'][item['id']])">
+
+          <h4 class="block-title" tal:content="structure item/title" />
+
+          <ul>
+            <span tal:omit-tag="" tal:repeat="item2 php:Component['facet'][item['id']]">
+              <li tal:condition="php: repeat.item2.key < 4">
+                <span tal:omit-tag="" tal:content="structure item2/link"/>
+                <span class="bcp-item-count" tal:condition="php: repeat.item2.key < 4" tal:content="structure item2/count" />
+              </li>
+            </span>
+          </ul>
+
+          <a tal:condition="php: count(Component['facet'][item['id']]) >= 5" class="js-show-element btn-show-hide"><span class="icon-plussquare"></span> <span class="js-showHide-message" style="color: #000;">Nascondi</span> <span class="js-showHide-message" style="color: #000;">Mostra altri </span>(<span tal:content="php: count(Component['facet'][item['id']]) - 4" />)</a>
+
+          <ul class="js-collapse-box hidden">
+            <span tal:omit-tag="" tal:repeat="item2 php:Component['facet'][item['id']]">
+              <li tal:condition="php: repeat.item2.key >= 4">
+                <span tal:content="structure item2/link" />
+                <span class="bcp-item-count" tal:condition="php: repeat.item2.key >= 4" tal:content="structure item2/count" />
+              </li>
+            </span>
+          </ul>
+
+        </div>
+      </span>
+
+      <span tal:omit-tag="" tal:condition="php: item['title'] == 'Area digitale' AND Component['digitalSelected']">
+        <div class="bcp-block-group-item-list margin-top" tal:condition="php: count(Component['facet'][item['id']])">
+
+          <h4 class="block-title" tal:content="structure item/title" />
+
+          <ul>
+            <span tal:omit-tag="" tal:repeat="item2 php:Component['facet'][item['id']]">
+              <li tal:condition="php: repeat.item2.key < 4">
+                <span tal:omit-tag="" tal:content="structure item2/link"/>
+                <span class="bcp-item-count" tal:condition="php: repeat.item2.key < 4" tal:content="structure item2/count" />
+              </li>
+            </span>
+          </ul>
+
+          <a tal:condition="php: count(Component['facet'][item['id']]) >= 5" class="js-show-element btn-show-hide"><span class="icon-plussquare"></span> <span class="js-showHide-message" style="color: #000;">Nascondi</span> <span class="js-showHide-message" style="color: #000;">Mostra altri </span>(<span tal:content="php: count(Component['facet'][item['id']]) - 4" />)</a>
+
+          <ul class="js-collapse-box hidden">
+            <span tal:omit-tag="" tal:repeat="item2 php:Component['facet'][item['id']]">
+              <li tal:condition="php: repeat.item2.key >= 4">
+                <span tal:content="structure item2/link" />
+                <span class="bcp-item-count" tal:condition="php: repeat.item2.key >= 4" tal:content="structure item2/count" />
+              </li>
+            </span>
+          </ul>
+
+        </div>
+      </span>
+      <!-- bcp-block-group-item-list -->
+
+    </div>
+    <!-- block-content -->
+
+  </div>
+  <!-- bcp-block-widget-result -->
+
+</div>
+<!-- module-column -->

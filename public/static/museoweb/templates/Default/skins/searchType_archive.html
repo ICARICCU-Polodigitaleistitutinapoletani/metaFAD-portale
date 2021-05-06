@@ -1,0 +1,48 @@
+<div class="module-column mcp-module-column-aside-search padding-top w-all-wm-xxl  no-gutter bw-f w-1-3">
+
+  <!-- bcp-block-widget-result -->
+  <div class="bcp-block-widget-result ">
+
+    <h3 class="block-title u-background-95 u-color-white u-padding-left-s u-padding-top-s u-padding-bottom-s u-padding-right-s">Ricerche</h3>
+
+    <!-- block-content -->
+    <div class="block-content">
+
+      <!-- bcp-block-group-item-list -->
+      <div class="bcp-block-group-item-list bcp-block-group-item-list--search">
+        <ul>
+          <li><a tal:content="php: Component['labelRicerca avanzata CA']" tal:attributes="href php: Component['urlRicercaAvanzataCA']; class php: (__Request::get('mask') == 'Ricerca avanzata CA') ? 'active' : ''" ></a></li>
+          <li><a tal:content="php: Component['labelRicerca avanzata UN']" tal:attributes="href php: Component['urlRicercaAvanzataUN']; class php: (__Request::get('mask') == 'Ricerca avanzata UN') ? 'active' : ''" ></a></li>
+        </ul>
+      </div>
+      <!-- bcp-block-group-item-list -->
+
+    </div>
+    <!-- block-content -->
+
+  </div>
+  <!-- bcp-block-widget-result -->
+
+  <!-- bcp-block-widget-result -->
+  <div class="bcp-block-widget-result">
+
+    <!-- block-content -->
+    <div class="block-content">
+
+      <!-- bcp-block-group-item-list -->
+      <div class="bcp-block-group-item-list bcp-block-group-item-list--search margin-top">
+
+        <ul>
+          <li tal:repeat="item Component/maskList"><a tal:attributes="href php: __Link::makeUrl('solr_advancedSearch') . '?mask=' . item['name']; class php: (__Request::get('mask') == item['name']) ? 'active' : '' " tal:content="item/label"></a></li>
+        </ul>
+
+      </div>
+      <!-- bcp-block-group-item-list -->
+
+    </div>
+    <!-- block-content -->
+
+  </div>
+  <!-- bcp-block-widget-result -->
+
+</div>
