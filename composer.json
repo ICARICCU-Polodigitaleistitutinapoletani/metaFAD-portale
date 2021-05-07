@@ -9,7 +9,9 @@
       }
    ],
     "require": {
-        "icariccu/pinax": "dev-main"
+        "icariccu/pinax-2": "dev-main",
+        "nfabre/deepzoom": "dev-master",
+        "gregwar/captcha": "1.*"
     },
     "require-dev": {
       "vimeo/psalm": "^4.3",
