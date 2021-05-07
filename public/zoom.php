@@ -32,7 +32,7 @@ if ( !file_exists( $zoomFile ) ) {
   if ($zoomSize && $zoomSize!='original') {
     $fileUrl = str_replace('meta_dam/', 'meta_dam/admin/rest/dam/', metafad_modules_dam_Common::replaceUrlWithSize($fileUrl, $zoomSize));
   }
-  $tempFile = __Paths::get('CACHE').md5($fileUrl);
+  $tempFile = __Paths::get('CACHE_JS'). md5($fileUrl);
 
   $r = @copy($fileUrl, $tempFile);
   if (!$r) {
@@ -40,45 +40,18 @@ if ( !file_exists( $zoomFile ) ) {
     copy(str_replace('meta_dam_dev/', 'meta_dam/', $fileUrl), $tempFile);
   }
 
-  $loader = new DeepzoomLoader();
-  if (__Config::get('pinax.media.imageMagick')==true) {
-    $adapter = new Deepzoom\ImageAdapter\ImagickWatermark(false);
-  } else {
-    $adapter = new Deepzoom\ImageAdapter\GdThumbWatermark(false);
-  }
+  $adapter = new Deepzoom\ImageAdapter\Imagick($tempFile);
   $file = new Deepzoom\StreamWrapper\File;
   $descriptor = new Deepzoom\Descriptor($file);
   $converter = new Deepzoom\ImageCreator($file, $descriptor, $adapter);
   $converter->create( realpath( $tempFile ), $zoomFile );
   @unlink($tempFile);
 }
-echo  PNX_HOST.ltrim($zoomFile, '.');
-
-class DeepzoomLoader
-{
-    public function __construct()
-    {
-       spl_autoload_register(array($this, 'loadClass'));
-       set_include_path(realpath('application/libs/openzoom/Oz/vendor/zend/lib').PATH_SEPARATOR.get_include_path());
-    }
-
-    public function loadClass($className)
-    {
-        if ( strpos($className, '__Config') >0) {
-            return true;
-        }
-        if (strpos($className, 'Deepzoom') === 0) {
-            require 'application/libs/openzoom/Oz/'.str_replace('\\','/', $className).'.php';
-        } else if (strpos($className, 'Zend_') === 0) {
-          require 'application/libs/openzoom/Oz/vendor/zend/lib/Zend/'.$className.'.php';
-        }
-    }
-
-}
+echo  PNX_HOST .'/'.ltrim($zoomFile, '.');
 
 function pnx_nestedCacheFile($filename)
 {
-    $folder = __Paths::get('CACHE').pnx_nestedCacheFolder($filename, 2);
+    $folder = __Paths::get('CACHE_JS').pnx_nestedCacheFolder($filename, 2);
     if (!file_exists($folder)) {
         mkdir($folder, 0777, true);
     }
