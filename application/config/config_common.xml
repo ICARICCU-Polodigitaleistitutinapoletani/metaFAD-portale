@@ -226,7 +226,10 @@
     <pnx:Param name="portale.dam.url.local" value="{{env:DAM_REST_URL}}"/>
     <pnx:Param name="metafad.modules.dam.maxResizeWidth" value="1200" />
     <pnx:Param name="advancedSearch.model" value="metafad.opac.models.Model" />
-
+    <pnx:Param name="metafad.solr.dam.url" value="{{env:SOLR_HOST}}/solr/dam" />
+    <pnx:Param name="metafad.imagePath" value="{{env:IIIF_URL}}" />
+    <pnx:Param name="metafad.imagePath.internal" value="{{env:IIIF_INTERNAL_URL}}" />
+  
     <pnx:Param name="tinyUrl.url" value="http://tinyurl.com/api-create.php?url=" />
 
     <!-- CONFIG INSTALLAZIONE -->

@@ -33,11 +33,11 @@ class iiif_services_Common
     {
         if($internal)
         {
-            return __Config::get('icar.imagePath.internal') . 'iiif/2/' . $uuid . '/'.$region.'/'.$size.'/0/default.jpg';
+            return __Config::get('metafad.imagePath.internal') . 'iiif/2/' . $uuid . '/'.$region.'/'.$size.'/0/default.jpg';
         }
         else
         {
-            return __Config::get('icar.imagePath') . 'iiif/2/' . $uuid . '/' . $region . '/' . $size . '/0/default.jpg';
+            return __Config::get('metafad.imagePath') . 'iiif/2/' . $uuid . '/' . $region . '/' . $size . '/0/default.jpg';
         }
     }
     static function getRecordMd5($ar)

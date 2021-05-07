@@ -5,7 +5,7 @@ class metafad_viewer_controllers_rest_Viewer extends pinax_rest_core_CommandRest
 {
     function execute()
     {
-		$id = __Request::get('id');
+        $id = (__Request::get('id')) ?:__Request::get('uid');
 		$init = __Request::get('init');
 		$type = __Request::get('type');
 		$url = __Config::get('metafad.fe.urlViewerService');
