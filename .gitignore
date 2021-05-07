@@ -15,3 +15,4 @@ public/admin/cache/*
 !public/cache/.gitkeep
 !public/admin/cache/.gitkeep
 vendor/
+!public/static/museoweb/templates/Default/ita-web-toolkit/build/vendor
