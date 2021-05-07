@@ -5,5 +5,5 @@ parameters:
 		- application/classes
 		- public
 	scanDirectories:
-		- vendor/icariccu/pinax/src
+		- vendor/icariccu/pinax-2/src
 		- application/libs
