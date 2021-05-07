@@ -1,5 +1,4 @@
 .DS_Store
-core
 cache/*
 !cache/.gitkeep
 admin/cache/*
